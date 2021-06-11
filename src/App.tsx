@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
 import { registerRootComponent } from 'expo'
 import * as ImagePicker from 'expo-image-picker'
-import { ImageUri } from './interfaces/index'
+import { ImageUri } from './interfaces'
+import { ACECOM_WD } from '@env'
 
 const classes = StyleSheet.create({
   button: {
@@ -71,7 +71,7 @@ const App = () => {
     if (selectedImage.uri)
       return selectedImage.uri
 
-    return 'https://i.ibb.co/94pyf5C/ACECOMDW5s.png'
+    return ACECOM_WD
   }
 
   return (

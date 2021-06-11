@@ -1,5 +1,8 @@
 # Frontend App
 
+## Version 0.3.0
+  - Implemented configuration for `.env` variables.
+
 ## Version 0.2.0
   - Selecting an image from the phone.
 
