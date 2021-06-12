@@ -1,5 +1,11 @@
 # Frontend App
 
+## Version 0.4.0
+  - Refactoring the structure from the project, now it has `src/index.tsx` file that invokes the `src/App.tsx` file.
+  - Implemented content sharing (without considering other platforms besides mobile).
+  - Implemented multi platform Toast message.
+  - Created `src/utils` folder.
+
 ## Version 0.3.0
   - Implemented configuration for `.env` variables.
 
@@ -8,4 +14,4 @@
 
 ## Version 0.1.0
   - Project initialization.
-  - Project restructuring based on: https://stackoverflow.com/a/67930988/12379333
+  - Restructuring based on: https://stackoverflow.com/a/67930988/12379333
