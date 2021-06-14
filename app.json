@@ -1,6 +1,6 @@
 {
   "expo": {
-    "entryPoint": "./src/App.tsx",
+    "entryPoint": "./src/index.tsx",
     "name": "front",
     "slug": "front",
     "version": "1.0.0",

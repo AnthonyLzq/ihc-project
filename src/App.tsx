@@ -1,14 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { registerRootComponent } from 'expo'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    alignItems     : 'center',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+    flex           : 1,
+    justifyContent : 'center'
   }
 })
 
@@ -21,4 +20,4 @@ const App = () => {
   )
 }
 
-export default registerRootComponent(App)
+export default App
