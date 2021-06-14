@@ -1,7 +1,5 @@
 import React from 'react'
 import {
-  Alert,
-  Button,
   Image,
   StyleSheet,
   Text,
@@ -60,7 +58,7 @@ const App = () => {
       const imageResult = await ImagePicker.launchImageLibraryAsync()
 
       if (imageResult.cancelled) {
-        Toast.show("Oh! You didn't pick any image!", toastOptions())
+        Toast.show('Oh! You didn\'t pick any image!', toastOptions())
 
         return
       }

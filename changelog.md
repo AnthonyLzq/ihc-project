@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.4.1
+  - Implemented:
+    - Package name.
+    - Minor fix of quotes
+
 ## Version 0.4.0
   - Refactoring the structure from the project, now it has `src/index.tsx` file that invokes the `src/App.tsx` file.
   - Implemented content sharing (without considering other platforms besides mobile).
