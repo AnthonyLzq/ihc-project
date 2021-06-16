@@ -1,22 +1,31 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
+import AppLoading from 'expo-app-loading'
+import { createStackNavigator } from '@react-navigation/stack'
+import { useFonts, Play_400Regular } from '@expo-google-fonts/play'
+import { Padauk_700Bold } from '@expo-google-fonts/padauk'
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems     : 'center',
-    backgroundColor: '#fff',
-    flex           : 1,
-    justifyContent : 'center'
-  }
-})
+import SignInEmail from './screens/SignInEmail'
+
+const Stack = createStackNavigator()
 
 const App = () => {
+  const [fondLoaded] = useFonts({
+    Catamaran: require('../assets/fonts/Catamaran-VariableFont_wght.ttf'),
+    Padauk_700Bold,
+    Play_400Regular
+  })
+
+  if (!fondLoaded)
+    return <AppLoading />
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style='auto' />
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Stack.Screen name='SignInEmail' component={SignInEmail}/>
+    </Stack.Navigator>
   )
 }
 
