@@ -15,17 +15,19 @@ const classes = StyleSheet.create({
 const CustomButton = ({
   style: {
     color,
+    marginTop = 0,
     titleColor = '#FFF',
     titleSize
   },
   icon,
   hasIconLeft = false,
   hasIconRight = false,
+  onPress = () => {},
   title,
   type = 'solid'
 }: CustomButtonProps) => {
   return (
-    <View style={classes.container}>
+    <View style={[classes.container, { marginTop }]}>
       {hasIconLeft ? (
         <Button
           buttonStyle={{
@@ -38,7 +40,15 @@ const CustomButton = ({
             size : icon?.size,
             type : icon?.type
           }}
+          onPress={onPress}
           title={title}
+          titleStyle={{
+            color     : titleColor,
+            fontSize  : titleSize,
+            fontFamily: 'Padauk_700Bold',
+            marginLeft: 8,
+            marginTop : 4
+          }}
           type={type}
         />
       ) : hasIconRight ? (
@@ -53,7 +63,15 @@ const CustomButton = ({
             size : icon?.size,
             type : icon?.type
           }}
+          onPress={onPress}
           title={title}
+          titleStyle={{
+            color      : titleColor,
+            fontSize   : titleSize,
+            fontFamily : 'Padauk_700Bold',
+            marginRight: 8,
+            marginTop  : 4
+          }}
           type={type}
           iconRight
         />
@@ -63,6 +81,7 @@ const CustomButton = ({
             backgroundColor: color,
             height         : '100%'
           }}
+          onPress={onPress}
           title={title}
           titleStyle={{
             color     : titleColor,

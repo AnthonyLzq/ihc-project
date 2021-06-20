@@ -31,16 +31,14 @@ const Logo = ({
   style: {
     containerHeight
   }
-}: LogoProps) => {
-  return (
-    <View style={[{ height: containerHeight }, classes.container]}>
-      <SvgBrain />
-      <View style={classes.appName}>
-        <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>
-        <Text style={[classes.ia, classes.text]}>AI</Text>
-      </View>
+}: LogoProps) => (
+  <View style={[{ height: containerHeight }, classes.container]}>
+    <SvgBrain />
+    <View style={classes.appName}>
+      <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>
+      <Text style={[classes.ia, classes.text]}>AI</Text>
     </View>
-  )
-}
+  </View>
+)
 
 export default Logo

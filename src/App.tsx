@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useFonts, Play_400Regular } from '@expo-google-fonts/play'
 import { Padauk_700Bold } from '@expo-google-fonts/padauk'
 
+import SignIn from './screens/SignIn'
 import SignInEmail from './screens/SignInEmail'
 
 const Stack = createStackNavigator()
@@ -24,6 +25,7 @@ const App = () => {
         headerShown: false
       }}
     >
+      <Stack.Screen name='SignIn' component={SignIn}/>
       <Stack.Screen name='SignInEmail' component={SignInEmail}/>
     </Stack.Navigator>
   )
