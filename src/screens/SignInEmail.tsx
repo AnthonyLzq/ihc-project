@@ -1,13 +1,14 @@
 import React from 'react'
 import { StatusBar, StyleSheet, View } from 'react-native'
 
-import { COLORS } from '../utils'
 import Logo from '../components/Logo'
 import CustomInput from '../components/CustomInput'
 import CustomButton from '../components/CustomButton'
 import CustomBelowButtonText from '../components/CustomBelowButtonText'
 import CustomBottomText from '../components/CustomBottomText'
 import GoBack from '../components/GoBack'
+import { SignInEmailProps } from '../types/props'
+import { COLORS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -17,12 +18,12 @@ const classes = StyleSheet.create({
     justifyContent : 'center'
   },
   inputContainer: {
-    alignItems         : 'center',
-    backgroundColor    : COLORS.SECOND_BLACK,
-    borderTopLeftRadius: 26,
-    borderTopEndRadius : 26,
-    height             : '64%',
-    width              : '100%'
+    alignItems          : 'center',
+    backgroundColor     : COLORS.SECOND_BLACK,
+    borderTopStartRadius: 26,
+    borderTopEndRadius  : 26,
+    height              : '64%',
+    width               : '100%'
   },
   textBelowButtonContainer: {
     flexDirection: 'row',
@@ -32,7 +33,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const Login = () => {
+const Login = ({ navigation }: SignInEmailProps) => {
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default'/>
@@ -73,12 +74,12 @@ const Login = () => {
           title='SIGN IN'
         />
         <View style={classes.textBelowButtonContainer}>
-          <GoBack />
+          <GoBack onPress={() => navigation.navigate('SignIn')}/>
           <CustomBelowButtonText
             text='Forgot password?'
           />
         </View>
-        <CustomBottomText mainText='Sing Up' />
+        <CustomBottomText mainText='Sign Up' />
       </View>
     </View>
   )

@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Input } from 'react-native-elements'
 
-import { COLORS } from '../utils'
 import { CustomInputProps } from '../types/props'
+import { COLORS } from '../utils'
 
 const classes = StyleSheet.create({
   input: {

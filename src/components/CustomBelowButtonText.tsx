@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
-import { COLORS } from '../utils'
 import { CustomBelowButtonTextProps } from '../types/props'
+import { COLORS } from '../utils'
 
 const classes = StyleSheet.create({
   text: {
