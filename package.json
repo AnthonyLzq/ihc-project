@@ -1,6 +1,6 @@
 {
   "main": "./src/index.tsx",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -42,7 +42,7 @@
     "type": "git",
     "url": "git+https://github.com/AnthonyLzq/ihc-project-front.git"
   },
-  "author": "AnthonyLzq <sluzquinosa@uni.pe>",
+  "author": "AnthonyLzq <sluzquinosa@uni.pe> BryanVe <gverae@uni.pe",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AnthonyLzq/ihc-project-front/issues"
