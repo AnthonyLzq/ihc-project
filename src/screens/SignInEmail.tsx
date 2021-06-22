@@ -22,7 +22,7 @@ const classes = StyleSheet.create({
     backgroundColor     : COLORS.SECOND_BLACK,
     borderTopStartRadius: 26,
     borderTopEndRadius  : 26,
-    height              : '64%',
+    height              : '63%',
     width               : '100%'
   },
   textBelowButtonContainer: {
@@ -37,7 +37,7 @@ const Login = ({ navigation }: SignInEmailProps) => {
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default'/>
-      <Logo style={{ containerHeight: '36%' }} />
+      <Logo style={{ height: '37%' }} />
       <View style={classes.inputContainer}>
         <CustomInput
           style={{
@@ -60,13 +60,14 @@ const Login = ({ navigation }: SignInEmailProps) => {
           secureTextEntry={true}
         />
         <CustomButton
+          hasIconRight={true}
           icon={{
             color: '#FFF',
             name : 'exit-to-app',
             size : 16,
             type : 'material'
           }}
-          hasIconRight={true}
+          onPress={() => navigation.navigate('SelectCourses')}
           style={{
             color    : COLORS.PURPLE,
             titleSize: 16

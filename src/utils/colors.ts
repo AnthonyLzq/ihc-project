@@ -3,7 +3,8 @@ const COLORS = {
   SECOND_BLACK: '#2A2A2A',
   LEAD        : '#6A6A6A',
   PURPLE      : '#AA8CFF',
-  RED         : '#FF6264'
+  RED         : '#FF6264',
+  GREEN       : '#7ACF65'
 }
 
 export default COLORS
