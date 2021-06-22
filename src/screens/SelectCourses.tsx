@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Alert,
   FlatList,
   SafeAreaView,
   StatusBar,
@@ -54,11 +55,52 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
     }
   }
 
+  const continueAlert = () => {
+    Alert.alert(
+      'Continue',
+      'Are you sure you want to continue? (This action can not be undone)',
+      [
+        {
+          // TODO: navigate to the next screen
+          onPress: () => console.log('Continue'),
+          style  : 'default',
+          text   : 'Yes'
+        },
+        {
+          onPress: () => {},
+          style  : 'cancel',
+          text   : 'No'
+        }
+      ],
+      { cancelable: true }
+    )
+  }
+
+  // TODO: implemented a way to logout globally
+  const logoutAlert = () => {
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        {
+          onPress: () => navigation.navigate('SignInEmail'),
+          text   : 'Yes',
+          style  : 'default'
+        },
+        {
+          onPress: () => {},
+          text   : 'No',
+          style  : 'cancel'
+        }
+      ],
+      { cancelable: true }
+    )
+  }
+
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
-      {/* TODO: Define a global logout custom hook */}
-      <Header logout={() => navigation.navigate('SignInEmail')} />
+      <Header logout={logoutAlert} />
       <View style={classes.coursesContainer}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>Select the </Text>
@@ -103,7 +145,7 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
             size : 16,
             type : 'material'
           }}
-          onPress={() => {}}
+          onPress={continueAlert}
           title='CONTINUE'
           hasIconRight={true}
         />

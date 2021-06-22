@@ -1,5 +1,12 @@
 # Frontend App
 
+## Version 0.7.0
+
+- Implemented:
+  - Confirmation dialogs for:
+    - For logout from the app.
+    - For the courses selected in the SelectCourses screen.
+
 ## Version 0.6.0
 
 - Implemented:
