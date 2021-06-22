@@ -1,23 +1,25 @@
 import React from 'react'
 import { StatusBar, StyleSheet, View } from 'react-native'
 
-import Logo from '../components/Logo'
-import CustomInput from '../components/CustomInput'
-import CustomButton from '../components/CustomButton'
-import CustomBelowButtonText from '../components/CustomBelowButtonText'
-import CustomBottomText from '../components/CustomBottomText'
-import GoBack from '../components/GoBack'
+import {
+  Logo,
+  CustomInput,
+  CustomButton,
+  CustomBelowButtonText,
+  CustomBottomText,
+  GoBack
+} from '../components'
 import { SignInEmailProps } from '../types/props'
 import { COLORS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
-    alignItems     : 'center',
     backgroundColor: COLORS.MAIN_BLACK,
-    flex           : 1,
-    justifyContent : 'center'
+    width          : '100%',
+    height         : '100%'
   },
   inputContainer: {
+    padding: 32,
     alignItems          : 'center',
     backgroundColor     : COLORS.SECOND_BLACK,
     borderTopStartRadius: 26,
@@ -29,7 +31,7 @@ const classes = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop    : 25,
-    width        : '83%'
+    width        : '100%'
   }
 })
 
@@ -45,8 +47,7 @@ const Login = ({ navigation }: SignInEmailProps) => {
             icon                : 'person',
             placeHolder         : 'Email',
             placeHolderTextColor: COLORS.LEAD,
-            marginTop           : 32,
-            size                : 11
+            size                : 14
           }}
         />
         <CustomInput
@@ -55,7 +56,7 @@ const Login = ({ navigation }: SignInEmailProps) => {
             icon                : 'lock',
             placeHolder         : 'Password',
             placeHolderTextColor: COLORS.LEAD,
-            size                : 11
+            size                : 14
           }}
           secureTextEntry={true}
         />

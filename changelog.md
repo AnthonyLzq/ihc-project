@@ -1,5 +1,15 @@
 # Frontend App
 
+## Version 0.7.1
+
+- Implemented:
+
+  - Created a centralized fonts source.
+
+- Modified:
+  - Some styles on screens.
+  - Some styles con general components.
+
 ## Version 0.7.0
 
 - Implemented:

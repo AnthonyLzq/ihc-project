@@ -5,9 +5,11 @@ import { useFonts, Play_400Regular } from '@expo-google-fonts/play'
 import { Padauk_700Bold } from '@expo-google-fonts/padauk'
 import { Mukta_400Regular, Mukta_700Bold } from '@expo-google-fonts/mukta'
 
-import SignIn from './screens/SignIn'
-import SignInEmail from './screens/SignInEmail'
-import SelectCourses from './screens/SelectCourses'
+import {
+  SignIn,
+  SignInEmail,
+  SelectCourses
+} from './screens'
 
 const Stack = createStackNavigator()
 

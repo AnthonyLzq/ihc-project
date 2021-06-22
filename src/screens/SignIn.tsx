@@ -1,30 +1,32 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import Logo from '../components/Logo'
-import CustomButton from '../components/CustomButton'
-import CustomBottomText from '../components/CustomBottomText'
+import {
+  Logo,
+  CustomButton,
+  CustomBottomText
+} from '../components'
 import { SignInProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
-    alignItems     : 'center',
     backgroundColor: COLORS.MAIN_BLACK,
-    flex           : 1,
-    justifyContent : 'center'
+    height: '100%',
+    width: '100%'
   },
   signInMethodsContainer: {
-    alignItems          : 'center',
     backgroundColor     : COLORS.SECOND_BLACK,
     borderTopEndRadius  : 26,
     borderTopStartRadius: 26,
     height              : '49%',
-    width               : '100%'
+    width               : '100%',
+    padding             : 32,
+    alignItems          : 'center'
   },
   or: {
     color       : '#FFF',
-    fontFamily  : 'Padauk_700Bold',
+    fontFamily  : FONTS.MAIN,
     fontSize    : 14,
     marginTop   : 12,
     marginBottom: 12
@@ -47,7 +49,6 @@ const SignIn = ({ navigation }: SignInProps) => {
           hasIconLeft={true}
           style={{
             color     : '#FFF',
-            marginTop : 30,
             titleSize : 16,
             titleColor: COLORS.SECOND_BLACK
           }}

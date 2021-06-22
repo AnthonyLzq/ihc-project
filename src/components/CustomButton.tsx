@@ -8,7 +8,7 @@ const classes = StyleSheet.create({
   container: {
     borderRadius: 6,
     height      : 48,
-    width       : '84%'
+    width       : '100%'
   }
 })
 

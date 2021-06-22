@@ -2,29 +2,29 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { CustomBottomTextProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container:{
-    flex          : 1,
+    position      : 'absolute',
     alignItems    : 'center',
-    justifyContent: 'flex-end',
-    marginBottom  : 33
+    bottom        : 0,
+    marginBottom  : 32
   },
   text: {
     color     : '#FFF',
-    fontFamily: 'Padauk_700Bold',
+    fontFamily: FONTS.MAIN,
     fontSize  : 12
   },
   mainText: {
     color: COLORS.RED,
-    fontFamily: 'Padauk_700Bold',
+    fontFamily: FONTS.MAIN,
     fontSize: 14
   }
 })
 
 const CustomBottomText = ({ mainText }: CustomBottomTextProps) => (
-  <View style={classes.container}>
+  <View style={[classes.container]}>
     <View>
       <Text style={classes.text}>Do not have an account yet?</Text>
     </View>

@@ -1,4 +1,5 @@
 import COLORS from './colors'
+import FONTS from './fonts'
 
 interface ICourseData {
   course  : string
@@ -46,4 +47,4 @@ const COURSES: ICourseData[] = [
   }
 ]
 
-export { COLORS, COURSES }
+export { COLORS, COURSES, FONTS }

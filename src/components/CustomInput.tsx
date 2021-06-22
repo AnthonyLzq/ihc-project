@@ -12,7 +12,7 @@ const classes = StyleSheet.create({
     borderRadius   : 6,
     height         : 48,
     marginBottom   : 25,
-    width          : '84%'
+    width          : '100%'
   }
 })
 
