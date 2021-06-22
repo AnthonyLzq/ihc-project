@@ -29,10 +29,10 @@ const classes = StyleSheet.create({
 
 const Logo = ({
   style: {
-    containerHeight
+    height
   }
 }: LogoProps) => (
-  <View style={[{ height: containerHeight }, classes.container]}>
+  <View style={[{ height }, classes.container]}>
     <SvgBrain />
     <View style={classes.appName}>
       <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>

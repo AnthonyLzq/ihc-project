@@ -1,6 +1,6 @@
 {
   "main": "./src/index.tsx",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,6 +9,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/mukta": "^0.1.0",
     "@expo-google-fonts/padauk": "^0.1.0",
     "@expo-google-fonts/play": "^0.1.0",
     "@react-native-community/masked-view": "0.1.10",

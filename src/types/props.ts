@@ -2,8 +2,9 @@ import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 type RootStackParamList = {
-  SignIn: undefined
-  SignInEmail: undefined
+  SignIn       : undefined
+  SignInEmail  : undefined
+  SelectCourses: undefined
 }
 
 type SignInProps = {
@@ -14,18 +15,23 @@ type SignInEmailProps = {
   navigation: StackNavigationProp<RootStackParamList, 'SignInEmail'>
 }
 
+type SelectCoursesProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'SelectCourses'>
+}
+
 type LogoProps = {
   style: {
-    containerHeight: string | number
+    height: string | number
   }
 }
 
 type CustomButtonProps = {
   style: {
-    color      : string
-    marginTop? : number
-    titleColor?: string
-    titleSize  : number
+    color        : string
+    marginBottom?: number
+    marginTop?   : number
+    titleColor?  : string
+    titleSize    : number
   }
   icon?: {
     color: string
@@ -33,6 +39,7 @@ type CustomButtonProps = {
     size : number
     type : string
   }
+  disabled?    : boolean
   hasIconLeft? : boolean
   hasIconRight?: boolean
   onPress?     : () => void
@@ -61,17 +68,46 @@ type CustomBottomTextProps = {
   mainText: string
 }
 
+type HeaderProps = {
+  goBack?: boolean
+  logout : () => void
+  style? : {
+    height?: number | string
+  }
+}
+
+type SvgBrainProps = {
+  height?: string
+  width? : string
+}
+
 type GoBackProps = {
   onPress: () => void
 }
 
+type CourseCardProps = {
+  available: boolean
+  course   : string
+  icon     : string
+  iconType : string
+  id       : string
+  onPress  : (b: boolean, s: string) => void
+  style?   : {
+    marginRight?: number
+  }
+}
+
 export {
+  CourseCardProps,
   CustomBelowButtonTextProps,
   CustomBottomTextProps,
   CustomButtonProps,
   CustomInputProps,
   GoBackProps,
+  HeaderProps,
   LogoProps,
+  SelectCoursesProps,
   SignInProps,
-  SignInEmailProps
+  SignInEmailProps,
+  SvgBrainProps
 }

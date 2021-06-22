@@ -1,23 +1,41 @@
 # Frontend App
 
+## Version 0.6.0
+
+- Implemented:
+  - UI of the SelectCourses screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - Mockup data for the SelectCourses UI.
+  - Mockup navigation from SignInEmail to SelectCourses and vice versa.
+  - Some new optional properties for:
+    - CustomButton: marginBottom and disable.
+    - SvgBrain: height and width.
+  - New components:
+    - CourseCard.
+    - Header.
+  - New font family: Mukta.
+- TODO:
+  - Confirmation dialogs:
+    - For logout from the app.
+    - For the courses selected in the SelectCourses screen.
+
 ## Version 0.5.0
 
 - Implemented:
-  - Adaptative icon for android devices.
+  - Adaptable icon for android devices.
   - Normal icon for all devices.
   - Splash screen for the initial app loading.
 
 ## Version 0.4.0
 
 - Implemented:
-  - UI of the first screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - UI of the SignIn screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
   - Fixed some style bugs in the CustomButton.
   - Navigation across the first and second screen.
 
 ## Version 0.3.0
 
 - Implemented:
-  - UI of the second screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - UI of the SignInEmail screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
   - Many reusable components to use across the app.
   - Previous configuration for navigation.
 

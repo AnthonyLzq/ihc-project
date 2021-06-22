@@ -17,9 +17,9 @@ const classes = StyleSheet.create({
   signInMethodsContainer: {
     alignItems          : 'center',
     backgroundColor     : COLORS.SECOND_BLACK,
-    borderTopStartRadius: 26,
     borderTopEndRadius  : 26,
-    height              : '46%',
+    borderTopStartRadius: 26,
+    height              : '49%',
     width               : '100%'
   },
   or: {
@@ -34,8 +34,8 @@ const classes = StyleSheet.create({
 const SignIn = ({ navigation }: SignInProps) => {
   return (
     <View style={classes.container}>
-      <StatusBar barStyle='default'/>
-      <Logo style={{ containerHeight: '54%' }} />
+      <StatusBar barStyle='default' />
+      <Logo style={{ height: '51%' }} />
       <View style={classes.signInMethodsContainer}>
         <CustomButton
           icon={{
