@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.7.1
+
+- Fixed:
+  - Removed logo from the SignInEmail Screen.
+
 ## Version 0.7.0
 
 - Implemented:
