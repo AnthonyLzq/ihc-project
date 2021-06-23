@@ -26,6 +26,9 @@
         "backgroundColor": "#FFFFFF"
       }
     },
+    "androidStatusBar": {
+      "backgroundColor": "#252525"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }

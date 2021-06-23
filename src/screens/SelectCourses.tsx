@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 
 import Header from '../components/Header'
-import CourseCard from '../components/CourseCard'
+import SelectCourseCard from '../components/SelectCourseCard'
 import CustomButton from '../components/CustomButton'
 import { SelectCoursesProps } from '../types/props'
 import { COLORS, COURSES } from '../utils'
@@ -62,7 +62,13 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
       [
         {
           // TODO: navigate to the next screen
-          onPress: () => console.log('Continue'),
+          onPress: () => navigation.navigate(
+            'LastViewedCourses',
+            {
+              firstTime: true,
+              ids      : selectedCourses
+            }
+          ),
           style  : 'default',
           text   : 'Yes'
         },
@@ -77,7 +83,7 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
   }
 
   // TODO: implemented a way to logout globally
-  const logoutAlert = () => {
+  const logoutAlert = React.useCallback(() => {
     Alert.alert(
       'Logout',
       'Are you sure you want to logout?',
@@ -95,7 +101,7 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
       ],
       { cancelable: true }
     )
-  }
+  }, [])
 
   return (
     <SafeAreaView style={classes.container}>
@@ -116,7 +122,7 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
           data={COURSES}
           numColumns={2}
           renderItem={({ item: { id, course, icon, iconType }, index }) => (
-            <CourseCard
+            <SelectCourseCard
               available={nCourses < 5}
               key={id}
               course={course}
