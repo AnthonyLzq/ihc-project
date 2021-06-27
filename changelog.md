@@ -1,5 +1,9 @@
 # Frontend App
 
+## Version 0.7.1
+- Fixed:
+  - Overlap when the keyboard is open in the SignInEmail screen. 
+
 ## Version 0.7.0
 
 - Implemented:
