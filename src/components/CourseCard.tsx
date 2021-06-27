@@ -1,94 +1,68 @@
 import React from 'react'
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import { CourseCardProps } from '../types/props'
-import { COLORS } from '../utils'
-
-const wHeight = Dimensions.get('window').height
-const wWidth = Dimensions.get('window').width
+import { COURSES, ICourseData } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
+    alignItems    : 'center',
     borderRadius  : 12,
-    justifyContent: 'center',
-    height        : 0.275 * wHeight,
-    marginBottom  : 32,
-    shadowColor   : 'rgba(0, 0, 0, 0.25)',
-    shadowOffset  : {
-      width : 0,
-      height: 1
-    },
-    shadowRadius: 4,
-    width       : 0.36 * wWidth
+    flexDirection : 'row',
+    height        : 72,
+    justifyContent: 'space-between',
+    paddingEnd    : 32,
+    paddingStart  : 32
   },
-  textWhite: {
+  course: {
+    alignItems   : 'center',
+    flexDirection: 'row'
+  },
+  text: {
     color     : '#FFF',
-    fontFamily: 'Mukta_400Regular',
-    textAlign : 'center'
+    fontFamily: 'Mukta_700Bold',
+    fontSize  : 16,
+    marginLeft: 16
   }
 })
 
 const CourseCard = ({
-  available,
   course,
   icon,
   iconType,
-  id,
-  onPress,
-  style: { marginRight } = { marginRight: 0 }
-}: CourseCardProps) => {
-  const [isSelected, setIsPressed] = React.useState(false)
-  const [backgroundColor, setBackgroundColor] = React.useState(
-    COLORS.MAIN_BLACK
-  )
-  const firstRender = React.useRef(true)
-
-  const toggleIsPressed = (): void => {
-    if (available || isSelected)
-      setIsPressed(!isSelected)
+  style: {
+    color,
+    marginBottom
   }
-
-  React.useEffect(() => {
-    if (!firstRender.current) {
-      if (isSelected) {
-        setBackgroundColor(COLORS.GREEN)
-        onPress(isSelected, id)
-      } else {
-        setBackgroundColor(COLORS.MAIN_BLACK)
-        onPress(isSelected, id)
-      }
-    } else
-      firstRender.current = false
-  }, [isSelected])
-
+}: CourseCardProps) => {
   return (
-    <TouchableOpacity
-      onPress={toggleIsPressed}
-      style={[
+    <View style={
+      [
         classes.container,
         {
-          backgroundColor,
-          marginRight
+          backgroundColor: color,
+          marginBottom
         }
-      ]}
-    >
-      <Icon
-        color='#FFF'
-        iconStyle={{
-          height: 41,
-          width : 25
-        }}
-        name={icon}
-        type={iconType}
-      />
-      <Text style={classes.textWhite}>{course}</Text>
-    </TouchableOpacity>
+      ]}>
+      <View style={classes.course}>
+        <Icon
+          color='#FFF'
+          size={25}
+          name={icon}
+          type={iconType}
+        />
+        <Text style={classes.text}>{course}</Text>
+      </View>
+      <TouchableOpacity>
+        <Icon
+            color='#FFF'
+            size={25}
+            name='arrow-forward'
+            type='material'
+          />
+      </TouchableOpacity>
+    </View>
   )
 }
 

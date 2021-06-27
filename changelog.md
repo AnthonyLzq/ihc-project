@@ -1,11 +1,18 @@
 # Frontend App
 
+## Version 0.8.0
+- Implemented:
+  - UI of the LastViewedCourses screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - Mockup data for the LastViewCourses screen.
+  - Custom icon: RobotHappy.
+- TODO:
+  - Implement custom confirmation dialogs.
+
 ## Version 0.7.1
 
 - Fixed:
   - Removed logo from the SignInEmail Screen.
   - Overlap when the keyboard is open in the SignInEmail screen. 
-
 
 ## Version 0.7.0
 
@@ -18,13 +25,13 @@
 
 - Implemented:
   - UI of the SelectCourses screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
-  - Mockup data for the SelectCourses UI.
+  - Mockup data for the SelectCourses screen.
   - Mockup navigation from SignInEmail to SelectCourses and vice versa.
   - Some new optional properties for:
     - CustomButton: marginBottom and disable.
     - SvgBrain: height and width.
   - New components:
-    - CourseCard.
+    - SelectCourseCard.
     - Header.
   - New font family: Mukta.
 - TODO:

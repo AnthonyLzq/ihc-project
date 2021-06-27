@@ -8,12 +8,14 @@ import { Mukta_400Regular, Mukta_700Bold } from '@expo-google-fonts/mukta'
 import SignIn from './screens/SignIn'
 import SignInEmail from './screens/SignInEmail'
 import SelectCourses from './screens/SelectCourses'
+import LastViewedCourses from './screens/LastViewedCourses'
 
 const Stack = createStackNavigator()
 
 const App = () => {
   const [fondLoaded] = useFonts({
     Catamaran: require('../assets/fonts/Catamaran-VariableFont_wght.ttf'),
+    'robot-happy': require('../assets/fonts/robot-happy.ttf'),
     Padauk_700Bold,
     Play_400Regular,
     Mukta_400Regular,
@@ -32,6 +34,7 @@ const App = () => {
       <Stack.Screen name='SignIn' component={SignIn} />
       <Stack.Screen name='SignInEmail' component={SignInEmail} />
       <Stack.Screen name='SelectCourses' component={SelectCourses} />
+      <Stack.Screen name='LastViewedCourses' component={LastViewedCourses} />
     </Stack.Navigator>
   )
 }

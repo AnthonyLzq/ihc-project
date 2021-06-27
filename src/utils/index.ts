@@ -46,4 +46,29 @@ const COURSES: ICourseData[] = [
   }
 ]
 
-export { COLORS, COURSES }
+const RELATED_COURSES: ICourseData[] = [
+  {
+    course  : 'JavaScript Programming',
+    icon    : 'language-javascript',
+    iconType: 'material-community',
+    id      : '1'
+  },
+  {
+    course  : 'Discrete Mathematics',
+    icon    : 'graph-outline',
+    iconType: 'material-community',
+    id      : '2'
+  }
+]
+
+const getRandomColor = (): string => {
+  const letters = '0123456789ABCDEF'
+  let color = '#'
+
+  for (let i = 0; i < 6; i++)
+    color += letters[Math.floor(Math.random() * 16)]
+
+  return color
+}
+
+export { COLORS, COURSES, RELATED_COURSES, ICourseData, getRandomColor }

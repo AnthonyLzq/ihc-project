@@ -2,9 +2,13 @@ import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 type RootStackParamList = {
-  SignIn       : undefined
-  SignInEmail  : undefined
-  SelectCourses: undefined
+  SignIn         : undefined
+  SignInEmail    : undefined
+  SelectCourses  : undefined
+  LastViewedCourses: {
+    firstTime: boolean
+    ids      : string[]
+  }
 }
 
 type SignInProps = {
@@ -17,6 +21,11 @@ type SignInEmailProps = {
 
 type SelectCoursesProps = {
   navigation: StackNavigationProp<RootStackParamList, 'SelectCourses'>
+}
+
+type LastViewedCoursesProps = {
+  navigation: StackNavigationProp<RootStackParamList, 'LastViewedCourses'>
+  route     : RouteProp<RootStackParamList,           'LastViewedCourses'>
 }
 
 type LogoProps = {
@@ -69,11 +78,12 @@ type CustomBottomTextProps = {
 }
 
 type HeaderProps = {
-  goBack?: boolean
-  logout : () => void
-  style? : {
+  style?: {
     height?: number | string
   }
+  goBack?  : boolean
+  goBackCB?: () => void
+  logout   : () => void
 }
 
 type SvgBrainProps = {
@@ -85,20 +95,30 @@ type GoBackProps = {
   onPress: () => void
 }
 
-type CourseCardProps = {
+type SelectCourseCardProps = {
+  style?   : {
+    marginRight?: number
+  }
   available: boolean
   course   : string
   icon     : string
   iconType : string
   id       : string
   onPress  : (b: boolean, s: string) => void
-  style?   : {
-    marginRight?: number
+}
+
+type CourseCardProps = {
+  style: {
+    color       : string
+    marginBottom: number
   }
+  course  : string
+  icon    : string
+  iconType: string
 }
 
 export {
-  CourseCardProps,
+  SelectCourseCardProps,
   CustomBelowButtonTextProps,
   CustomBottomTextProps,
   CustomButtonProps,
@@ -109,5 +129,7 @@ export {
   SelectCoursesProps,
   SignInProps,
   SignInEmailProps,
-  SvgBrainProps
+  SvgBrainProps,
+  LastViewedCoursesProps,
+  CourseCardProps
 }
