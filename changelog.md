@@ -4,6 +4,8 @@
 
 - Fixed:
   - Removed logo from the SignInEmail Screen.
+  - Overlap when the keyboard is open in the SignInEmail screen. 
+
 
 ## Version 0.7.0
 
