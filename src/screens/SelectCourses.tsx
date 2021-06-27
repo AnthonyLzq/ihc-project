@@ -9,9 +9,11 @@ import {
   View
 } from 'react-native'
 
-import Header from '../components/Header'
-import SelectCourseCard from '../components/SelectCourseCard'
-import CustomButton from '../components/CustomButton'
+import {
+  Header,
+  SelectCourseCard,
+  CustomButton
+} from '../components'
 import { GeneralScreenProps } from '../types/props'
 import { COLORS, COURSES, FONTS } from '../utils'
 
@@ -31,7 +33,7 @@ const classes = StyleSheet.create({
     flexDirection: 'row',
   },
   textWhite: {
-    color     : '#FFF',
+    color     : COLORS.WHITE,
     fontFamily: FONTS.SECONDARY.REGULAR
   },
   textPurple: {
@@ -41,7 +43,8 @@ const classes = StyleSheet.create({
 })
 
 // Mockup version
-const SelectCourses: React.FC<GeneralScreenProps> = ({ navigation }) => {
+const SelectCourses: React.FC<GeneralScreenProps> = (props) => {
+  const { navigation } = props
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])
 
@@ -144,7 +147,7 @@ const SelectCourses: React.FC<GeneralScreenProps> = ({ navigation }) => {
           }}
           disabled={nCourses < 3}
           icon={{
-            color: '#FFF',
+            color: COLORS.WHITE,
             name : 'chevron-right',
             size : 16,
             type : 'material'

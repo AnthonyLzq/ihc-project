@@ -4,7 +4,8 @@ const COLORS = {
   LEAD        : '#6A6A6A',
   PURPLE      : '#AA8CFF',
   RED         : '#FF6264',
-  GREEN       : '#7ACF65'
+  GREEN       : '#7ACF65',
+  WHITE       : '#FFF'
 }
 
 export default COLORS

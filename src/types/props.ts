@@ -2,7 +2,7 @@ import { ComponentType } from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-type RouteNames = 'SignIn' | 'SignInEmail' | 'SelectCourses' | 'LastViewedCourses'
+type ScreenViewNames = 'SignIn' | 'SignInEmail' | 'SelectCourses' | 'LastViewedCourses'
 
 type RootStackParamList = {
   SignIn           : undefined
@@ -15,11 +15,11 @@ type RootStackParamList = {
 }
 
 type GeneralScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, RouteNames>
+  navigation: StackNavigationProp<RootStackParamList, ScreenViewNames>
 }
 
-type Route = {
-  name      : RouteNames
+type ScreenView = {
+  name      : ScreenViewNames
   component : ComponentType<GeneralScreenProps> | ComponentType<LastViewedCoursesProps>
 }
 
@@ -146,6 +146,6 @@ export {
   SvgBrainProps,
   LastViewedCoursesProps,
   CourseCardProps,
-  Route,
+  ScreenView,
   GeneralScreenProps
 }

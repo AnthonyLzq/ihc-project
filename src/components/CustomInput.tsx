@@ -16,18 +16,19 @@ const classes = StyleSheet.create({
   }
 })
 
-const CustomInput = ({
-  style: {
-    color,
-    icon,
-    fontFamily = FONTS.INPUT.REGULAR,
-    marginTop,
-    placeHolder,
-    placeHolderTextColor,
-    size
-  },
-  secureTextEntry = false
-}: CustomInputProps) => {
+const CustomInput: React.FC<CustomInputProps> = (props) => {
+  const {
+    style: {
+      color,
+      icon,
+      fontFamily = FONTS.INPUT.REGULAR,
+      marginTop,
+      placeHolder,
+      placeHolderTextColor,
+      size
+    },
+    secureTextEntry = false
+  } = props
   const [viewStyles, setViewStyles] = React.useState<Record<string, unknown>[]>(
     [classes.input]
   )

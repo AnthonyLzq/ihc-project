@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import { CourseCardProps } from '../types/props'
-import { COURSES, ICourseData, FONTS } from '../utils'
+import { COURSES, ICourseData, FONTS, COLORS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -20,22 +20,24 @@ const classes = StyleSheet.create({
     flexDirection: 'row'
   },
   text: {
-    color     : '#FFF',
+    color     : COLORS.WHITE,
     fontFamily: FONTS.SECONDARY.BOLD,
     fontSize  : 16,
     marginLeft: 16
   }
 })
 
-const CourseCard = ({
-  course,
-  icon,
-  iconType,
-  style: {
-    color,
-    marginBottom
-  }
-}: CourseCardProps) => {
+const CourseCard: React.FC<CourseCardProps> = (props) => {
+  const {
+    course,
+    icon,
+    iconType,
+    style: {
+      color,
+      marginBottom
+    }
+  } = props
+
   return (
     <View style={
       [
@@ -47,7 +49,7 @@ const CourseCard = ({
       ]}>
       <View style={classes.course}>
         <Icon
-          color='#FFF'
+          color={COLORS.WHITE}
           size={25}
           name={icon}
           type={iconType}
@@ -56,7 +58,7 @@ const CourseCard = ({
       </View>
       <TouchableOpacity>
         <Icon
-            color='#FFF'
+            color={COLORS.WHITE}
             size={25}
             name='arrow-forward'
             type='material'

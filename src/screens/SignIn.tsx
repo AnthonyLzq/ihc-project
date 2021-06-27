@@ -25,7 +25,7 @@ const classes = StyleSheet.create({
     height              : '50%'
   },
   or: {
-    color       : '#FFF',
+    color       : COLORS.WHITE,
     fontFamily  : FONTS.MAIN.BOLD,
     fontSize    : 14,
     marginTop   : 12,
@@ -50,7 +50,7 @@ const SignIn: React.FC<GeneralScreenProps> = (props) => {
           }}
           hasIconLeft={true}
           style={{
-            color     : '#FFF',
+            color     : COLORS.WHITE,
             titleSize : 16,
             titleColor: COLORS.SECOND_BLACK
           }}
@@ -59,7 +59,7 @@ const SignIn: React.FC<GeneralScreenProps> = (props) => {
         <Text style={classes.or}>or</Text>
         <CustomButton
           icon={{
-            color: '#FFF',
+            color: COLORS.WHITE,
             name : 'mail',
             size : 16,
             type : 'material'
@@ -69,7 +69,7 @@ const SignIn: React.FC<GeneralScreenProps> = (props) => {
           style={{
             color     : COLORS.PURPLE,
             titleSize : 16,
-            titleColor: '#FFF'
+            titleColor: COLORS.WHITE
           }}
           title='SIGN IN WITH EMAIL'
         />

@@ -31,7 +31,7 @@ const classes = StyleSheet.create({
     marginTop   : 50
   },
   text: {
-    color: '#FFF'
+    color: COLORS.WHITE
   },
   textTitle: {
     fontFamily: FONTS.SECONDARY.BOLD,
@@ -43,7 +43,9 @@ const classes = StyleSheet.create({
   }
 })
 
-const Login: React.FC<GeneralScreenProps> = ({ navigation }) => {
+const Login: React.FC<GeneralScreenProps> = (props) => {
+  const { navigation } = props
+  
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default' />
@@ -53,7 +55,7 @@ const Login: React.FC<GeneralScreenProps> = ({ navigation }) => {
       </View>
       <CustomInput
         style={{
-          color               : '#FFF',
+          color               : COLORS.WHITE,
           icon                : 'person',
           marginTop           : 40,
           placeHolder         : 'Email',
@@ -63,7 +65,7 @@ const Login: React.FC<GeneralScreenProps> = ({ navigation }) => {
       />
       <CustomInput
         style={{
-          color               : '#FFF',
+          color               : COLORS.WHITE,
           icon                : 'lock',
           placeHolder         : 'Password',
           placeHolderTextColor: COLORS.LEAD,
@@ -74,7 +76,7 @@ const Login: React.FC<GeneralScreenProps> = ({ navigation }) => {
       <CustomButton
         hasIconRight={true}
         icon={{
-          color: '#FFF',
+          color: COLORS.WHITE,
           name : 'exit-to-app',
           size : 16,
           type : 'material'

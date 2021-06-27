@@ -23,22 +23,26 @@ const classes = StyleSheet.create({
     fontSize  : 32
   },
   whiteColor: {
-    color: '#FFF'
+    color: COLORS.WHITE
   }
 })
 
-const Logo = ({
-  style: {
-    height
-  }
-}: LogoProps) => (
-  <View style={[{ height }, classes.container]}>
-    <SvgBrain />
-    <View style={classes.appName}>
-      <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>
-      <Text style={[classes.ia, classes.text]}>AI</Text>
+const Logo: React.FC<LogoProps> = (props) => {
+  const {
+    style: {
+      height
+    }
+  } = props
+
+  return (
+    <View style={[{ height }, classes.container]}>
+      <SvgBrain />
+      <View style={classes.appName}>
+        <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>
+        <Text style={[classes.ia, classes.text]}>AI</Text>
+      </View>
     </View>
-  </View>
-)
+  )
+}
 
 export default Logo

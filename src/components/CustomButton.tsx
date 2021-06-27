@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { Button } from 'react-native-elements'
 
 import { CustomButtonProps } from '../types/props'
-import { FONTS } from '../utils'
+import { FONTS, COLORS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -13,22 +13,24 @@ const classes = StyleSheet.create({
   }
 })
 
-const CustomButton = ({
-  style: {
-    color,
-    marginBottom = 0,
-    marginTop = 0,
-    titleColor = '#FFF',
-    titleSize
-  },
-  disabled = false,
-  icon,
-  hasIconLeft = false,
-  hasIconRight = false,
-  onPress = () => {},
-  title,
-  type = 'solid'
-}: CustomButtonProps) => {
+const CustomButton: React.FC<CustomButtonProps> = (props) => {
+  const {
+    style: {
+      color,
+      marginBottom = 0,
+      marginTop = 0,
+      titleColor = COLORS.WHITE,
+      titleSize
+    },
+    disabled = false,
+    icon,
+    hasIconLeft = false,
+    hasIconRight = false,
+    onPress = () => {},
+    title,
+    type = 'solid'
+  } = props
+
   return (
     <View style={[classes.container, { marginBottom, marginTop }]}>
       {hasIconLeft ? (

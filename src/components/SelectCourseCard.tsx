@@ -28,21 +28,22 @@ const classes = StyleSheet.create({
     width       : 0.36 * wWidth
   },
   textWhite: {
-    color     : '#FFF',
+    color     : COLORS.WHITE,
     fontFamily: FONTS.SECONDARY.REGULAR,
     textAlign : 'center'
   }
 })
 
-const SelectCourseCard = ({
-  available,
-  course,
-  icon,
-  iconType,
-  id,
-  onPress,
-  style: { marginRight } = { marginRight: 0 }
-}: SelectCourseCardProps) => {
+const SelectCourseCard: React.FC<SelectCourseCardProps> = (props) => {
+  const {
+    available,
+    course,
+    icon,
+    iconType,
+    id,
+    onPress,
+    style: { marginRight } = { marginRight: 0 }
+  } = props
   const [isSelected, setIsPressed] = React.useState(false)
   const [backgroundColor, setBackgroundColor] = React.useState(
     COLORS.MAIN_BLACK
@@ -79,7 +80,7 @@ const SelectCourseCard = ({
       ]}
     >
       <Icon
-        color='#FFF'
+        color={COLORS.WHITE}
         iconStyle={{
           height: 41,
           width : 25

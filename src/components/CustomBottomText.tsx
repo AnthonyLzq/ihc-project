@@ -11,7 +11,7 @@ const classes = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   text: {
-    color     : '#FFF',
+    color     : COLORS.WHITE,
     fontFamily: FONTS.MAIN.REGULAR,
     fontSize  : 12
   },

@@ -11,8 +11,10 @@ import {
 } from 'react-native'
 import { FAB } from 'react-native-elements'
 
-import Header from '../components/Header'
-import CourseCard from '../components/CourseCard'
+import {
+  Header,
+  CourseCard
+} from '../components'
 import RobotHappy from '../icons/RobotHappy'
 import { LastViewedCoursesProps } from '../types/props'
 import {
@@ -42,7 +44,7 @@ const classes = StyleSheet.create({
     marginBottom : 18
   },
   textWhite: {
-    color     : '#FFF',
+    color     : COLORS.WHITE,
     fontFamily: FONTS.SECONDARY.REGULAR,
     fontSize  : 30
   },
@@ -65,7 +67,7 @@ const classes = StyleSheet.create({
     fontSize: 16
   },
   mightInterest: {
-    color       : '#FFF',
+    color       : COLORS.WHITE,
     fontFamily  : FONTS.SECONDARY.REGULAR,
     fontSize    : 24,
     marginBottom: 16,
@@ -171,7 +173,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = (props) => {
           color={COLORS.RED}
           icon={
             <RobotHappy
-              color='#FFF'
+              color={COLORS.WHITE}
               name='robot-happy'
               size={21}
             />

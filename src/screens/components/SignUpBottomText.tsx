@@ -9,7 +9,7 @@ const SignUpBottomText: React.FC<GeneralScreenProps> = (props) => {
     <CustomBottomText
       text='Do you already have an account?'
       mainText='Sign In'
-      ononPressMainText={() => navigation.navigate('SignIn')}
+      onPressMainText={() => navigation.navigate('SignIn')}
     />
   )
 }

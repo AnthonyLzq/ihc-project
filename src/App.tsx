@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { useFonts, Play_400Regular } from '@expo-google-fonts/play'
 import { Padauk_400Regular, Padauk_700Bold } from '@expo-google-fonts/padauk'
 import { Mukta_400Regular, Mukta_700Bold } from '@expo-google-fonts/mukta'
-import routes from './routes'
+import screens from './screens'
 
 const Stack = createStackNavigator()
 
@@ -28,7 +28,7 @@ const App = () => {
         headerShown: false
       }}
     >
-      {routes.map(({ name, component }) => <Stack.Screen key={name} name={name} component={component} />)}
+      {screens.map(({ name, component }) => <Stack.Screen key={name} name={name} component={component} />)}
     </Stack.Navigator>
   )
 }

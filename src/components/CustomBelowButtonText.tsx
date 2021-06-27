@@ -12,10 +12,14 @@ const classes = StyleSheet.create({
   }
 })
 
-const CustomBelowButtonText = ({ text }: CustomBelowButtonTextProps) => (
-  <Text style={classes.text}>
-    {text}
-  </Text>
-)
+const CustomBelowButtonText: React.FC<CustomBelowButtonTextProps> = (props) => {
+  const { text } = props
+
+  return (
+    <Text style={classes.text}>
+      {text}
+    </Text>
+  )
+}
 
 export default CustomBelowButtonText

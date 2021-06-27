@@ -1,5 +1,5 @@
 
-import { Route } from './types/props'
+import { ScreenView } from './types/props'
 import {
   SignIn,
   SignInEmail,
@@ -7,7 +7,7 @@ import {
   LastViewedCourses
 } from './screens'
 
-const routes: Route[] = [
+const screens: ScreenView[] = [
   {
     name: 'SignIn',
     component: SignIn
@@ -26,4 +26,4 @@ const routes: Route[] = [
   }
 ]
 
-export default routes
+export default screens

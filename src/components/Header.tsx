@@ -17,11 +17,13 @@ const classes = StyleSheet.create({
   }
 })
 
-const Header = ({
-  goBack = false,
-  logout,
-  style: { height } = { height: '12%' }
-}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = (props) => {
+  const {
+    goBack = false,
+    logout,
+    style: { height } = { height: '12%' }
+  } = props
+
   return (
     <View style={[{ height }, classes.container]}>
       {/* {goBack && <Text>Hi</Text>} */}
@@ -30,7 +32,7 @@ const Header = ({
         onPress={logout}
       >
         <Icon
-          color='#FFF'
+          color={COLORS.WHITE}
           iconStyle={{
             height: 22.2,
             width : 20
