@@ -1,5 +1,5 @@
 import COLORS from './colors'
-
+import FONTS from './fonts'
 interface ICourseData {
   course  : string
   icon    : string
@@ -71,4 +71,4 @@ const getRandomColor = (): string => {
   return color
 }
 
-export { COLORS, COURSES, RELATED_COURSES, ICourseData, getRandomColor }
+export { COLORS, FONTS, COURSES, RELATED_COURSES, ICourseData, getRandomColor }

@@ -1,41 +1,45 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import Logo from '../components/Logo'
-import CustomButton from '../components/CustomButton'
-import CustomBottomText from '../components/CustomBottomText'
-import { SignInProps } from '../types/props'
-import { COLORS } from '../utils'
+import {
+  Logo,
+  CustomButton
+} from '../components'
+import { SignInBottomText } from './components'
+import { GeneralScreenProps } from '../types/props'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
-    alignItems     : 'center',
     backgroundColor: COLORS.MAIN_BLACK,
-    flex           : 1,
-    justifyContent : 'center'
+    width: '100%',
+    height: '100%'
   },
   signInMethodsContainer: {
+    padding             : 32,
     alignItems          : 'center',
     backgroundColor     : COLORS.SECOND_BLACK,
     borderTopEndRadius  : 26,
     borderTopStartRadius: 26,
-    height              : '49%',
-    width               : '100%'
+    width               : '100%',
+    height              : '50%'
   },
   or: {
     color       : '#FFF',
-    fontFamily  : 'Padauk_700Bold',
+    fontFamily  : FONTS.MAIN.BOLD,
     fontSize    : 14,
     marginTop   : 12,
     marginBottom: 12
   }
 })
 
-const SignIn = ({ navigation }: SignInProps) => {
+const SignIn: React.FC<GeneralScreenProps> = (props) => {
+  const { navigation } = props
+
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default' />
-      <Logo style={{ height: '51%' }} />
+      <Logo style={{ height: '50%' }} />
       <View style={classes.signInMethodsContainer}>
         <CustomButton
           icon={{
@@ -47,7 +51,6 @@ const SignIn = ({ navigation }: SignInProps) => {
           hasIconLeft={true}
           style={{
             color     : '#FFF',
-            marginTop : 30,
             titleSize : 16,
             titleColor: COLORS.SECOND_BLACK
           }}
@@ -70,7 +73,7 @@ const SignIn = ({ navigation }: SignInProps) => {
           }}
           title='SIGN IN WITH EMAIL'
         />
-        <CustomBottomText mainText='Sign Up' />
+        <SignInBottomText navigation={navigation} />
       </View>
     </View>
   )

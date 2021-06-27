@@ -3,12 +3,13 @@ import { StyleSheet, View } from 'react-native'
 import { Button } from 'react-native-elements'
 
 import { CustomButtonProps } from '../types/props'
+import { FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
     borderRadius: 6,
     height      : 48,
-    width       : '84%'
+    width       : '100%'
   }
 })
 
@@ -48,7 +49,7 @@ const CustomButton = ({
           titleStyle={{
             color     : titleColor,
             fontSize  : titleSize,
-            fontFamily: 'Padauk_700Bold',
+            fontFamily: FONTS.MAIN.BOLD,
             marginLeft: 8,
             marginTop : 4
           }}
@@ -72,7 +73,7 @@ const CustomButton = ({
           titleStyle={{
             color      : titleColor,
             fontSize   : titleSize,
-            fontFamily : 'Padauk_700Bold',
+            fontFamily : FONTS.MAIN.BOLD,
             marginRight: 8,
             marginTop  : 4
           }}
@@ -91,7 +92,7 @@ const CustomButton = ({
           titleStyle={{
             color     : titleColor,
             fontSize  : titleSize,
-            fontFamily: 'Padauk_700Bold'
+            fontFamily: FONTS.MAIN.BOLD
           }}
           type={type}
           iconRight

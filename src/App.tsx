@@ -2,13 +2,9 @@ import React from 'react'
 import AppLoading from 'expo-app-loading'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useFonts, Play_400Regular } from '@expo-google-fonts/play'
-import { Padauk_700Bold } from '@expo-google-fonts/padauk'
+import { Padauk_400Regular, Padauk_700Bold } from '@expo-google-fonts/padauk'
 import { Mukta_400Regular, Mukta_700Bold } from '@expo-google-fonts/mukta'
-
-import SignIn from './screens/SignIn'
-import SignInEmail from './screens/SignInEmail'
-import SelectCourses from './screens/SelectCourses'
-import LastViewedCourses from './screens/LastViewedCourses'
+import routes from './routes'
 
 const Stack = createStackNavigator()
 
@@ -16,6 +12,7 @@ const App = () => {
   const [fondLoaded] = useFonts({
     Catamaran: require('../assets/fonts/Catamaran-VariableFont_wght.ttf'),
     'robot-happy': require('../assets/fonts/robot-happy.ttf'),
+    Padauk_400Regular,
     Padauk_700Bold,
     Play_400Regular,
     Mukta_400Regular,
@@ -31,10 +28,7 @@ const App = () => {
         headerShown: false
       }}
     >
-      <Stack.Screen name='SignIn' component={SignIn} />
-      <Stack.Screen name='SignInEmail' component={SignInEmail} />
-      <Stack.Screen name='SelectCourses' component={SelectCourses} />
-      <Stack.Screen name='LastViewedCourses' component={LastViewedCourses} />
+      {routes.map(({ name, component }) => <Stack.Screen key={name} name={name} component={component} />)}
     </Stack.Navigator>
   )
 }

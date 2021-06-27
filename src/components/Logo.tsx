@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import SvgBrain from './SvgBrain'
 import { LogoProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -19,7 +19,7 @@ const classes = StyleSheet.create({
     fontWeight: 'bold'
   },
   text: {
-    fontFamily: 'Play_400Regular',
+    fontFamily: FONTS.LOGO.REGULAR,
     fontSize  : 32
   },
   whiteColor: {

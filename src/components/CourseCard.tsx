@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import { CourseCardProps } from '../types/props'
-import { COURSES, ICourseData } from '../utils'
+import { COURSES, ICourseData, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -21,7 +21,7 @@ const classes = StyleSheet.create({
   },
   text: {
     color     : '#FFF',
-    fontFamily: 'Mukta_700Bold',
+    fontFamily: FONTS.SECONDARY.BOLD,
     fontSize  : 16,
     marginLeft: 16
   }

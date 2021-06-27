@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
 import { CustomBelowButtonTextProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   text: {
     color     : COLORS.RED,
-    fontFamily: 'Padauk_700Bold',
+    fontFamily: FONTS.MAIN.BOLD,
     fontSize  : 14
   }
 })

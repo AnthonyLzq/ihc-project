@@ -2,37 +2,40 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { CustomBottomTextProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container:{
     flex          : 1,
     alignItems    : 'center',
-    justifyContent: 'flex-end',
-    marginBottom  : 33
+    justifyContent: 'flex-end'
   },
   text: {
     color     : '#FFF',
-    fontFamily: 'Padauk_700Bold',
+    fontFamily: FONTS.MAIN.REGULAR,
     fontSize  : 12
   },
   mainText: {
     color: COLORS.RED,
-    fontFamily: 'Padauk_700Bold',
+    fontFamily: FONTS.MAIN.BOLD,
     fontSize: 14
   }
 })
 
-const CustomBottomText = ({ mainText }: CustomBottomTextProps) => (
-  <View style={classes.container}>
+const CustomBottomText: React.FC<CustomBottomTextProps> = (props) => {
+  const { mainText, text, onPressMainText } = props
+
+  return (
+    <View style={classes.container}>
     <View>
-      <Text style={classes.text}>Do not have an account yet?</Text>
+      <Text style={classes.text}>{text}</Text>
     </View>
     <View>
-      <Text style={classes.mainText}>{mainText}</Text>
+      <Text style={classes.mainText} onPress={onPressMainText}>{mainText}</Text>
     </View>
   </View>
-)
+  )
+}
 
 export default CustomBottomText
 

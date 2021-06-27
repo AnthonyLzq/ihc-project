@@ -12,8 +12,8 @@ import {
 import Header from '../components/Header'
 import SelectCourseCard from '../components/SelectCourseCard'
 import CustomButton from '../components/CustomButton'
-import { SelectCoursesProps } from '../types/props'
-import { COLORS, COURSES } from '../utils'
+import { GeneralScreenProps } from '../types/props'
+import { COLORS, COURSES, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -24,24 +24,24 @@ const classes = StyleSheet.create({
     backgroundColor     : COLORS.SECOND_BLACK,
     borderTopEndRadius  : 26,
     borderTopStartRadius: 26,
-    height              : '88%'
+    height              : '88%',
+    padding             : 32
   },
   title: {
     flexDirection: 'row',
-    marginTop    : 30
   },
   textWhite: {
     color     : '#FFF',
-    fontFamily: 'Mukta_400Regular'
+    fontFamily: FONTS.SECONDARY.REGULAR
   },
   textPurple: {
     color     : COLORS.PURPLE,
-    fontFamily: 'Mukta_700Bold'
+    fontFamily: FONTS.SECONDARY.BOLD
   }
 })
 
 // Mockup version
-const SelectCourses = ({ navigation }: SelectCoursesProps) => {
+const SelectCourses: React.FC<GeneralScreenProps> = ({ navigation }) => {
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])
 
@@ -140,8 +140,6 @@ const SelectCourses = ({ navigation }: SelectCoursesProps) => {
         <CustomButton
           style={{
             color       : COLORS.PURPLE,
-            marginBottom: 32,
-            marginTop   : -1,
             titleSize   : 16
           }}
           disabled={nCourses < 3}

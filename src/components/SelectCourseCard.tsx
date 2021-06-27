@@ -8,7 +8,7 @@ import {
 import { Icon } from 'react-native-elements'
 
 import { SelectCourseCardProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const wHeight = Dimensions.get('window').height
 const wWidth = Dimensions.get('window').width
@@ -29,7 +29,7 @@ const classes = StyleSheet.create({
   },
   textWhite: {
     color     : '#FFF',
-    fontFamily: 'Mukta_400Regular',
+    fontFamily: FONTS.SECONDARY.REGULAR,
     textAlign : 'center'
   }
 })

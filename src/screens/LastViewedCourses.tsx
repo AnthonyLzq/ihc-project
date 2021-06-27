@@ -19,6 +19,7 @@ import {
   COLORS,
   COURSES,
   RELATED_COURSES,
+  FONTS,
   ICourseData,
   getRandomColor
 } from '../utils'
@@ -42,12 +43,12 @@ const classes = StyleSheet.create({
   },
   textWhite: {
     color     : '#FFF',
-    fontFamily: 'Mukta_400Regular',
+    fontFamily: FONTS.SECONDARY.REGULAR,
     fontSize  : 30
   },
   textPurple: {
     color     : COLORS.PURPLE,
-    fontFamily: 'Mukta_700Bold',
+    fontFamily: FONTS.SECONDARY.BOLD,
     fontSize  : 30
   },
   flatListSelectedCourses: {
@@ -65,7 +66,7 @@ const classes = StyleSheet.create({
   },
   mightInterest: {
     color       : '#FFF',
-    fontFamily  : 'Mukta_400Regular',
+    fontFamily  : FONTS.SECONDARY.REGULAR,
     fontSize    : 24,
     marginBottom: 16,
     marginTop   : 24
@@ -73,15 +74,17 @@ const classes = StyleSheet.create({
 })
 
 // Mockup version
-const LastViewedCourses = ({
-  navigation,
-  route: {
-    params: {
-      firstTime,
-      ids
+const LastViewedCourses: React.FC<LastViewedCoursesProps> = (props) => {
+  const {
+    navigation,
+    route: {
+      params: {
+        firstTime,
+        ids
+      }
     }
-  }
-}: LastViewedCoursesProps) => {
+  } = props
+
   const [selectedCourses] = React.useState<ICourseData[]>(
     COURSES.filter(c => ids.includes(c.id))
   )

@@ -1,6 +1,12 @@
 # Frontend App
 
+## Version 0.8.1
+
+- Modified:
+  - The code was refactored.
+
 ## Version 0.8.0
+
 - Implemented:
   - UI of the LastViewedCourses screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
   - Mockup data for the LastViewCourses screen.
@@ -12,7 +18,7 @@
 
 - Fixed:
   - Removed logo from the SignInEmail Screen.
-  - Overlap when the keyboard is open in the SignInEmail screen. 
+  - Overlap when the keyboard is open in the SignInEmail screen.
 
 ## Version 0.7.0
 

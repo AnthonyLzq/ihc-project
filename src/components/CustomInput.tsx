@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Input } from 'react-native-elements'
 
 import { CustomInputProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   input: {
@@ -12,7 +12,7 @@ const classes = StyleSheet.create({
     borderRadius   : 6,
     height         : 48,
     marginBottom   : 25,
-    width          : '84%'
+    width          : '100%'
   }
 })
 
@@ -20,7 +20,7 @@ const CustomInput = ({
   style: {
     color,
     icon,
-    fontFamily = 'Catamaran',
+    fontFamily = FONTS.INPUT.REGULAR,
     marginTop,
     placeHolder,
     placeHolderTextColor,
@@ -42,7 +42,7 @@ const CustomInput = ({
       <Input
         leftIcon={
           <Icon
-            color={color}
+            color={placeHolderTextColor}
             name={icon}
             size={size}
           />
