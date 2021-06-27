@@ -1,31 +1,43 @@
+import { ComponentType } from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
+type ScreenViewNames = 'SignIn' | 'SignInEmail' | 'SelectCourses' | 'LastViewedCourses'
+
 type RootStackParamList = {
-  SignIn         : undefined
-  SignInEmail    : undefined
-  SelectCourses  : undefined
+  SignIn           : undefined
+  SignInEmail      : undefined
+  SelectCourses    : undefined
   LastViewedCourses: {
     firstTime: boolean
     ids      : string[]
   }
 }
 
-type SignInProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
+type GeneralScreenProps = {
+  navigation: StackNavigationProp<RootStackParamList, ScreenViewNames>
 }
 
-type SignInEmailProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'SignInEmail'>
+type ScreenView = {
+  name     : ScreenViewNames
+  component: ComponentType<GeneralScreenProps> | ComponentType<LastViewedCoursesProps>
 }
 
-type SelectCoursesProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'SelectCourses'>
-}
+// type SignInProps = {
+//   navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
+// }
 
-type LastViewedCoursesProps = {
-  navigation: StackNavigationProp<RootStackParamList, 'LastViewedCourses'>
-  route     : RouteProp<RootStackParamList,           'LastViewedCourses'>
+// type SignInEmailProps = {
+//   navigation: StackNavigationProp<RootStackParamList, 'SignInEmail'>
+// }
+
+// type SelectCoursesProps = {
+//   navigation: StackNavigationProp<RootStackParamList, 'SelectCourses'>
+// }
+
+type LastViewedCoursesProps = GeneralScreenProps & {
+  // navigation: StackNavigationProp<RootStackParamList, 'LastViewedCourses'>
+  route: RouteProp<RootStackParamList, 'LastViewedCourses'>
 }
 
 type LogoProps = {
@@ -74,7 +86,9 @@ type CustomBelowButtonTextProps = {
 }
 
 type CustomBottomTextProps = {
-  mainText: string
+  mainText       : string
+  text           : string
+  onPressMainText: () => void
 }
 
 type HeaderProps = {
@@ -126,10 +140,12 @@ export {
   GoBackProps,
   HeaderProps,
   LogoProps,
-  SelectCoursesProps,
-  SignInProps,
-  SignInEmailProps,
+  // SelectCoursesProps,
+  // SignInProps,
+  // SignInEmailProps,
   SvgBrainProps,
   LastViewedCoursesProps,
-  CourseCardProps
+  CourseCardProps,
+  ScreenView,
+  GeneralScreenProps
 }

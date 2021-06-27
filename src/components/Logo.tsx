@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import SvgBrain from './SvgBrain'
 import { LogoProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -12,33 +12,35 @@ const classes = StyleSheet.create({
     justifyContent: 'center'
   },
   appName: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   ia: {
     color     : COLORS.PURPLE,
     fontWeight: 'bold'
   },
   text: {
-    fontFamily: 'Play_400Regular',
+    fontFamily: FONTS.LOGO.REGULAR,
     fontSize  : 32
   },
   whiteColor: {
-    color: '#FFF'
+    color: COLORS.WHITE
   }
 })
 
-const Logo = ({
-  style: {
-    height
-  }
-}: LogoProps) => (
-  <View style={[{ height }, classes.container]}>
-    <SvgBrain />
-    <View style={classes.appName}>
-      <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>
-      <Text style={[classes.ia, classes.text]}>AI</Text>
+const Logo: React.FC<LogoProps> = props => {
+  const {
+    style: { height }
+  } = props
+
+  return (
+    <View style={[{ height }, classes.container]}>
+      <SvgBrain />
+      <View style={classes.appName}>
+        <Text style={[classes.text, classes.whiteColor]}>Assistant </Text>
+        <Text style={[classes.ia, classes.text]}>AI</Text>
+      </View>
     </View>
-  </View>
-)
+  )
+}
 
 export default Logo

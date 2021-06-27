@@ -1,14 +1,9 @@
 import React from 'react'
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import { SelectCourseCardProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, FONTS } from '../utils'
 
 const wHeight = Dimensions.get('window').height
 const wWidth = Dimensions.get('window').width
@@ -28,21 +23,22 @@ const classes = StyleSheet.create({
     width       : 0.36 * wWidth
   },
   textWhite: {
-    color     : '#FFF',
-    fontFamily: 'Mukta_400Regular',
+    color     : COLORS.WHITE,
+    fontFamily: FONTS.SECONDARY.REGULAR,
     textAlign : 'center'
   }
 })
 
-const SelectCourseCard = ({
-  available,
-  course,
-  icon,
-  iconType,
-  id,
-  onPress,
-  style: { marginRight } = { marginRight: 0 }
-}: SelectCourseCardProps) => {
+const SelectCourseCard: React.FC<SelectCourseCardProps> = props => {
+  const {
+    available,
+    course,
+    icon,
+    iconType,
+    id,
+    onPress,
+    style: { marginRight } = { marginRight: 0 }
+  } = props
   const [isSelected, setIsPressed] = React.useState(false)
   const [backgroundColor, setBackgroundColor] = React.useState(
     COLORS.MAIN_BLACK
@@ -50,8 +46,7 @@ const SelectCourseCard = ({
   const firstRender = React.useRef(true)
 
   const toggleIsPressed = (): void => {
-    if (available || isSelected)
-      setIsPressed(!isSelected)
+    if (available || isSelected) setIsPressed(!isSelected)
   }
 
   React.useEffect(() => {
@@ -63,8 +58,7 @@ const SelectCourseCard = ({
         setBackgroundColor(COLORS.MAIN_BLACK)
         onPress(isSelected, id)
       }
-    } else
-      firstRender.current = false
+    } else firstRender.current = false
   }, [isSelected])
 
   return (
@@ -79,7 +73,7 @@ const SelectCourseCard = ({
       ]}
     >
       <Icon
-        color='#FFF'
+        color={COLORS.WHITE}
         iconStyle={{
           height: 41,
           width : 25

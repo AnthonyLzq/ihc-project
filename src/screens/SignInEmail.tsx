@@ -1,26 +1,29 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import CustomInput from '../components/CustomInput'
-import CustomButton from '../components/CustomButton'
-import CustomBelowButtonText from '../components/CustomBelowButtonText'
-import CustomBottomText from '../components/CustomBottomText'
-import GoBack from '../components/GoBack'
-import { SignInEmailProps } from '../types/props'
-import { COLORS } from '../utils'
+import {
+  CustomInput,
+  CustomButton,
+  CustomBelowButtonText,
+  GoBack
+} from '../components'
+import { SignUpBottomText } from './components'
+import { GeneralScreenProps } from '../types/props'
+import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
     alignItems     : 'center',
     backgroundColor: COLORS.SECOND_BLACK,
     height         : '100%',
-    width          : '100%'
+    width          : '100%',
+    padding        : 32
   },
   textBelowButtonContainer: {
     flexDirection : 'row',
     justifyContent: 'space-between',
     marginTop     : 25,
-    width         : '83%'
+    width         : '100%'
   },
   titleContainer: {
     alignItems  : 'center',
@@ -28,19 +31,21 @@ const classes = StyleSheet.create({
     marginTop   : 50
   },
   text: {
-    color: '#FFF'
+    color: COLORS.WHITE
   },
   textTitle: {
-    fontFamily: 'Mukta_700Bold',
+    fontFamily: FONTS.SECONDARY.BOLD,
     fontSize  : 24
   },
   textSubtitle: {
-    fontFamily: 'Mukta_400Regular',
+    fontFamily: FONTS.SECONDARY.REGULAR,
     fontSize  : 14
   }
 })
 
-const Login = ({ navigation }: SignInEmailProps) => {
+const Login: React.FC<GeneralScreenProps> = props => {
+  const { navigation } = props
+
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default' />
@@ -50,28 +55,28 @@ const Login = ({ navigation }: SignInEmailProps) => {
       </View>
       <CustomInput
         style={{
-          color               : COLORS.LEAD,
+          color               : COLORS.WHITE,
           icon                : 'person',
           marginTop           : 40,
           placeHolder         : 'Email',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 11
+          size                : 14
         }}
       />
       <CustomInput
         style={{
-          color               : COLORS.LEAD,
+          color               : COLORS.WHITE,
           icon                : 'lock',
           placeHolder         : 'Password',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 11
+          size                : 14
         }}
         secureTextEntry={true}
       />
       <CustomButton
         hasIconRight={true}
         icon={{
-          color: '#FFF',
+          color: COLORS.WHITE,
           name : 'exit-to-app',
           size : 16,
           type : 'material'
@@ -89,7 +94,7 @@ const Login = ({ navigation }: SignInEmailProps) => {
           text='Forgot password?'
         />
       </View>
-      <CustomBottomText mainText='Sign Up' />
+      <SignUpBottomText navigation={navigation} />
     </View>
   )
 }

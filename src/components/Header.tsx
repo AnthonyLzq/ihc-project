@@ -17,23 +17,23 @@ const classes = StyleSheet.create({
   }
 })
 
-const Header = ({
-  goBack = false,
-  logout,
-  style: { height } = { height: '12%' }
-}: HeaderProps) => {
+const Header: React.FC<HeaderProps> = props => {
+  const {
+    goBack = false,
+    logout,
+    style: { height } = { height: '12%' }
+  } = props
+
   return (
     <View style={[{ height }, classes.container]}>
       {/* {goBack && <Text>Hi</Text>} */}
       <SvgBrain height='32' width='30.25' />
-      <TouchableOpacity
-        onPress={logout}
-      >
+      <TouchableOpacity onPress={logout}>
         <Icon
-          color='#FFF'
+          color={COLORS.WHITE}
           iconStyle={{
             height: 22.2,
-            width : 20
+            width: 20
           }}
           name='logout'
           type='material-community'
@@ -44,4 +44,3 @@ const Header = ({
 }
 
 export default Header
-
