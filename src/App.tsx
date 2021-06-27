@@ -1,23 +1,14 @@
 import React from 'react'
 import AppLoading from 'expo-app-loading'
 import { createStackNavigator } from '@react-navigation/stack'
-import { useFonts, Play_400Regular } from '@expo-google-fonts/play'
-import { Padauk_400Regular, Padauk_700Bold } from '@expo-google-fonts/padauk'
-import { Mukta_400Regular, Mukta_700Bold } from '@expo-google-fonts/mukta'
-import screens from './screens'
+import { useFonts } from '@expo-google-fonts/play'
+import screens from './screenViews'
+import { fontResources } from './utils'
 
 const Stack = createStackNavigator()
 
 const App = () => {
-  const [fondLoaded] = useFonts({
-    Catamaran: require('../assets/fonts/Catamaran-VariableFont_wght.ttf'),
-    'robot-happy': require('../assets/fonts/robot-happy.ttf'),
-    Padauk_400Regular,
-    Padauk_700Bold,
-    Play_400Regular,
-    Mukta_400Regular,
-    Mukta_700Bold
-  })
+  const [fondLoaded] = useFonts(fontResources)
 
   if (!fondLoaded)
     return <AppLoading />

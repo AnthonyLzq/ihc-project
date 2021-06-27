@@ -71,4 +71,5 @@ const getRandomColor = (): string => {
   return color
 }
 
+export * from './fonts'
 export { COLORS, FONTS, COURSES, RELATED_COURSES, ICourseData, getRandomColor }
