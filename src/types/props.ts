@@ -19,8 +19,8 @@ type GeneralScreenProps = {
 }
 
 type ScreenView = {
-  name      : ScreenViewNames
-  component : ComponentType<GeneralScreenProps> | ComponentType<LastViewedCoursesProps>
+  name     : ScreenViewNames
+  component: ComponentType<GeneralScreenProps> | ComponentType<LastViewedCoursesProps>
 }
 
 // type SignInProps = {
@@ -37,7 +37,7 @@ type ScreenView = {
 
 type LastViewedCoursesProps = GeneralScreenProps & {
   // navigation: StackNavigationProp<RootStackParamList, 'LastViewedCourses'>
-  route     : RouteProp<RootStackParamList, 'LastViewedCourses'>
+  route: RouteProp<RootStackParamList, 'LastViewedCourses'>
 }
 
 type LogoProps = {
@@ -86,8 +86,8 @@ type CustomBelowButtonTextProps = {
 }
 
 type CustomBottomTextProps = {
-  mainText: string
-  text: string
+  mainText       : string
+  text           : string
   onPressMainText: () => void
 }
 

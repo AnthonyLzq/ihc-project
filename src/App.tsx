@@ -2,6 +2,7 @@ import React from 'react'
 import AppLoading from 'expo-app-loading'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useFonts } from '@expo-google-fonts/play'
+
 import screens from './screenViews'
 import { fontResources } from './utils'
 

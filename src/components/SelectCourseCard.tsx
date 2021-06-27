@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity
-} from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'react-native-elements'
 
 import { SelectCourseCardProps } from '../types/props'
@@ -34,7 +29,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const SelectCourseCard: React.FC<SelectCourseCardProps> = (props) => {
+const SelectCourseCard: React.FC<SelectCourseCardProps> = props => {
   const {
     available,
     course,
@@ -51,8 +46,7 @@ const SelectCourseCard: React.FC<SelectCourseCardProps> = (props) => {
   const firstRender = React.useRef(true)
 
   const toggleIsPressed = (): void => {
-    if (available || isSelected)
-      setIsPressed(!isSelected)
+    if (available || isSelected) setIsPressed(!isSelected)
   }
 
   React.useEffect(() => {
@@ -64,8 +58,7 @@ const SelectCourseCard: React.FC<SelectCourseCardProps> = (props) => {
         setBackgroundColor(COLORS.MAIN_BLACK)
         onPress(isSelected, id)
       }
-    } else
-      firstRender.current = false
+    } else firstRender.current = false
   }, [isSelected])
 
   return (

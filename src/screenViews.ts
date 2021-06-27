@@ -9,19 +9,19 @@ import {
 
 const screens: ScreenView[] = [
   {
-    name: 'SignIn',
+    name     : 'SignIn',
     component: SignIn
   },
   {
-    name: 'SignInEmail',
+    name     : 'SignInEmail',
     component: SignInEmail
   },
   {
-    name: 'SelectCourses',
+    name     : 'SelectCourses',
     component: SelectCourses
   },
   {
-    name: 'LastViewedCourses',
+    name     : 'LastViewedCourses',
     component: LastViewedCourses
   }
 ]

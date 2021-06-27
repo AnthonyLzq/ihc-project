@@ -16,24 +16,26 @@ const classes = StyleSheet.create({
     fontSize  : 12
   },
   mainText: {
-    color: COLORS.RED,
+    color     : COLORS.RED,
     fontFamily: FONTS.MAIN.BOLD,
-    fontSize: 14
+    fontSize  : 14
   }
 })
 
-const CustomBottomText: React.FC<CustomBottomTextProps> = (props) => {
+const CustomBottomText: React.FC<CustomBottomTextProps> = props => {
   const { mainText, text, onPressMainText } = props
 
   return (
     <View style={classes.container}>
-    <View>
-      <Text style={classes.text}>{text}</Text>
+      <View>
+        <Text style={classes.text}>{text}</Text>
+      </View>
+      <View>
+        <Text style={classes.mainText} onPress={onPressMainText}>
+          {mainText}
+        </Text>
+      </View>
     </View>
-    <View>
-      <Text style={classes.mainText} onPress={onPressMainText}>{mainText}</Text>
-    </View>
-  </View>
   )
 }
 

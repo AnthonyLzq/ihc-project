@@ -76,7 +76,7 @@ const classes = StyleSheet.create({
 })
 
 // Mockup version
-const LastViewedCourses: React.FC<LastViewedCoursesProps> = (props) => {
+const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
   const {
     navigation,
     route: {

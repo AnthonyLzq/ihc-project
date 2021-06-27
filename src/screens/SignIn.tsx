@@ -5,15 +5,15 @@ import {
   Logo,
   CustomButton
 } from '../components'
-import { SignInBottomText } from './components'
+import { SignUpBottomText } from './components'
 import { GeneralScreenProps } from '../types/props'
 import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
     backgroundColor: COLORS.MAIN_BLACK,
-    width: '100%',
-    height: '100%'
+    height         : '100%',
+    width          : '100%'
   },
   signInMethodsContainer: {
     padding             : 32,
@@ -33,7 +33,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const SignIn: React.FC<GeneralScreenProps> = (props) => {
+const SignIn: React.FC<GeneralScreenProps> = props => {
   const { navigation } = props
 
   return (
@@ -73,7 +73,7 @@ const SignIn: React.FC<GeneralScreenProps> = (props) => {
           }}
           title='SIGN IN WITH EMAIL'
         />
-        <SignInBottomText navigation={navigation} />
+        <SignUpBottomText navigation={navigation} />
       </View>
     </View>
   )

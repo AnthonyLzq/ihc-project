@@ -12,7 +12,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const GoBack: React.FC<GoBackProps> = (props) => {
+const GoBack: React.FC<GoBackProps> = props => {
   const { onPress } = props
 
   return (

@@ -7,7 +7,7 @@ import {
   CustomBelowButtonText,
   GoBack
 } from '../components'
-import { SignInBottomText } from './components'
+import { SignUpBottomText } from './components'
 import { GeneralScreenProps } from '../types/props'
 import { COLORS, FONTS } from '../utils'
 
@@ -43,9 +43,9 @@ const classes = StyleSheet.create({
   }
 })
 
-const Login: React.FC<GeneralScreenProps> = (props) => {
+const Login: React.FC<GeneralScreenProps> = props => {
   const { navigation } = props
-  
+
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default' />
@@ -94,7 +94,7 @@ const Login: React.FC<GeneralScreenProps> = (props) => {
           text='Forgot password?'
         />
       </View>
-      <SignInBottomText navigation={navigation} />
+      <SignUpBottomText navigation={navigation} />
     </View>
   )
 }

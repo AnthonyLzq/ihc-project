@@ -12,7 +12,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const CustomBelowButtonText: React.FC<CustomBelowButtonTextProps> = (props) => {
+const CustomBelowButtonText: React.FC<CustomBelowButtonTextProps> = props => {
   const { text } = props
 
   return (

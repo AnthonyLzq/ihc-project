@@ -4,8 +4,8 @@ import Svg, { Path } from 'react-native-svg'
 import { SvgBrainProps } from '../types/props'
 import { COLORS } from '../utils'
 
-const SvgBrain: React.FC<SvgBrainProps> = (props) => {
-  const { height = '52', width ='52' } = props
+const SvgBrain: React.FC<SvgBrainProps> = props => {
+  const { height = '52', width = '52' } = props
 
   return (
     <Svg height={height} width={width} viewBox='0 0 55 52' fill='none'>

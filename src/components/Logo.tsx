@@ -12,7 +12,7 @@ const classes = StyleSheet.create({
     justifyContent: 'center'
   },
   appName: {
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   ia: {
     color     : COLORS.PURPLE,
@@ -27,11 +27,9 @@ const classes = StyleSheet.create({
   }
 })
 
-const Logo: React.FC<LogoProps> = (props) => {
+const Logo: React.FC<LogoProps> = props => {
   const {
-    style: {
-      height
-    }
+    style: { height }
   } = props
 
   return (

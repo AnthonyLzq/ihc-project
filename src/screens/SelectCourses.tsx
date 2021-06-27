@@ -43,7 +43,7 @@ const classes = StyleSheet.create({
 })
 
 // Mockup version
-const SelectCourses: React.FC<GeneralScreenProps> = (props) => {
+const SelectCourses: React.FC<GeneralScreenProps> = props => {
   const { navigation } = props
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])

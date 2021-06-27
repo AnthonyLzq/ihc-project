@@ -13,7 +13,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const CustomButton: React.FC<CustomButtonProps> = (props) => {
+const CustomButton: React.FC<CustomButtonProps> = props => {
   const {
     style: {
       color,

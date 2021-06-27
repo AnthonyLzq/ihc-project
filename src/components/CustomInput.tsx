@@ -16,7 +16,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const CustomInput: React.FC<CustomInputProps> = (props) => {
+const CustomInput: React.FC<CustomInputProps> = props => {
   const {
     style: {
       color,
@@ -34,20 +34,13 @@ const CustomInput: React.FC<CustomInputProps> = (props) => {
   )
 
   React.useEffect(() => {
-    if (marginTop)
-      setViewStyles([...viewStyles, { marginTop }])
+    if (marginTop) setViewStyles([...viewStyles, { marginTop }])
   }, [])
 
   return (
     <View style={viewStyles}>
       <Input
-        leftIcon={
-          <Icon
-            color={placeHolderTextColor}
-            name={icon}
-            size={size}
-          />
-        }
+        leftIcon={<Icon color={placeHolderTextColor} name={icon} size={size} />}
         placeholder={placeHolder}
         placeholderTextColor={placeHolderTextColor}
         inputContainerStyle={{ borderBottomWidth: 0 }}
