@@ -4,7 +4,8 @@ import {
   SignIn,
   SignInEmail,
   SelectCourses,
-  LastViewedCourses
+  LastViewedCourses,
+  SignUp
 } from './screens'
 
 const screens: ScreenView[] = [
@@ -23,6 +24,10 @@ const screens: ScreenView[] = [
   {
     name     : 'LastViewedCourses',
     component: LastViewedCourses
+  },
+  {
+    name     : 'SignUp',
+    component: SignUp
   }
 ]
 

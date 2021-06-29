@@ -1,5 +1,15 @@
 # Frontend App
 
+## Version 0.9.1
+
+- Fixed:
+  - SignUp component name.
+
+## Version 0.9.0
+
+- Implemented:
+  - UI of the SignUp screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+
 ## Version 0.8.1
 
 - Modified:
