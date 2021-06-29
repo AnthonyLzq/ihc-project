@@ -2,7 +2,7 @@ import { ComponentType } from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-type ScreenViewNames = 'SignIn' | 'SignInEmail' | 'SelectCourses' | 'LastViewedCourses'
+type ScreenViewNames = 'SignIn' | 'SignInEmail' | 'SelectCourses' | 'LastViewedCourses' | 'SignUp'
 
 type RootStackParamList = {
   SignIn           : undefined
@@ -12,6 +12,7 @@ type RootStackParamList = {
     firstTime: boolean
     ids      : string[]
   }
+  SignUp           : undefined
 }
 
 type GeneralScreenProps = {
