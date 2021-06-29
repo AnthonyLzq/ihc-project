@@ -2,43 +2,50 @@ import { ComponentType } from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
-type ScreenViewNames = 'SignIn' | 'SignInEmail' | 'SelectCourses' | 'LastViewedCourses' | 'SignUp'
+type ScreenViewNames =
+  | 'SignIn'
+  | 'SignInEmail'
+  | 'SelectCourses'
+  | 'LastViewedCourses'
+  | 'SignUp'
+  | 'CourseDetail'
 
 type RootStackParamList = {
   SignIn           : undefined
   SignInEmail      : undefined
   SelectCourses    : undefined
+  SignUp           : undefined
   LastViewedCourses: {
     firstTime: boolean
     ids      : string[]
   }
-  SignUp           : undefined
+  CourseDetail: {
+    id: string
+  }
 }
 
+type Navigation = StackNavigationProp<RootStackParamList, ScreenViewNames>
+
 type GeneralScreenProps = {
-  navigation: StackNavigationProp<RootStackParamList, ScreenViewNames>
+  navigation: Navigation
 }
+
+type LastViewedCoursesProps = GeneralScreenProps & {
+  route: RouteProp<RootStackParamList, 'LastViewedCourses'>
+}
+
+type CourseDetailProps = GeneralScreenProps & {
+  route: RouteProp<RootStackParamList, 'CourseDetail'>
+}
+
+type Component =
+  | ComponentType<GeneralScreenProps>
+  | ComponentType<LastViewedCoursesProps>
+  | ComponentType<CourseDetailProps>
 
 type ScreenView = {
   name     : ScreenViewNames
-  component: ComponentType<GeneralScreenProps> | ComponentType<LastViewedCoursesProps>
-}
-
-// type SignInProps = {
-//   navigation: StackNavigationProp<RootStackParamList, 'SignIn'>
-// }
-
-// type SignInEmailProps = {
-//   navigation: StackNavigationProp<RootStackParamList, 'SignInEmail'>
-// }
-
-// type SelectCoursesProps = {
-//   navigation: StackNavigationProp<RootStackParamList, 'SelectCourses'>
-// }
-
-type LastViewedCoursesProps = GeneralScreenProps & {
-  // navigation: StackNavigationProp<RootStackParamList, 'LastViewedCourses'>
-  route: RouteProp<RootStackParamList, 'LastViewedCourses'>
+  component: Component
 }
 
 type LogoProps = {
@@ -130,6 +137,7 @@ type CourseCardProps = {
   course  : string
   icon    : string
   iconType: string
+  onPress : () => void
 }
 
 export {
@@ -141,12 +149,11 @@ export {
   GoBackProps,
   HeaderProps,
   LogoProps,
-  // SelectCoursesProps,
-  // SignInProps,
-  // SignInEmailProps,
+  Navigation,
   SvgBrainProps,
   LastViewedCoursesProps,
   CourseCardProps,
   ScreenView,
-  GeneralScreenProps
+  GeneralScreenProps,
+  CourseDetailProps
 }

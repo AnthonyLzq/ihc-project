@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Alert,
   FlatList,
   SafeAreaView,
   StatusBar,
@@ -11,19 +10,17 @@ import {
 } from 'react-native'
 import { FAB } from 'react-native-elements'
 
-import {
-  Header,
-  CourseCard
-} from '../components'
-import RobotHappy from '../icons/RobotHappy'
 import { LastViewedCoursesProps } from '../types/props'
+import { Header, CourseCard } from '../components'
+import RobotHappy from '../icons/RobotHappy'
 import {
   COLORS,
   COURSES,
   RELATED_COURSES,
   FONTS,
   ICourseData,
-  getRandomColor
+  getRandomColor,
+  logout
 } from '../utils'
 
 const classes = StyleSheet.create({
@@ -86,36 +83,14 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
       }
     }
   } = props
-
   const [selectedCourses] = React.useState<ICourseData[]>(
     COURSES.filter(c => ids.includes(c.id))
   )
 
-  // TODO: implemented a way to logout globally
-  const logoutAlert = React.useCallback(() => {
-    Alert.alert(
-      'Logout',
-      'Are you sure you want to logout?',
-      [
-        {
-          onPress: () => navigation.navigate('SignInEmail'),
-          text   : 'Yes',
-          style  : 'default'
-        },
-        {
-          onPress: () => {},
-          text   : 'No',
-          style  : 'cancel'
-        }
-      ],
-      { cancelable: true }
-    )
-  }, [])
-
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
-      <Header logout={logoutAlert}/>
+      <Header logout={(() => logout(navigation))}/>
       <View style={classes.lastViewedCoursesContainer}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>
@@ -135,6 +110,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
               course={course}
               icon={icon}
               iconType={iconType}
+              onPress={() => navigation.navigate('CourseDetail', { id })}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -164,6 +140,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
               course={course}
               icon={icon}
               iconType={iconType}
+              onPress={() => navigation.navigate('CourseDetail', { id })}
             />
           )}
           showsVerticalScrollIndicator={false}
