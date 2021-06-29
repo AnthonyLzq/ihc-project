@@ -20,8 +20,8 @@ const FONTS = {
   }
 }
 
-export const fontResources = {
-  Catamaran: require('../../assets/fonts/Catamaran-VariableFont_wght.ttf'),
+const fontResources = {
+  Catamaran    : require('../../assets/fonts/Catamaran-VariableFont_wght.ttf'),
   'robot-happy': require('../../assets/fonts/robot-happy.ttf'),
   Padauk_400Regular,
   Padauk_700Bold,
@@ -31,4 +31,4 @@ export const fontResources = {
   Mukta_700Bold
 }
 
-export default FONTS
+export { fontResources, FONTS }

@@ -1,9 +1,18 @@
 # Frontend App
 
+## Version 0.10.0
+
+- Implemented:
+  - UI of the CourseDetail screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - Some code refactoring.
+  - Global logout `callback` in the `src/utils` folder.
+- TODO:
+  - Fix "overflow" in the topics of the CourseDetail screen.
+
 ## Version 0.9.1
 
 - Fixed:
-  - SignUp component name.
+  - SignUp screen name.
 
 ## Version 0.9.0
 
