@@ -1,5 +1,12 @@
 # Frontend App
 
+## Version 0.11.0
+
+- Implemented:
+  - UI of the SignUpEmailFirstStep screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - UI of the SignUpEmailSecondStep screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+  - UI of the SignUpEmailWelcome screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+
 ## Version 0.10.0
 
 - Implemented:

@@ -65,7 +65,7 @@ const SignUp: React.FC<GeneralScreenProps> = props => {
             type : 'material'
           }}
           hasIconLeft={true}
-          onPress={() => navigation.navigate('SignUpEmail')}
+          onPress={() => navigation.navigate('SignUpEmailFirstStep')}
           style={{
             color     : COLORS.PURPLE,
             titleSize : 16,
