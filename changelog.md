@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.9.1
+
+- Fixed:
+  - SignUp component name.
+
 ## Version 0.9.0
 
 - Implemented:

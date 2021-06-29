@@ -33,7 +33,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const SignIn: React.FC<GeneralScreenProps> = props => {
+const SignUp: React.FC<GeneralScreenProps> = props => {
   const { navigation } = props
 
   return (
@@ -79,4 +79,4 @@ const SignIn: React.FC<GeneralScreenProps> = props => {
   )
 }
 
-export default SignIn
+export default SignUp
