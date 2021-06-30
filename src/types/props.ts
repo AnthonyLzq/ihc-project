@@ -9,12 +9,14 @@ type ScreenViewNames =
   | 'LastViewedCourses'
   | 'SignUp'
   | 'CourseDetail'
+  | 'SignUpEmailFirstStep'
+  | 'SignUpEmailSecondStep'
+  | 'SignUpEmailWelcome'
 
 type RootStackParamList = {
   SignIn           : undefined
   SignInEmail      : undefined
   SelectCourses    : undefined
-  SignUp           : undefined
   LastViewedCourses: {
     firstTime: boolean
     ids      : string[]
@@ -22,6 +24,10 @@ type RootStackParamList = {
   CourseDetail: {
     id: string
   }
+  SignUp               : undefined
+  SignUpEmailFirstStep : undefined
+  SignUpEmailSecondStep: undefined
+  SignUpEmailWelcome   : undefined
 }
 
 type Navigation = StackNavigationProp<RootStackParamList, ScreenViewNames>
@@ -79,7 +85,7 @@ type CustomButtonProps = {
 type CustomInputProps = {
   style: {
     color               : string
-    icon                : string
+    icon?               : string
     fontFamily?         : string
     marginTop?          : string | number
     placeHolder         : string
@@ -109,6 +115,11 @@ type HeaderProps = {
 }
 
 type SvgBrainProps = {
+  height?: string
+  width? : string
+}
+
+type SvgWelcomeProps = {
   height?: string
   width? : string
 }
@@ -155,5 +166,6 @@ export {
   CourseCardProps,
   ScreenView,
   GeneralScreenProps,
-  CourseDetailProps
+  CourseDetailProps,
+  SvgWelcomeProps
 }

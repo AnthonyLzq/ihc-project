@@ -1,12 +1,12 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
+import { GeneralScreenProps } from '../types/props'
 import {
   Logo,
   CustomButton
 } from '../components'
 import { SignInBottomText } from './components'
-import { GeneralScreenProps } from '../types/props'
 import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
@@ -65,7 +65,7 @@ const SignUp: React.FC<GeneralScreenProps> = props => {
             type : 'material'
           }}
           hasIconLeft={true}
-          onPress={() => navigation.navigate('SignUpEmail')}
+          onPress={() => navigation.navigate('SignUpEmailFirstStep')}
           style={{
             color     : COLORS.PURPLE,
             titleSize : 16,

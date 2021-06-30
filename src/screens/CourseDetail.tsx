@@ -72,9 +72,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
   const {
     navigation,
     route: {
-      params: {
-        id
-      }
+      params: { id }
     }
   } = props
   const [course, setCourse] = React.useState('')

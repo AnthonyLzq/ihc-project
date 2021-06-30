@@ -40,4 +40,3 @@ const CustomBottomText: React.FC<CustomBottomTextProps> = props => {
 }
 
 export default CustomBottomText
-

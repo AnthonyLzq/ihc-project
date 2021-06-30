@@ -5,10 +5,9 @@ import { GeneralScreenProps } from '../types/props'
 import {
   CustomInput,
   CustomButton,
-  CustomBelowButtonText,
   GoBack
 } from '../components'
-import { SignUpBottomText } from './components'
+import { SignInBottomText } from './components'
 import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
@@ -20,8 +19,6 @@ const classes = StyleSheet.create({
     padding        : 32
   },
   textBelowButtonContainer: {
-    flexDirection : 'row',
-    justifyContent: 'space-between',
     marginTop     : 25,
     width         : '100%'
   },
@@ -36,31 +33,22 @@ const classes = StyleSheet.create({
   textTitle: {
     fontFamily: FONTS.SECONDARY.BOLD,
     fontSize  : 24
-  },
-  textSubtitle: {
-    fontFamily: FONTS.SECONDARY.REGULAR,
-    fontSize  : 14
   }
 })
 
-const Login: React.FC<GeneralScreenProps> = props => {
+const SignUpEmailFirstStep: React.FC<GeneralScreenProps> = props => {
   const { navigation } = props
 
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default' />
       <View style={classes.titleContainer}>
-        <Text style={[classes.text, classes.textTitle]}>Welcome back!</Text>
-        <Text style={[classes.text, classes.textSubtitle]}>
-          We're so excited to see you again!
-        </Text>
+        <Text style={[classes.text, classes.textTitle]}>Enter your names</Text>
       </View>
       <CustomInput
         style={{
           color               : COLORS.WHITE,
-          icon                : 'person',
-          marginTop           : 40,
-          placeHolder         : 'Email',
+          placeHolder         : 'Names',
           placeHolderTextColor: COLORS.LEAD,
           size                : 14
         }}
@@ -68,37 +56,32 @@ const Login: React.FC<GeneralScreenProps> = props => {
       <CustomInput
         style={{
           color               : COLORS.WHITE,
-          icon                : 'lock',
-          placeHolder         : 'Password',
+          placeHolder         : 'Lastnames',
           placeHolderTextColor: COLORS.LEAD,
           size                : 14
         }}
-        secureTextEntry={true}
       />
       <CustomButton
         hasIconRight={true}
         icon={{
           color: COLORS.WHITE,
-          name : 'exit-to-app',
+          name : 'navigate-next',
           size : 16,
           type : 'material'
         }}
-        onPress={() => navigation.navigate('SelectCourses')}
+        onPress={() => navigation.navigate('SignUpEmailSecondStep')}
         style={{
           color    : COLORS.PURPLE,
           titleSize: 16
         }}
-        title='SIGN IN'
+        title='CONTINUE'
       />
       <View style={classes.textBelowButtonContainer}>
-        <GoBack onPress={() => navigation.navigate('SignIn')}/>
-        <CustomBelowButtonText
-          text='Forgot password?'
-        />
+        <GoBack onPress={() => navigation.navigate('SignUp')}/>
       </View>
-      <SignUpBottomText navigation={navigation} />
+      <SignInBottomText navigation={navigation} />
     </View>
   )
 }
 
-export default Login
+export default SignUpEmailFirstStep

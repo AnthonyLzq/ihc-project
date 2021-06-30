@@ -9,12 +9,12 @@ import {
   View
 } from 'react-native'
 
+import { GeneralScreenProps } from '../types/props'
 import {
   Header,
   SelectCourseCard,
   CustomButton
 } from '../components'
-import { GeneralScreenProps } from '../types/props'
 import { COLORS, COURSES, FONTS } from '../utils'
 
 const classes = StyleSheet.create({

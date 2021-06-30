@@ -13,6 +13,9 @@ const classes = StyleSheet.create({
     height         : 48,
     marginBottom   : 25,
     width          : '100%'
+  },
+  withoutIcon: {
+    paddingTop: 4
   }
 })
 
@@ -38,9 +41,13 @@ const CustomInput: React.FC<CustomInputProps> = props => {
   }, [])
 
   return (
-    <View style={viewStyles}>
+    <View style={[...viewStyles, icon ? {} : classes.withoutIcon]}>
       <Input
-        leftIcon={<Icon color={placeHolderTextColor} name={icon} size={size} />}
+        leftIcon={
+          icon ? (
+            <Icon color={placeHolderTextColor} name={icon} size={size} />
+          ) : undefined
+        }
         placeholder={placeHolder}
         placeholderTextColor={placeHolderTextColor}
         inputContainerStyle={{ borderBottomWidth: 0 }}
