@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.12.0
+
+- Implemented:
+  - UI of the AllCourses screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+
 ## Version 0.11.1
 
 - Fixed:
