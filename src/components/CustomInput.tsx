@@ -41,9 +41,13 @@ const CustomInput: React.FC<CustomInputProps> = props => {
   }, [])
 
   return (
-    <View style={[ ...viewStyles, icon ? {} : classes.withoutIcon ]}>
+    <View style={[...viewStyles, icon ? {} : classes.withoutIcon]}>
       <Input
-        leftIcon={icon ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined}
+        leftIcon={
+          icon ? (
+            <Icon color={placeHolderTextColor} name={icon} size={size} />
+          ) : undefined
+        }
         placeholder={placeHolder}
         placeholderTextColor={placeHolderTextColor}
         inputContainerStyle={{ borderBottomWidth: 0 }}

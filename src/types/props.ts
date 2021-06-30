@@ -24,10 +24,11 @@ type RootStackParamList = {
   CourseDetail: {
     id: string
   }
-  SignUp                  : undefined
-  SignUpEmailFirstStep    : undefined
-  SignUpEmailSecondStep   : undefined
-  SignUpEmailWelcome      : undefined
+  SignUp               : undefined
+  SignUpEmailFirstStep : undefined
+  SignUpEmailSecondStep: undefined
+  SignUpEmailWelcome   : undefined
+}
 
 type Navigation = StackNavigationProp<RootStackParamList, ScreenViewNames>
 

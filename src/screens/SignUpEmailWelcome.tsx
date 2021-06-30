@@ -1,14 +1,14 @@
 import React from 'react'
-
 import {
   Text,
   View,
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
-import { SvgWelcome } from './components'
 import { Icon } from 'react-native-elements'
+
 import { GeneralScreenProps } from '../types/props'
+import { SvgWelcome } from './components'
 import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
@@ -19,47 +19,47 @@ const classes = StyleSheet.create({
     padding         : 32,
   },
   title: {
-    color           : COLORS.PURPLE,
-    fontFamily      : FONTS.SECONDARY.BOLD,
-    fontSize        : 50,
-    textAlign       : 'center',
-    marginTop       : 50
+    color     : COLORS.PURPLE,
+    fontFamily: FONTS.SECONDARY.BOLD,
+    fontSize  : 50,
+    textAlign : 'center',
+    marginTop : 50
   },
   names: {
-    color           : COLORS.WHITE,
-    fontFamily      : FONTS.SECONDARY.REGULAR,
-    fontSize        : 30,
-    textAlign       : 'center'
+    color     : COLORS.WHITE,
+    fontFamily: FONTS.SECONDARY.REGULAR,
+    fontSize  : 30,
+    textAlign : 'center'
   },
   welcomeMessage: {
-    color           : COLORS.WHITE,
-    fontFamily      : FONTS.SECONDARY.REGULAR,
-    fontSize        : 20,
-    textAlign       : 'center',
-    marginTop       : 30
+    color     : COLORS.WHITE,
+    fontFamily: FONTS.SECONDARY.REGULAR,
+    fontSize  : 20,
+    textAlign : 'center',
+    marginTop : 30
   },
   highlightedText: {
-    color           : COLORS.PURPLE,
-    fontFamily      : FONTS.SECONDARY.BOLD,
+    color     : COLORS.PURPLE,
+    fontFamily: FONTS.SECONDARY.BOLD,
   },
   signInText: {
-    color           : COLORS.RED,
-    fontFamily      : FONTS.MAIN.BOLD,
-    fontSize        : 20
+    color     : COLORS.RED,
+    fontFamily: FONTS.MAIN.BOLD,
+    fontSize  : 20
   },
   signInButton: {
-    flex            : 1,
-    flexDirection   : 'row',
-    justifyContent  : 'center',
-    alignItems      : 'center'
+    flex          : 1,
+    flexDirection : 'row',
+    justifyContent: 'center',
+    alignItems    : 'center'
   },
   svgMessage: {
-    marginTop       : 100,
-    marginBottom    : 50
+    marginTop   : 100,
+    marginBottom: 50
   }
 })
 
-const SignUpEmailWelcome: React.FC<GeneralScreenProps> = (props) => {
+const SignUpEmailWelcome: React.FC<GeneralScreenProps> = props => {
   const { navigation } = props
 
   return (

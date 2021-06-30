@@ -1,13 +1,13 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
+import { GeneralScreenProps } from '../types/props'
 import {
   CustomInput,
   CustomButton,
   GoBack
 } from '../components'
 import { SignInBottomText } from './components'
-import { GeneralScreenProps } from '../types/props'
 import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({

@@ -1,5 +1,11 @@
 # Frontend App
 
+## Version 0.11.1
+
+- Fixed:
+  - Problem with the types.
+  - Some code styles.
+
 ## Version 0.11.0
 
 - Implemented:

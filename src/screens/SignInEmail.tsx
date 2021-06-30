@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
+import { GeneralScreenProps } from '../types/props'
 import {
   CustomInput,
   CustomButton,
@@ -8,7 +9,6 @@ import {
   GoBack
 } from '../components'
 import { SignUpBottomText } from './components'
-import { GeneralScreenProps } from '../types/props'
 import { COLORS, FONTS } from '../utils'
 
 const classes = StyleSheet.create({
@@ -51,7 +51,9 @@ const Login: React.FC<GeneralScreenProps> = props => {
       <StatusBar barStyle='default' />
       <View style={classes.titleContainer}>
         <Text style={[classes.text, classes.textTitle]}>Welcome back!</Text>
-        <Text style={[classes.text, classes.textSubtitle]}>We're so excited to see you again!</Text>
+        <Text style={[classes.text, classes.textSubtitle]}>
+          We're so excited to see you again!
+        </Text>
       </View>
       <CustomInput
         style={{
