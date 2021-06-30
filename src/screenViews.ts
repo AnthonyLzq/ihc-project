@@ -6,6 +6,7 @@ import {
   SelectCourses,
   LastViewedCourses,
   CourseDetail,
+  AllCourses,
   SignUp,
   SignUpEmailFirstStep,
   SignUpEmailSecondStep,
@@ -28,6 +29,10 @@ const screens: ScreenView[] = [
   {
     name     : 'LastViewedCourses',
     component: LastViewedCourses
+  },
+  {
+    name     : 'AllCourses',
+    component: AllCourses
   },
   {
     name     : 'CourseDetail',

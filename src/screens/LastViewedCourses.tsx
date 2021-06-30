@@ -121,7 +121,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
         />
         <TouchableOpacity
           style={classes.allCourses}
-          onPress={() => {}}
+          onPress={() => navigation.navigate('AllCourses', { ids })}
         >
           <Text style={[classes.textPurple, classes.textAllCourses]}>
             See all my courses

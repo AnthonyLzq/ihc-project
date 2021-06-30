@@ -7,8 +7,9 @@ type ScreenViewNames =
   | 'SignInEmail'
   | 'SelectCourses'
   | 'LastViewedCourses'
-  | 'SignUp'
   | 'CourseDetail'
+  | 'AllCourses'
+  | 'SignUp'
   | 'SignUpEmailFirstStep'
   | 'SignUpEmailSecondStep'
   | 'SignUpEmailWelcome'
@@ -23,6 +24,9 @@ type RootStackParamList = {
   }
   CourseDetail: {
     id: string
+  }
+  AllCourses:  {
+    ids: string[]
   }
   SignUp               : undefined
   SignUpEmailFirstStep : undefined
@@ -44,10 +48,15 @@ type CourseDetailProps = GeneralScreenProps & {
   route: RouteProp<RootStackParamList, 'CourseDetail'>
 }
 
+type AllCoursesProps = GeneralScreenProps & {
+  route: RouteProp<RootStackParamList, 'AllCourses'>
+}
+
 type Component =
   | ComponentType<GeneralScreenProps>
   | ComponentType<LastViewedCoursesProps>
   | ComponentType<CourseDetailProps>
+  | ComponentType<AllCoursesProps>
 
 type ScreenView = {
   name     : ScreenViewNames
@@ -167,5 +176,6 @@ export {
   ScreenView,
   GeneralScreenProps,
   CourseDetailProps,
-  SvgWelcomeProps
+  SvgWelcomeProps,
+  AllCoursesProps
 }
