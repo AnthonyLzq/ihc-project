@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 
-import { GeneralScreenProps } from '../types/props'
+import { SignUpEmailWelcomeProps } from '../types/props'
 import { SvgWelcome } from './components'
 import { COLORS, FONTS } from '../utils'
 
@@ -59,14 +59,22 @@ const classes = StyleSheet.create({
   }
 })
 
-const SignUpEmailWelcome: React.FC<GeneralScreenProps> = props => {
-  const { navigation } = props
+const SignUpEmailWelcome: React.FC<SignUpEmailWelcomeProps> = props => {
+  const {
+    navigation,
+    route
+  } = props
+
+  const signInWithEmail = () => 
+    navigation.navigate('SignInEmail', {
+      email: route?.params?.email || ''
+    })
 
   return (
     <View style={classes.container}>
       <View>
         <Text style={classes.title}>Welcome!</Text>
-        <Text style={classes.names}>Bryan Vera</Text>
+        <Text style={classes.names}>{route?.params?.email.split(' ')[0].trim()}</Text>
       </View>
       <View style={classes.svgMessage}>
         <SvgWelcome width='100%' />
@@ -77,7 +85,7 @@ const SignUpEmailWelcome: React.FC<GeneralScreenProps> = props => {
         </Text>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={signInWithEmail}
         style={classes.signInButton}
       >
         <Text style={classes.signInText}>Sign In</Text>

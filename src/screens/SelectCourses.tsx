@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native'
 
-import { GeneralScreenProps } from '../types/props'
+import { SelectCoursesProps } from '../types/props'
 import {
   Header,
   SelectCourseCard,
@@ -43,7 +43,7 @@ const classes = StyleSheet.create({
 })
 
 // Mockup version
-const SelectCourses: React.FC<GeneralScreenProps> = props => {
+const SelectCourses: React.FC<SelectCoursesProps> = props => {
   const { navigation } = props
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])

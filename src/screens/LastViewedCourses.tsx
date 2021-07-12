@@ -76,15 +76,10 @@ const classes = StyleSheet.create({
 const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
   const {
     navigation,
-    route: {
-      params: {
-        firstTime,
-        ids
-      }
-    }
+    route
   } = props
   const [selectedCourses] = React.useState<ICourseData[]>(
-    COURSES.filter(c => ids.includes(c.id))
+    COURSES.filter(c => route?.params?.ids.includes(c.id))
   )
 
   return (
@@ -94,7 +89,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
       <View style={classes.lastViewedCoursesContainer}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>
-            {firstTime ? 'Last viewed ' : 'Selected '}
+            {route?.params?.firstTime ? 'Last viewed ' : 'Selected '}
           </Text>
           <Text style={classes.textPurple}>courses</Text>
         </View>
@@ -121,7 +116,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
         />
         <TouchableOpacity
           style={classes.allCourses}
-          onPress={() => navigation.navigate('AllCourses', { ids })}
+          onPress={() => navigation.navigate('AllCourses', { ids: route?.params?.ids || [] })}
         >
           <Text style={[classes.textPurple, classes.textAllCourses]}>
             See all my courses

@@ -1,5 +1,13 @@
 # Frontend App
 
+## Version 0.13.0
+
+- Implemented:
+  - Redux store using sagas for asynchronous calls to backend.
+  - Some changes for adding typing functionality to text fields on SignUp flow.
+  - Validations for text fields on SignUp flow.
+  - Reformat on screen props
+
 ## Version 0.12.0
 
 - Implemented:

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import { GeneralScreenProps } from '../types/props'
+import { SignUpEmailFirstStepProps } from '../types/props'
 import {
   CustomInput,
   CustomButton,
@@ -36,8 +36,19 @@ const classes = StyleSheet.create({
   }
 })
 
-const SignUpEmailFirstStep: React.FC<GeneralScreenProps> = props => {
+const SignUpEmailFirstStep: React.FC<SignUpEmailFirstStepProps> = props => {
   const { navigation } = props
+  const [names, setNames] = React.useState<string>('')
+  const [lastnames, setLastnames] = React.useState<string>('')
+
+  const handleOnChangeNames = (text: string) => setNames(text)
+  const handleOnChangeLastnames = (text: string) => setLastnames(text)
+  const continueFormToNextView = () => 
+    navigation.navigate('SignUpEmailSecondStep', {
+      names
+    })
+
+  const navigateToBackScreen = () => navigation.navigate('SignUp')
 
   return (
     <View style={classes.container}>
@@ -50,16 +61,18 @@ const SignUpEmailFirstStep: React.FC<GeneralScreenProps> = props => {
           color               : COLORS.WHITE,
           placeHolder         : 'Names',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
+        onChangeText={handleOnChangeNames}
       />
       <CustomInput
         style={{
           color               : COLORS.WHITE,
           placeHolder         : 'Lastnames',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
+        onChangeText={handleOnChangeLastnames}
       />
       <CustomButton
         hasIconRight={true}
@@ -69,15 +82,16 @@ const SignUpEmailFirstStep: React.FC<GeneralScreenProps> = props => {
           size : 16,
           type : 'material'
         }}
-        onPress={() => navigation.navigate('SignUpEmailSecondStep')}
+        onPress={continueFormToNextView}
         style={{
           color    : COLORS.PURPLE,
           titleSize: 16
         }}
         title='CONTINUE'
+        disabled={names.length === 0 || lastnames.length === 0}
       />
       <View style={classes.textBelowButtonContainer}>
-        <GoBack onPress={() => navigation.navigate('SignUp')}/>
+        <GoBack onPress={navigateToBackScreen}/>
       </View>
       <SignInBottomText navigation={navigation} />
     </View>

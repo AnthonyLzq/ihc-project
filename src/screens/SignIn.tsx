@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import { GeneralScreenProps } from '../types/props'
+import { SignInProps } from '../types/props'
 import {
   Logo,
   CustomButton
@@ -33,7 +33,7 @@ const classes = StyleSheet.create({
   }
 })
 
-const SignIn: React.FC<GeneralScreenProps> = props => {
+const SignIn: React.FC<SignInProps> = props => {
   const { navigation } = props
 
   return (

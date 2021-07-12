@@ -1,22 +1,13 @@
 import { ComponentType } from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-
-type ScreenViewNames =
-  | 'SignIn'
-  | 'SignInEmail'
-  | 'SelectCourses'
-  | 'LastViewedCourses'
-  | 'CourseDetail'
-  | 'AllCourses'
-  | 'SignUp'
-  | 'SignUpEmailFirstStep'
-  | 'SignUpEmailSecondStep'
-  | 'SignUpEmailWelcome'
+import { KeyboardTypeOptions } from 'react-native'
 
 type RootStackParamList = {
   SignIn           : undefined
-  SignInEmail      : undefined
+  SignInEmail?     : {
+    email: string
+  }
   SelectCourses    : undefined
   LastViewedCourses: {
     firstTime: boolean
@@ -30,37 +21,46 @@ type RootStackParamList = {
   }
   SignUp               : undefined
   SignUpEmailFirstStep : undefined
-  SignUpEmailSecondStep: undefined
-  SignUpEmailWelcome   : undefined
+  SignUpEmailSecondStep: {
+    names     : string
+  }
+  SignUpEmailWelcome   : {
+    names: string
+    email: string
+  }
 }
 
+type ScreenViewNames = keyof RootStackParamList
 type Navigation = StackNavigationProp<RootStackParamList, ScreenViewNames>
-
-type GeneralScreenProps = {
+type GeneralScreenProps<T extends ScreenViewNames> = {
   navigation: Navigation
+  route?    : RouteProp<RootStackParamList, T>
 }
 
-type LastViewedCoursesProps = GeneralScreenProps & {
-  route: RouteProp<RootStackParamList, 'LastViewedCourses'>
-}
-
-type CourseDetailProps = GeneralScreenProps & {
-  route: RouteProp<RootStackParamList, 'CourseDetail'>
-}
-
-type AllCoursesProps = GeneralScreenProps & {
-  route: RouteProp<RootStackParamList, 'AllCourses'>
-}
-
-type Component =
-  | ComponentType<GeneralScreenProps>
-  | ComponentType<LastViewedCoursesProps>
-  | ComponentType<CourseDetailProps>
-  | ComponentType<AllCoursesProps>
+type SignInProps = GeneralScreenProps<'SignIn'>
+type SignInEmailProps = GeneralScreenProps<'SignInEmail'>
+type SelectCoursesProps = GeneralScreenProps<'SelectCourses'>
+type LastViewedCoursesProps = GeneralScreenProps<'LastViewedCourses'>
+type CourseDetailProps = GeneralScreenProps<'CourseDetail'>
+type AllCoursesProps = GeneralScreenProps<'AllCourses'>
+type SignUpProps = GeneralScreenProps<'SignUp'>
+type SignUpEmailFirstStepProps = GeneralScreenProps<'SignUpEmailFirstStep'>
+type SignUpEmailSecondStepProps = GeneralScreenProps<'SignUpEmailSecondStep'>
+type SignUpEmailWelcomeProps = GeneralScreenProps<'SignUpEmailWelcome'>
 
 type ScreenView = {
   name     : ScreenViewNames
-  component: Component
+  component: 
+    | ComponentType<SignInProps>
+    | ComponentType<SignInEmailProps>
+    | ComponentType<SelectCoursesProps>
+    | ComponentType<LastViewedCoursesProps>
+    | ComponentType<CourseDetailProps>
+    | ComponentType<AllCoursesProps>
+    | ComponentType<SignUpProps>
+    | ComponentType<SignUpEmailFirstStepProps>
+    | ComponentType<SignUpEmailSecondStepProps>
+    | ComponentType<SignUpEmailWelcomeProps>
 }
 
 type LogoProps = {
@@ -101,7 +101,10 @@ type CustomInputProps = {
     placeHolderTextColor: string
     size                : number
   },
-  secureTextEntry?: boolean
+  secureTextEntry?      : boolean
+  onChangeText?         : (text: string) => void
+  keyboardType?         : KeyboardTypeOptions
+  value?                : string
 }
 
 type CustomBelowButtonTextProps = {
@@ -160,6 +163,12 @@ type CourseCardProps = {
   onPress : () => void
 }
 
+interface User {
+  names: string
+  lastnames: string
+  email: string
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -171,11 +180,19 @@ export {
   LogoProps,
   Navigation,
   SvgBrainProps,
-  LastViewedCoursesProps,
   CourseCardProps,
   ScreenView,
   GeneralScreenProps,
-  CourseDetailProps,
   SvgWelcomeProps,
-  AllCoursesProps
+  User,
+  SignInProps,
+  SignInEmailProps,
+  SelectCoursesProps,
+  LastViewedCoursesProps,
+  CourseDetailProps,
+  AllCoursesProps,
+  SignUpProps,
+  SignUpEmailFirstStepProps,
+  SignUpEmailSecondStepProps,
+  SignUpEmailWelcomeProps
 }

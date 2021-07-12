@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import { GeneralScreenProps } from '../types/props'
+import { SignInEmailProps } from '../types/props'
 import {
   CustomInput,
   CustomButton,
@@ -43,8 +43,12 @@ const classes = StyleSheet.create({
   }
 })
 
-const Login: React.FC<GeneralScreenProps> = props => {
-  const { navigation } = props
+const Login: React.FC<SignInEmailProps> = props => {
+  const {
+    navigation,
+    route
+  } = props
+  const defaultEmail = route?.params?.email || ''
 
   return (
     <View style={classes.container}>
@@ -64,6 +68,7 @@ const Login: React.FC<GeneralScreenProps> = props => {
           placeHolderTextColor: COLORS.LEAD,
           size                : 14
         }}
+        value={defaultEmail}
       />
       <CustomInput
         style={{

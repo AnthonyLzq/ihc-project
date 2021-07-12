@@ -30,7 +30,10 @@ const CustomInput: React.FC<CustomInputProps> = props => {
       placeHolderTextColor,
       size
     },
-    secureTextEntry = false
+    secureTextEntry = false,
+    onChangeText,
+    keyboardType,
+    value
   } = props
   const [viewStyles, setViewStyles] = React.useState<Record<string, unknown>[]>(
     [classes.input]
@@ -43,6 +46,7 @@ const CustomInput: React.FC<CustomInputProps> = props => {
   return (
     <View style={[...viewStyles, icon ? {} : classes.withoutIcon]}>
       <Input
+        onChangeText={onChangeText}
         leftIcon={
           icon ? (
             <Icon color={placeHolderTextColor} name={icon} size={size} />
@@ -53,6 +57,8 @@ const CustomInput: React.FC<CustomInputProps> = props => {
         inputContainerStyle={{ borderBottomWidth: 0 }}
         style={{ color, fontSize: size, fontFamily }}
         secureTextEntry={secureTextEntry}
+        keyboardType={keyboardType}
+        value={value}
       />
     </View>
   )
