@@ -1,14 +1,17 @@
 import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
-import { GeneralScreenProps } from '../types/props'
+import { SignUpEmailSecondStepProps } from '../types/props'
 import {
   CustomInput,
   CustomButton,
   GoBack
 } from '../components'
 import { SignInBottomText } from './components'
-import { COLORS, FONTS } from '../utils'
+import { COLORS, FONTS, EMAIL_REGEX } from '../utils'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../store'
+import * as slices from '../slices'
 
 const classes = StyleSheet.create({
   container: {
@@ -36,8 +39,40 @@ const classes = StyleSheet.create({
   }
 })
 
-const SignUpEmailSecondStep: React.FC<GeneralScreenProps> = props => {
-  const { navigation } = props
+const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
+  const {
+    navigation,
+    route
+  } = props
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
+  const [confirmPassword, setConfirmPassword] = React.useState<string>('')
+  const dispatch = useDispatch<AppDispatch>()
+
+  const handleOnChangeEmail = (text: string) => setEmail(text)
+  const handleOnChangePassword = (text: string) => setPassword(text)
+  const handleOnChangeConfirmPassword = (text: string) => setConfirmPassword(text)
+
+  const signUp = () => {
+    if (!email.match(EMAIL_REGEX)) {
+      alert('Enter an valid email')
+
+      return
+    }
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match')
+
+      return
+    }
+
+    dispatch(slices.signIn())
+
+    // navigation.navigate('SignUpEmailWelcome', {
+    //   route?.params?.names,
+    //   email
+    // })
+  }
 
   return (
     <View style={classes.container}>
@@ -50,26 +85,30 @@ const SignUpEmailSecondStep: React.FC<GeneralScreenProps> = props => {
           color               : COLORS.WHITE,
           placeHolder         : 'Email',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
+        onChangeText={handleOnChangeEmail}
+        keyboardType='email-address'
       />
       <CustomInput
         style={{
           color               : COLORS.WHITE,
           placeHolder         : 'Password',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
         secureTextEntry
+        onChangeText={handleOnChangePassword}
       />
       <CustomInput
         style={{
           color               : COLORS.WHITE,
           placeHolder         : 'Confirm password',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
         secureTextEntry
+        onChangeText={handleOnChangeConfirmPassword}
       />
       <CustomButton
         hasIconRight
@@ -79,12 +118,13 @@ const SignUpEmailSecondStep: React.FC<GeneralScreenProps> = props => {
           size : 16,
           type : 'material'
         }}
-        onPress={() => navigation.navigate('SignUpEmailWelcome')}
+        onPress={signUp}
         style={{
           color    : COLORS.PURPLE,
           titleSize: 16
         }}
         title='SIGN UP'
+        disabled={email.length === 0 || password.length === 0 || confirmPassword.length === 0}
       />
       <View style={classes.textBelowButtonContainer}>
         <GoBack onPress={() => navigation.navigate('SignUpEmailFirstStep')}/>

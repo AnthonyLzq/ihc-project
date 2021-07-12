@@ -179,3 +179,6 @@ export {
   fontResources,
   logout
 }
+
+export * from './string'
+export * from './request'

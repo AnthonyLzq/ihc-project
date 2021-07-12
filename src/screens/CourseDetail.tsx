@@ -71,9 +71,7 @@ interface Topic {
 const CourseDetail: React.FC<CourseDetailProps> = props => {
   const {
     navigation,
-    route: {
-      params: { id }
-    }
+    route
   } = props
   const [course, setCourse] = React.useState('')
   const [mainTopics, setMainTopics] = React.useState<Topic[]>([])
@@ -81,7 +79,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
 
   React.useEffect(() => {
     const courseData = [...COURSES, ...RELATED_COURSES]
-      .find(c => c.id === id) as ICourseData
+      .find(c => c.id === (route?.params?.id)) as ICourseData
 
     setCourse(courseData.course)
     setMainTopics(

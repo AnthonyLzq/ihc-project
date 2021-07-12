@@ -53,12 +53,11 @@ const classes = StyleSheet.create({
 const AllCourses: React.FC<AllCoursesProps> = props => {
   const {
     navigation,
-    route: {
-      params: { ids }
-    }
+    route
   } = props
+
   const [courses] = React.useState<ICourseData[]>(
-    COURSES.filter(c => ids.includes(c.id))
+    COURSES.filter(c => route?.params?.ids.includes(c.id))
   )
 
   return (
