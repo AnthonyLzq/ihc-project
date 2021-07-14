@@ -7,6 +7,7 @@ import {
   LastViewedCourses,
   CourseDetail,
   AllCourses,
+  Chat,
   SignUp,
   SignUpEmailFirstStep,
   SignUpEmailSecondStep,
@@ -33,6 +34,10 @@ const screens: ScreenView[] = [
   {
     name     : 'AllCourses',
     component: AllCourses
+  },
+  {
+    name     : 'Chat',
+    component: Chat
   },
   {
     name     : 'CourseDetail',

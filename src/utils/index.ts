@@ -169,14 +169,77 @@ const getRandomColor = (): string => {
   return color
 }
 
+type rating =  '1' | '2' | '3' | '4' | '5'
+type ID = rating | '6'
+type Criteria = 'all' | 'blog' | 'tutorial' | 'paper' | 'book' | 'video'
+
+interface SearchCriteria {
+  id      : ID
+  name    : `#${Criteria}`
+  selected: boolean
+  disabled: boolean
+}
+
+const searchCriteria: SearchCriteria[] = [
+  {
+    id      : '1',
+    name    : '#all',
+    selected: false,
+    disabled: false
+  },
+  {
+    id      : '2',
+    name    : '#blog',
+    selected: false,
+    disabled: false
+  },
+  {
+    id      : '3',
+    name    : '#tutorial',
+    selected: false,
+    disabled: false
+  },
+  {
+    id      : '4',
+    name    : '#paper',
+    selected: false,
+    disabled: false
+  },
+  {
+    id      : '5',
+    name    : '#book',
+    selected: false,
+    disabled: false
+  },
+  {
+    id      : '6',
+    name    : '#video',
+    selected: false,
+    disabled: false
+  }
+]
+
+interface ChatMessage {
+  id     : string
+  content: {
+    text     : string
+    resources: string[]
+  }
+  date   : Date
+  fromBot: boolean // true: bot, false: user
+  rating?: rating
+}
+
 export {
   COLORS,
   FONTS,
   COURSES,
   RELATED_COURSES,
   ICourseData,
+  ChatMessage,
   getRandomColor,
   fontResources,
+  searchCriteria,
   logout
 }
 

@@ -4,7 +4,7 @@ import * as api from '../api'
 
 export function* signUpSaga() {
   yield takeLatest(
-    slices.signIn,
-    api.signIn
+    slices.signUp,
+    api.signUp
   )
 }

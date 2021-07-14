@@ -68,7 +68,7 @@ const SignUpEmailFirstStep: React.FC<SignUpEmailFirstStepProps> = props => {
       <CustomInput
         style={{
           color               : COLORS.WHITE,
-          placeHolder         : 'Lastnames',
+          placeHolder         : 'Last name',
           placeHolderTextColor: COLORS.LEAD,
           size                : 16
         }}

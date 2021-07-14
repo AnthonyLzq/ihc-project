@@ -1,7 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Keyboard } from 'react-native'
 import { User } from '../types/props'
 
-export interface SignInSlice {
+
+interface UserSignInCredentials {
+  email: string
+  password: string
+}
+interface UserSignUpCredentials extends UserSignInCredentials {
+  names: string
+  lastnames: string
+}
+export interface GeneralAction {
   isLoading : boolean
   data?     : User
   error?    : string
@@ -9,11 +19,15 @@ export interface SignInSlice {
 
 export interface AuthState {
   isAuth: boolean
-  signIn: SignInSlice
+  signUp: GeneralAction,
+  signIn: GeneralAction
 }
 
 const initialState: AuthState = {
   isAuth: false,
+  signUp: {
+    isLoading: false
+  },
   signIn: {
     isLoading: false
   }
@@ -23,24 +37,26 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signIn: state => {
+    signUp: state => {
+      Keyboard.dismiss()
+      
       // do some action with the state
-      state.signIn = {
+      state.signUp = {
         isLoading: true
       }
     },
-    signInSuccess: (state, action: PayloadAction<User>) => {
+    signUpSuccess: (state, action: PayloadAction<User>) => {
       // do some action with the state
       alert(`Names: ${action.payload.names}, Lastnames: ${action.payload.lastnames}, Email: ${action.payload.email}`)
 
-      state.signIn = {
+      state.signUp = {
         isLoading: false,
         data: action.payload
       }
     },
-    signInError: (state, action: PayloadAction<string>) => {
+    signUpError: (state, action: PayloadAction<string>) => {
       // do some action with the state
-      state.signIn = {
+      state.signUp = {
         isLoading: false,
         error: action.payload
       }
@@ -49,8 +65,8 @@ export const authSlice = createSlice({
 })
 
 export const {
-  signIn,
-  signInSuccess,
-  signInError
+  signUp,
+  signUpSuccess,
+  signUpError
 } = authSlice.actions
 export default authSlice.reducer

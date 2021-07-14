@@ -1,8 +1,10 @@
 // export all reducers
+import { firebaseReducer } from 'react-redux-firebase';
 import authReducer from './auth'
 
 const rootReducer = {
-  authReducer
+  authReducer,
+  firebaseReducer
 }
 
 export default rootReducer
