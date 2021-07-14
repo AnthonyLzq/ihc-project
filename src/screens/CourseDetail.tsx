@@ -12,7 +12,7 @@ import { Icon, FAB } from 'react-native-elements'
 
 import { CourseDetailProps } from '../types/props'
 import { Header } from '../components'
-import RobotHappy from '../icons/RobotHappy'
+import { RobotHappy } from '../icons'
 import {
   COLORS,
   COURSES,
@@ -104,7 +104,11 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
         <FlatList
           data={mainTopics}
           renderItem={({ item: { name, id }}) => (
-            <TouchableOpacity key={id} style={classes.topicView}>
+            <TouchableOpacity
+              key={id}
+              onPress={() => navigation.navigate('Chat')}
+              style={classes.topicView}
+            >
               <Icon
                 color={COLORS.WHITE}
                 name='file-search-outline'
@@ -129,7 +133,11 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
         <FlatList
           data={suggestTopics}
           renderItem={({ item: { name, id } }) => (
-            <TouchableOpacity key={id} style={classes.topicView}>
+            <TouchableOpacity
+              key={id}
+              onPress={() => navigation.navigate('Chat')}
+              style={classes.topicView}
+            >
               <Icon
                 color={COLORS.WHITE}
                 name='file-search-outline'
@@ -158,7 +166,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
             size={21}
           />
         }
-        onPress={() => {}}
+        onPress={() => navigation.navigate('Chat')}
         placement='right'
       />
     </SafeAreaView>

@@ -96,7 +96,7 @@ const AllCourses: React.FC<AllCoursesProps> = props => {
               size={21}
             />
           }
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Chat')}
           placement='right'
         />
       </View>

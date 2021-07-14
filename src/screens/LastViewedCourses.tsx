@@ -150,7 +150,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
               size={21}
             />
           }
-          onPress={() => {}}
+          onPress={() => navigation.navigate('Chat')}
           placement='right'
         />
       </View>
