@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.14.0
+
+- Implemented:
+  - Loading screen to use when fetching the backend.
+
 ## Version 0.13.0
 
 - Implemented:
