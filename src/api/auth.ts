@@ -5,7 +5,7 @@ import * as slices from '../slices'
 import { User } from '../types/props'
 import { Get } from '../utils'
 
-export function* signIn(): SagaIterator {
+export function* signUp(): SagaIterator {
   try {
     // example of fetching data
     const response = yield call(Get, '/posts')
@@ -20,10 +20,10 @@ export function* signIn(): SagaIterator {
     } 
 
     console.log(userResponse)
-    yield put(slices.signInSuccess(userResponse))
+    yield put(slices.signUpSuccess(userResponse))
   } catch (error) {
     alert('There was an error')
-    yield put(slices.signInError('There was an error'))
+    yield put(slices.signUpError('There was an error'))
   }
 }
 

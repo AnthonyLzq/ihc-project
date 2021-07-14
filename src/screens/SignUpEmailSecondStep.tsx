@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, StyleSheet, Text, View } from 'react-native'
+import { Keyboard, StatusBar, StyleSheet, Text, View } from 'react-native'
 
 import { SignUpEmailSecondStepProps } from '../types/props'
 import {
@@ -9,7 +9,7 @@ import {
 } from '../components'
 import { SignInBottomText } from './components'
 import { COLORS, FONTS, EMAIL_REGEX } from '../utils'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../hooks'
 import { AppDispatch } from '../store'
 import * as slices from '../slices'
 
@@ -47,7 +47,7 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
-  const dispatch = useDispatch<AppDispatch>()
+  const dispatch = useAppDispatch()
 
   const handleOnChangeEmail = (text: string) => setEmail(text)
   const handleOnChangePassword = (text: string) => setPassword(text)
@@ -66,7 +66,7 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
       return
     }
 
-    dispatch(slices.signIn())
+    dispatch(slices.signUp())
 
     // navigation.navigate('SignUpEmailWelcome', {
     //   route?.params?.names,

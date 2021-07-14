@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.15.0
+
+- Implemented:
+  - Firebase configuration was set.
+
 ## Version 0.14.0
 
 - Implemented:
