@@ -37,7 +37,9 @@ const CourseCard: React.FC<CourseCardProps> = props => {
   } = props
 
   return (
-    <View
+    <TouchableOpacity
+      activeOpacity={0.01}
+      onPress={onPress}
       style={[
         classes.container,
         {
@@ -50,15 +52,13 @@ const CourseCard: React.FC<CourseCardProps> = props => {
         <Icon color={COLORS.WHITE} size={25} name={icon} type={iconType} />
         <Text style={classes.text}>{course}</Text>
       </View>
-      <TouchableOpacity onPress={onPress}>
-        <Icon
-          color={COLORS.WHITE}
-          size={25}
-          name='arrow-forward'
-          type='material'
-        />
-      </TouchableOpacity>
-    </View>
+      <Icon
+        color={COLORS.WHITE}
+        size={25}
+        name='arrow-forward'
+        type='material'
+      />
+    </TouchableOpacity>
   )
 }
 

@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.15.2
+
+- Fixed:
+  - Selectable area on courses cards.
+
 ## Version 0.14.0
 
 - Implemented:
