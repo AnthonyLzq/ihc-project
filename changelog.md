@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.15.1
+
+- Implemented:
+  - Validation for sign in with email view.
+
 ## Version 0.14.0
 
 - Implemented:
