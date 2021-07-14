@@ -8,8 +8,10 @@ import { Get } from '../utils'
 export function* signIn(): SagaIterator {
   try {
     // example of fetching data
-    // const response = yield call(Get, '/posts')
-    
+    const response = yield call(Get, '/posts')
+    yield call(delaay)
+    console.log(response)
+
     // mock user response
     const userResponse: User = {
       names: 'Bryan',
@@ -24,3 +26,9 @@ export function* signIn(): SagaIterator {
     yield put(slices.signInError('There was an error'))
   }
 }
+
+const delaay = () => new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('aea')
+  }, 5000)
+})
