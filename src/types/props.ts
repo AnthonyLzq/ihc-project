@@ -19,6 +19,7 @@ type RootStackParamList = {
   AllCourses:  {
     ids: string[]
   }
+  Chat                 : undefined
   SignUp               : undefined
   SignUpEmailFirstStep : undefined
   SignUpEmailSecondStep: {
@@ -94,17 +95,19 @@ type CustomButtonProps = {
 type CustomInputProps = {
   style: {
     color               : string
-    icon?               : string
     fontFamily?         : string
+    marginBottom?       : string | number
     marginTop?          : string | number
     placeHolder         : string
     placeHolderTextColor: string
     size                : number
   },
-  secureTextEntry?      : boolean
-  onChangeText?         : (text: string) => void
-  keyboardType?         : KeyboardTypeOptions
-  value?                : string
+  onChangeText?   : (text: string) => void
+  keyboardType?   : KeyboardTypeOptions
+  value?          : string
+  icon?           : string
+  iconLeft?       : boolean
+  secureTextEntry?: boolean
 }
 
 type CustomBelowButtonTextProps = {
@@ -169,6 +172,15 @@ interface User {
   email: string
 }
 
+type MessageProps = {
+  content: {
+    text     : string
+    resources: string[]
+  },
+  date   : Date
+  fromBot: boolean
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -194,5 +206,6 @@ export {
   SignUpProps,
   SignUpEmailFirstStepProps,
   SignUpEmailSecondStepProps,
-  SignUpEmailWelcomeProps
+  SignUpEmailWelcomeProps,
+  MessageProps,
 }

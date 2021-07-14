@@ -17,6 +17,9 @@
   - Some changes for adding typing functionality to text fields on SignUp flow.
   - Validations for text fields on SignUp flow.
   - Reformat on screen props
+  - UI of the Chat screen of the [design](https://www.figma.com/file/qDfkoP6JJnu4f19ZmrW5Xo/IHC-Project?node-id=0%3A1).
+- TODO:
+  - Fix the bug when the keyboard is open.
 
 ## Version 0.12.0
 

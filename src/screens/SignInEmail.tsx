@@ -54,7 +54,7 @@ const Login: React.FC<SignInEmailProps> = props => {
     <View style={classes.container}>
       <StatusBar barStyle='default' />
       <View style={classes.titleContainer}>
-        <Text style={[classes.text, classes.textTitle]}>Welcome back!</Text>
+        <Text style={[classes.text, classes.textTitle]}>Welcome!</Text>
         <Text style={[classes.text, classes.textSubtitle]}>
           We're so excited to see you again!
         </Text>
@@ -62,23 +62,23 @@ const Login: React.FC<SignInEmailProps> = props => {
       <CustomInput
         style={{
           color               : COLORS.WHITE,
-          icon                : 'person',
           marginTop           : 40,
           placeHolder         : 'Email',
           placeHolderTextColor: COLORS.LEAD,
           size                : 14
         }}
         value={defaultEmail}
+        icon='person'
       />
       <CustomInput
         style={{
           color               : COLORS.WHITE,
-          icon                : 'lock',
           placeHolder         : 'Password',
           placeHolderTextColor: COLORS.LEAD,
           size                : 14
         }}
         secureTextEntry={true}
+        icon='lock'
       />
       <CustomButton
         hasIconRight={true}

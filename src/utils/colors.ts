@@ -5,7 +5,8 @@ const COLORS = {
   PURPLE      : '#AA8CFF',
   RED         : '#FF6264',
   GREEN       : '#7ACF65',
-  WHITE       : '#FFF'
+  WHITE       : '#FFF',
+  BOT_MESSAGE : '#303030'
 }
 
 export default COLORS
