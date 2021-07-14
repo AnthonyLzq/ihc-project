@@ -9,7 +9,7 @@ import {
   GoBack
 } from '../components'
 import { SignUpBottomText } from './components'
-import { COLORS, FONTS } from '../utils'
+import { COLORS, FONTS, EMAIL_REGEX } from '../utils'
 
 const classes = StyleSheet.create({
   container: {
@@ -48,7 +48,21 @@ const Login: React.FC<SignInEmailProps> = props => {
     navigation,
     route
   } = props
-  const defaultEmail = route?.params?.email || ''
+  const [email, setEmail] = React.useState<string>(route?.params?.email || '')
+  const [password, setPassword] = React.useState<string>('')
+
+  const handleOnChangeEmail = (text: string) => setEmail(text)
+  const handleOnChangePassword = (text: string) => setPassword(text)
+
+  const signIn = () => {
+    if (!email.match(EMAIL_REGEX)) {
+      alert('Enter an valid email')
+
+      return
+    }
+
+    navigation.navigate('SelectCourses')
+  }
 
   return (
     <View style={classes.container}>
@@ -65,9 +79,12 @@ const Login: React.FC<SignInEmailProps> = props => {
           marginTop           : 40,
           placeHolder         : 'Email',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
-        value={defaultEmail}
+
+        value={email}
+        onChangeText={handleOnChangeEmail}
+        keyboardType='email-address'
         icon='person'
       />
       <CustomInput
@@ -75,9 +92,11 @@ const Login: React.FC<SignInEmailProps> = props => {
           color               : COLORS.WHITE,
           placeHolder         : 'Password',
           placeHolderTextColor: COLORS.LEAD,
-          size                : 14
+          size                : 16
         }}
         secureTextEntry={true}
+        value={password}
+        onChangeText={handleOnChangePassword}
         icon='lock'
       />
       <CustomButton
@@ -88,7 +107,7 @@ const Login: React.FC<SignInEmailProps> = props => {
           size : 16,
           type : 'material'
         }}
-        onPress={() => navigation.navigate('SelectCourses')}
+        onPress={signIn}
         style={{
           color    : COLORS.PURPLE,
           titleSize: 16
