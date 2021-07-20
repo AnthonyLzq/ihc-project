@@ -37,45 +37,28 @@ const CustomInput: React.FC<CustomInputProps> = props => {
     secureTextEntry = false
   } = props
 
+  const iconProps = icon ? {
+    leftIcon: iconLeft ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined,
+    rightIcon: !iconLeft ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined
+  } : {}
+
   return (
     <View style={[
       classes.input,
       icon ? {} : classes.withoutIcon,
       { marginBottom, marginTop }
     ]}>
-      {icon ? (
-        iconLeft ? (
-          <Input
-            leftIcon={
-              <Icon color={placeHolderTextColor} name={icon} size={size} />
-            }
-            placeholder={placeHolder}
-            placeholderTextColor={placeHolderTextColor}
-            inputContainerStyle={{ borderBottomWidth: 0 }}
-            style={{ color, fontSize: size, fontFamily }}
-            secureTextEntry={secureTextEntry}
-          />
-        ) : (
-          <Input
-            rightIcon={
-              <Icon color={placeHolderTextColor} name={icon} size={size} />
-            }
-            placeholder={placeHolder}
-            placeholderTextColor={placeHolderTextColor}
-            inputContainerStyle={{ borderBottomWidth: 0 }}
-            style={{ color, fontSize: size, fontFamily }}
-            secureTextEntry={secureTextEntry}
-          />
-        )
-      ) : (
-        <Input
-          placeholder={placeHolder}
-          placeholderTextColor={placeHolderTextColor}
-          inputContainerStyle={{ borderBottomWidth: 0 }}
-          style={{ color, fontSize: size, fontFamily }}
-          secureTextEntry={secureTextEntry}
-        />
-      )}
+      <Input
+        {...iconProps}
+        placeholder={placeHolder}
+        placeholderTextColor={placeHolderTextColor}
+        inputContainerStyle={{ borderBottomWidth: 0 }}
+        style={{ color, fontSize: size, fontFamily }}
+        secureTextEntry={secureTextEntry}
+        onChangeText={onChangeText}
+        keyboardType={keyboardType}
+        value={value}
+      />
     </View>
   )
 }

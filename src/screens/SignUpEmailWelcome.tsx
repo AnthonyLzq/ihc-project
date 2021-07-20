@@ -74,7 +74,7 @@ const SignUpEmailWelcome: React.FC<SignUpEmailWelcomeProps> = props => {
     <View style={classes.container}>
       <View>
         <Text style={classes.title}>Welcome!</Text>
-        <Text style={classes.names}>{route?.params?.email.split(' ')[0].trim()}</Text>
+        <Text style={classes.names}>{route?.params?.names.split(' ')[0].trim()}</Text>
       </View>
       <View style={classes.svgMessage}>
         <SvgWelcome width='100%' />

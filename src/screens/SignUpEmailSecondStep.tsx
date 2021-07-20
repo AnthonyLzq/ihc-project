@@ -1,5 +1,5 @@
 import React from 'react'
-import { Keyboard, StatusBar, StyleSheet, Text, View } from 'react-native'
+import { StatusBar, StyleSheet, Text, View } from 'react-native'
 
 import { SignUpEmailSecondStepProps } from '../types/props'
 import {
@@ -9,9 +9,7 @@ import {
 } from '../components'
 import { SignInBottomText } from './components'
 import { COLORS, FONTS, EMAIL_REGEX } from '../utils'
-import { useAppDispatch } from '../hooks'
-import { AppDispatch } from '../store'
-import * as slices from '../slices'
+import { useFirebase } from 'react-redux-firebase'
 
 const classes = StyleSheet.create({
   container: {
@@ -47,7 +45,7 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
-  const dispatch = useAppDispatch()
+  const firebase = useFirebase()
 
   const handleOnChangeEmail = (text: string) => setEmail(text)
   const handleOnChangePassword = (text: string) => setPassword(text)
@@ -66,12 +64,19 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
       return
     }
 
-    dispatch(slices.signUp())
 
-    // navigation.navigate('SignUpEmailWelcome', {
-    //   route?.params?.names,
-    //   email
-    // })
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(userCreds => {
+      console.log(userCreds.user?.uid);
+    }).catch(error => console.log(error.message))
+
+
+    // dispatch(slices.signUp({
+    //   names: route?.params?.names || '',
+    //   lastnames: route?.params?.lastnames || '',
+    //   email,
+    //   password,
+    //   navigation
+    // }))
   }
 
   return (

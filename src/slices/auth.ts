@@ -10,6 +10,7 @@ interface UserSignInCredentials {
 interface UserSignUpCredentials extends UserSignInCredentials {
   names: string
   lastnames: string
+  navigation: any
 }
 export interface GeneralAction {
   isLoading : boolean
@@ -37,7 +38,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signUp: state => {
+    signUp: (state, action: PayloadAction<UserSignUpCredentials>) => {
       Keyboard.dismiss()
       
       // do some action with the state
@@ -45,9 +46,9 @@ export const authSlice = createSlice({
         isLoading: true
       }
     },
-    signUpSuccess: (state, action: PayloadAction<User>) => {
+    signUpSuccess: (state, action: PayloadAction<any>) => {
       // do some action with the state
-      alert(`Names: ${action.payload.names}, Lastnames: ${action.payload.lastnames}, Email: ${action.payload.email}`)
+      alert(`Names: ${action.payload.names}, Lastnames: ${action.payload.lastnames}, Email: ${action.payload.email}, Password: ${action.payload.password}`)
 
       state.signUp = {
         isLoading: false,

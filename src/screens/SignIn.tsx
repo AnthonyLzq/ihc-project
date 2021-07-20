@@ -41,7 +41,7 @@ const SignIn: React.FC<SignInProps> = props => {
       <StatusBar barStyle='default' />
       <Logo style={{ height: '50%' }} />
       <View style={classes.signInMethodsContainer}>
-        <CustomButton
+        {/* <CustomButton
           icon={{
             color: COLORS.SECOND_BLACK,
             name : 'google',
@@ -56,7 +56,7 @@ const SignIn: React.FC<SignInProps> = props => {
           }}
           title='SIGN IN WITH GOOGLE'
         />
-        <Text style={classes.or}>or</Text>
+        <Text style={classes.or}>or</Text> */}
         <CustomButton
           icon={{
             color: COLORS.WHITE,

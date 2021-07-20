@@ -24,6 +24,7 @@ type RootStackParamList = {
   SignUpEmailFirstStep : undefined
   SignUpEmailSecondStep: {
     names     : string
+    lastnames : string
   }
   SignUpEmailWelcome   : {
     names: string
@@ -181,6 +182,15 @@ type MessageProps = {
   fromBot: boolean
 }
 
+interface UserSignInCredentials {
+  email: string
+  password: string
+}
+interface UserSignUpCredentials extends UserSignInCredentials {
+  names: string
+  lastnames: string
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -208,4 +218,6 @@ export {
   SignUpEmailSecondStepProps,
   SignUpEmailWelcomeProps,
   MessageProps,
+  UserSignInCredentials,
+  UserSignUpCredentials
 }

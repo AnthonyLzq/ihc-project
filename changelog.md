@@ -1,5 +1,11 @@
 # Frontend App
 
+## Version 0.15.3
+
+- Fixed:
+  - Redux-saga library was added again.
+  - Disabled `serializableCheck` on redux store.
+
 ## Version 0.15.2
 
 - Fixed:
