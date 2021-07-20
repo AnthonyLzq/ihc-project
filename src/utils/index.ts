@@ -1,6 +1,5 @@
 import COLORS from './colors'
 import { fontResources, FONTS  } from './fonts'
-import logout from './logout'
 interface ICourseData {
   course  : string
   icon    : string
@@ -239,9 +238,9 @@ export {
   ChatMessage,
   getRandomColor,
   fontResources,
-  searchCriteria,
-  logout
+  searchCriteria
 }
 
 export * from './string'
 export * from './request'
+export * from './auth'

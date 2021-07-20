@@ -11,7 +11,7 @@ const _configureStore = () => {
 
   const store = configureStore({
     reducer: rootReducer,
-    middleware: [ ...getDefaultMiddleware({ thunk: false }), ...middlewares ],
+    middleware: [ ...getDefaultMiddleware({ thunk: false, serializableCheck: false }), ...middlewares ],
     devTools: process.env.NODE_ENV !== 'production'
   })
 

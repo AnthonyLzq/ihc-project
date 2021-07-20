@@ -45,7 +45,8 @@ const SignUpEmailFirstStep: React.FC<SignUpEmailFirstStepProps> = props => {
   const handleOnChangeLastnames = (text: string) => setLastnames(text)
   const continueFormToNextView = () => 
     navigation.navigate('SignUpEmailSecondStep', {
-      names
+      names,
+      lastnames
     })
 
   const navigateToBackScreen = () => navigation.navigate('SignUp')
@@ -63,6 +64,7 @@ const SignUpEmailFirstStep: React.FC<SignUpEmailFirstStepProps> = props => {
           placeHolderTextColor: COLORS.LEAD,
           size                : 16
         }}
+        value={names}
         onChangeText={handleOnChangeNames}
       />
       <CustomInput
@@ -72,6 +74,7 @@ const SignUpEmailFirstStep: React.FC<SignUpEmailFirstStepProps> = props => {
           placeHolderTextColor: COLORS.LEAD,
           size                : 16
         }}
+        value={lastnames}
         onChangeText={handleOnChangeLastnames}
       />
       <CustomButton
