@@ -69,8 +69,8 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
   } = props
   const allCourses = useAppSelector(state => state.syllabusReducer.allSyllabus.data) as Syllabus[]
   const courseData = allCourses.find(course => course.generalInfo.course.code === (route?.params?.id))
-  const mainTopics = courseData ? courseData.analyticProgram.map(topic => topic) : []
-  const suggestTopics = courseData ? courseData.analyticProgram.map(topic => topic) : []
+  const mainTopics = (courseData ? courseData.analyticProgram.map(topic => topic) : []).slice(0, courseData ? courseData.analyticProgram.length - 2 : 0)
+  const suggestTopics = (courseData ? courseData.analyticProgram.map(topic => topic) : []).slice(-2)
 
   return (
     <SafeAreaView style={classes.container}>
@@ -106,7 +106,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
               showsVerticalScrollIndicator={false}
               style={{
                 flexGrow : 0,
-                maxHeight: 220
+                maxHeight: 300
               }}
             />
             <Text style={[classes.subtitle, { marginTop: 17 }]}>

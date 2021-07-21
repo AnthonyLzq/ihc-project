@@ -8,3 +8,10 @@ export function* getAllSyllabus() {
     api.getAllSyllabus
   )
 }
+
+export function* getRecommendedSyllabus() {
+  yield takeLatest(
+    slices.getRecommendedSyllabus,
+    api.getRecommendedSyllabus
+  )
+}
