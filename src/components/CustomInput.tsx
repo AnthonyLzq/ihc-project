@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, TouchableOpacityBase } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Input } from 'react-native-elements'
 
@@ -34,12 +34,35 @@ const CustomInput: React.FC<CustomInputProps> = props => {
     value,
     icon,
     iconLeft = icon ? true : false,
-    secureTextEntry = false
+    secureTextEntry = false,
+    hasTouchableOpacity = false,
+    onPressIcon = undefined,
+    onPressInIcon = undefined,
+    onPressOutIcon = undefined
   } = props
 
+  const touchableOpacityProps = {
+    style: { backgroundColor: COLORS.SECOND_BLACK, borderRadius: 50, padding: 8 },
+    onPressIn: onPressInIcon,
+    onPressOut: onPressOutIcon,
+    onPress: onPressIcon,
+  }
+
   const iconProps = icon ? {
-    leftIcon: iconLeft ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined,
-    rightIcon: !iconLeft ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined
+    leftIcon: iconLeft ? 
+              (hasTouchableOpacity ? 
+                <TouchableOpacity {...touchableOpacityProps}>
+                  <Icon color={placeHolderTextColor} name={icon} size={size} />
+                </TouchableOpacity> :
+                <Icon color={placeHolderTextColor} name={icon} size={size} />) :
+                undefined,
+    rightIcon: !iconLeft ?
+              (hasTouchableOpacity ?
+                <TouchableOpacity {...touchableOpacityProps}>
+                  <Icon color={placeHolderTextColor} name={icon} size={size} />
+                </TouchableOpacity> :
+                <Icon color={placeHolderTextColor} name={icon} size={size} />) :
+                undefined
   } : {}
 
   return (

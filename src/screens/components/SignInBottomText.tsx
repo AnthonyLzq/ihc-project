@@ -1,8 +1,8 @@
 import React from 'react'
 import { CustomBottomText } from '../../components'
-import { GeneralScreenProps } from '../../types/props'
+import { Navigation } from '../../types/props'
 
-const SignInBottomText: React.FC<GeneralScreenProps> = props => {
+const SignInBottomText: React.FC<{ navigation: Navigation }> = props => {
   const { navigation } = props
 
   return (

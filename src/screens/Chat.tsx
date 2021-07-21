@@ -11,16 +11,21 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native'
+import { Audio } from 'expo-av';
+import { getInfoAsync, readAsStringAsync, EncodingType } from 'expo-file-system'
 import 'react-native-get-random-values'
 import { v4 as uuid } from 'uuid'
 
 import { CustomInput, Header } from '../components'
 import { Message } from './components'
 import { RobotHappy } from '../icons'
+
 import { COLORS, FONTS, ChatMessage, searchCriteria } from '../utils'
-import { GeneralScreenProps } from '../types/props'
+import { ChatProps } from '../types/props'
+import axios from 'axios';
+import { CLOUD_URL } from '../keys';
 
 const wHeight = Dimensions.get('window').height
 const wWidth = Dimensions.get('window').width
@@ -52,19 +57,19 @@ const classes = StyleSheet.create({
   searchCriteriaContainer: {
     justifyContent: 'space-between',
     flexDirection : 'row',
-    marginBottom  : 4,
+    marginBottom  : 5,
     width         : '100%'
   },
   searchCriteria: {
     borderRadius : 4,
+    paddingTop: 3,
     paddingBottom: 3,
-    paddingEnd   : 12,
-    paddingStart : 12,
-    paddingTop   : 3,
+    paddingStart: 10,
+    paddingEnd: 10,
   },
   textSearchCriteria: {
     fontFamily: FONTS.INPUT.REGULAR,
-    fontSize  : 10
+    fontSize  : 12
   },
   input: {
     position     : 'absolute',
@@ -75,11 +80,35 @@ const classes = StyleSheet.create({
   }
 })
 
-const Chat: React.FC<GeneralScreenProps> = props => {
+const recordingOptions = {
+  android: {
+      extension: '.m4a',
+      outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+      audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
+      sampleRate: 44100,
+      numberOfChannels: 2,
+      bitRate: 128000,
+  },
+  ios: {
+      extension: '.wav',
+      audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      bitRate: 128000,
+      linearPCMBitDepth: 16,
+      linearPCMIsBigEndian: false,
+      linearPCMIsFloat: false,
+  },
+};
+
+const Chat: React.FC<ChatProps> = props => {
   const { navigation } = props
   const [keyboardHeight, setKeyboardHeight] = React.useState(0)
   const [isKeyBoardOpen, setIsKeyboardOpen] = React.useState(false)
   const [criteria, setCriteria] = React.useState(searchCriteria)
+  const [message, setMessage] = React.useState<string>('')
+  const [recording, setRecording] = React.useState<Audio.Recording>()
+  const [sound, setSound] = React.useState<Audio.Sound>()
   const [messages, setMessages] = React.useState<ChatMessage[]>([{
     id     : uuid(),
     content: {
@@ -97,6 +126,78 @@ const Chat: React.FC<GeneralScreenProps> = props => {
     setKeyboardHeight(0)
     setIsKeyboardOpen(false)
   }
+
+  const sendMessage = () => {
+    alert('send message')
+  }
+
+  const startRecording = async () => {
+    try {
+      console.log('requesting permissions...')
+
+      await Audio.requestPermissionsAsync()
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true
+      })
+
+      console.log('starting recording...')
+      const recording = new Audio.Recording()
+
+      await recording.prepareToRecordAsync(recordingOptions)
+      await recording.startAsync()
+
+      setRecording(recording)
+      console.log('recording started')
+    } catch (error) {
+      console.error('failed to start recording...', error);
+    }
+  }
+
+  const stopRecording = async () => {
+    console.log('stopping recording..')
+
+    setRecording(undefined)
+
+    await recording?.stopAndUnloadAsync()
+    const uri = recording?.getURI()
+
+    console.log('recording stopped and stored at', uri);
+
+    if (uri) {
+      try {
+        const info = await getInfoAsync(uri)
+        const audio = await readAsStringAsync(uri, {
+          encoding: EncodingType.Base64
+        })
+
+        console.log('audio64', audio);
+
+        const response = await axios({
+          url: CLOUD_URL,
+          method: 'post',
+          data: {
+            config: {
+              encoding: 'LINEAR16',
+              languageCode: 'en-US',
+              sampleRateHertz: 16000
+            },
+            audio: {
+              content: audio
+            }
+          }
+        })
+
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+        console.log(error.message);
+        console.log(error.response.data);
+      }
+    }
+  }
+
+  const handleOnChangeMessage = (text: string) => setMessage(text)
 
   React.useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onKeyboardDidShow)
@@ -205,15 +306,23 @@ const Chat: React.FC<GeneralScreenProps> = props => {
           />
         </SafeAreaView>
         <CustomInput
-          icon='mic'
+          // icon={message.length === 0 ? 'mic' : 'send'}
+          icon='send'
           iconLeft={false}
           style={{
             color               : COLORS.WHITE,
             marginBottom        : 0,
             placeHolder         : 'What topic are you looking for?',
             placeHolderTextColor: COLORS.LEAD,
-            size                : 14
+            size                : 16
           }}
+          value={message}
+          onChangeText={handleOnChangeMessage}
+          hasTouchableOpacity
+          onPressIcon={sendMessage}
+          // onPressIcon={message.length !== 0 && !recording ? sendMessage : undefined}
+          // onPressInIcon={message.length === 0 && !recording ? () => startRecording() : undefined}
+          // onPressOutIcon={message.length === 0 && recording ? () => stopRecording() : undefined}
         />
       </View>
     </View>
