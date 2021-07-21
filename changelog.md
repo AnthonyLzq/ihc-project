@@ -1,5 +1,16 @@
 # Frontend App
 
+## Version 0.20.0
+
+- Implemented:
+
+  - Now select courses screen saves the courses on database.
+  - Validation when signing in, know if the user has already signed in and selected their courses before.
+
+- Modified:
+  - `authReducer` changed to `userReducer`.
+  - Refactored some code.
+
 ## Version 0.19.0
 
 - Implemented:

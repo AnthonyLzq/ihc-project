@@ -50,7 +50,8 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])
   const dispatch = useAppDispatch()
-  const { isLoading, data } = useAppSelector(state => state.syllabusReducer.initialSyllabus)
+  const userData = useAppSelector(state => state.userReducer.signIn.data)
+  const courses = useAppSelector(state => state.syllabusReducer.initialSyllabus.data)
 
   const changeNCourses = (increaseOrDecrease: boolean, id: string): void => {
     if (increaseOrDecrease) {
@@ -68,14 +69,13 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
       'Are you sure you want to continue? (This action can not be undone)',
       [
         {
-          // TODO: navigate to the next screen
-          onPress: () => navigation.navigate(
-            'LastViewedCourses',
-            {
-              firstTime: true,
-              ids      : selectedCourses
-            }
-          ),
+          onPress: () => {
+            dispatch(slices.selectSyllabus({
+              id: userData?.id || '',
+              selectedCourses,
+              navigation
+            }))
+          },
           style  : 'default',
           text   : 'Yes'
         },
@@ -110,7 +110,7 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
         <FlatList
           keyExtractor={(item, index) => `${item.generalInfo.course.code}-${index}`}
           columnWrapperStyle={{ justifyContent: 'space-between' }}
-          data={data ? data : []}
+          data={courses ? courses : []}
           numColumns={2}
           renderItem={({ item, index }) => (
             <SelectCourseCard

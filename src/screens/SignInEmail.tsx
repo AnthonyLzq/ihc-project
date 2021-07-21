@@ -77,10 +77,13 @@ const Login: React.FC<SignInEmailProps> = props => {
       const { message } = await Get(`/user/${userCreds.user?.uid}`)
 
       dispatch(slices.signInSuccess(message))
+      console.log(message);
       navigation.reset({
         index: 0,
-        routes: [
+        routes: !message.selectedCourses || message.selectedCourses.length === 0 ? [
           { name: 'SelectCourses' }
+        ] : [
+          { name: 'LastViewedCourses' }
         ]
       })
     } catch (error) {
