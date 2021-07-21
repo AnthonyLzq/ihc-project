@@ -2,16 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Keyboard } from 'react-native'
 import { User } from '../types/props'
 
-export interface GeneralAction {
+interface GeneralAction<T> {
   isLoading : boolean
-  data?     : User
+  data?     : T
   error?    : string
 }
 
 export interface AuthState {
   isAuth: boolean
-  signUp: GeneralAction,
-  signIn: GeneralAction
+  signUp: GeneralAction<any>,
+  signIn: GeneralAction<User>
 }
 
 const initialState: AuthState = {

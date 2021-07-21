@@ -1,9 +1,9 @@
 import { all, fork } from 'redux-saga/effects'
-// import * as authSagas from './auth'
+import * as syllabusSagas from './syllabus'
 
 function* rootSaga() {
   yield all([
-    // ...Object.values(authSagas).map(saga => fork(saga))
+    ...Object.values(syllabusSagas).map(saga => fork(saga))
   ])
 }
 
