@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.22.0
+
+- Implemented:
+  - Now all courses load the data from database.
+
 ## Version 0.21.0
 
 - Implemented:
