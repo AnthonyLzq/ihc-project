@@ -1,7 +1,8 @@
 import { ComponentType } from 'react'
 import { RouteProp } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { KeyboardTypeOptions } from 'react-native'
+import { GestureResponderEvent, KeyboardTypeOptions } from 'react-native'
+import { IconNode } from 'react-native-elements/dist/icons/Icon'
 
 type RootStackParamList = {
   SignIn           : undefined
@@ -19,7 +20,9 @@ type RootStackParamList = {
   AllCourses:  {
     ids: string[]
   }
-  Chat                 : undefined
+  Chat?   : {
+    topic : string
+  }
   SignUp               : undefined
   SignUpEmailFirstStep : undefined
   SignUpEmailSecondStep: {
@@ -49,6 +52,7 @@ type SignUpProps = GeneralScreenProps<'SignUp'>
 type SignUpEmailFirstStepProps = GeneralScreenProps<'SignUpEmailFirstStep'>
 type SignUpEmailSecondStepProps = GeneralScreenProps<'SignUpEmailSecondStep'>
 type SignUpEmailWelcomeProps = GeneralScreenProps<'SignUpEmailWelcome'>
+type ChatProps = GeneralScreenProps<'Chat'>
 
 type ScreenView = {
   name     : ScreenViewNames
@@ -63,6 +67,7 @@ type ScreenView = {
     | ComponentType<SignUpEmailFirstStepProps>
     | ComponentType<SignUpEmailSecondStepProps>
     | ComponentType<SignUpEmailWelcomeProps>
+    | ComponentType<ChatProps>
 }
 
 type LogoProps = {
@@ -103,12 +108,16 @@ type CustomInputProps = {
     placeHolderTextColor: string
     size                : number
   },
-  onChangeText?   : (text: string) => void
-  keyboardType?   : KeyboardTypeOptions
-  value?          : string
-  icon?           : string
-  iconLeft?       : boolean
-  secureTextEntry?: boolean
+  onChangeText?         : (text: string) => void
+  keyboardType?         : KeyboardTypeOptions
+  value?                : string
+  icon?                 : string
+  iconLeft?             : boolean
+  secureTextEntry?      : boolean
+  hasTouchableOpacity?  : boolean
+  onPressIcon?          : (event: GestureResponderEvent) => void
+  onPressInIcon?        : (event: GestureResponderEvent) => void
+  onPressOutIcon?       : (event: GestureResponderEvent) => void
 }
 
 type CustomBelowButtonTextProps = {
@@ -176,9 +185,9 @@ interface User {
 
 type MessageProps = {
   content: {
-    text     : string
-    resources: string[]
-  },
+    message?    : string
+    resource?  : BotResource
+  }
   date   : Date
   fromBot: boolean
 }
@@ -241,6 +250,12 @@ interface SelectCoursesBody {
   navigation      : Navigation
 }
 
+interface BotResource {
+  description : string
+  link        : string
+  title       : string
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -268,10 +283,12 @@ export {
   SignUpEmailSecondStepProps,
   SignUpEmailWelcomeProps,
   MessageProps,
+  ChatProps,
   UserSignInCredentials,
   UserSignUpCredentials,
   Syllabus,
   ApiResponse,
   SelectCoursesBody,
-  AnalyticProgramItem
+  AnalyticProgramItem,
+  BotResource
 }

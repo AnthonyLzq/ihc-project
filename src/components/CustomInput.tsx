@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableHighlight } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Input } from 'react-native-elements'
 
@@ -34,12 +34,40 @@ const CustomInput: React.FC<CustomInputProps> = props => {
     value,
     icon,
     iconLeft = icon ? true : false,
-    secureTextEntry = false
+    secureTextEntry = false,
+    hasTouchableOpacity = false,
+    onPressIcon = undefined,
+    onPressInIcon = undefined,
+    onPressOutIcon = undefined
   } = props
+  const [isPress, setIsPress] = React.useState(false)
+
+  const touchableOpacityProps = {
+    activeOpacity: 1,
+    underlayColor: COLORS.RED,                               // <-- "backgroundColor" will be always overwritten by "underlayColor"
+    style: { backgroundColor: COLORS.SECOND_BLACK, borderRadius: 50, padding: 8 },
+    onPressIn: onPressInIcon,
+    onPressOut: onPressOutIcon,
+    onPress: onPressIcon,
+    onHideUnderlay: () => setIsPress(false),
+    onShowUnderlay: () => setIsPress(true)
+  }
 
   const iconProps = icon ? {
-    leftIcon: iconLeft ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined,
-    rightIcon: !iconLeft ? <Icon color={placeHolderTextColor} name={icon} size={size} /> : undefined
+    leftIcon: iconLeft ? 
+              (hasTouchableOpacity ? 
+                <TouchableHighlight {...touchableOpacityProps}>
+                  <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />
+                </TouchableHighlight> :
+                <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />) :
+                undefined,
+    rightIcon: !iconLeft ?
+              (hasTouchableOpacity ?
+                <TouchableHighlight {...touchableOpacityProps}>
+                  <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />
+                </TouchableHighlight> :
+                <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />) :
+                undefined
   } : {}
 
   return (

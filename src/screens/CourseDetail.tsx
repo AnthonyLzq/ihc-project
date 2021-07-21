@@ -88,7 +88,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   key={item.topic}
-                  onPress={() => navigation.navigate('Chat')}
+                  onPress={() => navigation.navigate('Chat', { topic: `${item.topic} en ${courseData.generalInfo.course.name}` })}
                   style={classes.topicView}
                 >
                   <Icon
@@ -118,7 +118,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   key={item.topic}
-                  onPress={() => navigation.navigate('Chat')}
+                  onPress={() => navigation.navigate('Chat', { topic: `${item.topic} en ${courseData.generalInfo.course.name}` })}
                   style={classes.topicView}
                 >
                   <Icon
@@ -159,4 +159,3 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
 }
 
 export default CourseDetail
-

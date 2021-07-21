@@ -3,27 +3,30 @@ import {
   Dimensions,
   FlatList,
   Keyboard,
-  KeyboardAvoidingView,
   KeyboardEvent,
-  Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native'
+import { Audio } from 'expo-av';
+import { readAsStringAsync, EncodingType } from 'expo-file-system'
 import 'react-native-get-random-values'
 import { v4 as uuid } from 'uuid'
 
 import { CustomInput, Header } from '../components'
 import { Message } from './components'
 import { RobotHappy } from '../icons'
-import { COLORS, FONTS, ChatMessage, searchCriteria } from '../utils'
-import { GeneralScreenProps } from '../types/props'
+
+import { COLORS, FONTS, ChatMessage, searchCriteria, Post } from '../utils'
+import { ApiResponse, ChatProps, BotResource } from '../types/props'
+import { useAppDispatch, useAppSelector } from '../hooks';
+import * as slices from '../slices';
 
 const wHeight = Dimensions.get('window').height
-const wWidth = Dimensions.get('window').width
+// const wWidth = Dimensions.get('window').width
 
 const classes = StyleSheet.create({
   container: {
@@ -52,19 +55,19 @@ const classes = StyleSheet.create({
   searchCriteriaContainer: {
     justifyContent: 'space-between',
     flexDirection : 'row',
-    marginBottom  : 4,
+    marginBottom  : 5,
     width         : '100%'
   },
   searchCriteria: {
     borderRadius : 4,
+    paddingTop: 3,
     paddingBottom: 3,
-    paddingEnd   : 12,
-    paddingStart : 12,
-    paddingTop   : 3,
+    paddingStart: 12,
+    paddingEnd: 12,
   },
   textSearchCriteria: {
     fontFamily: FONTS.INPUT.REGULAR,
-    fontSize  : 10
+    fontSize  : 12
   },
   input: {
     position     : 'absolute',
@@ -75,20 +78,55 @@ const classes = StyleSheet.create({
   }
 })
 
-const Chat: React.FC<GeneralScreenProps> = props => {
-  const { navigation } = props
+const recordingOptions = {
+  android: {
+      extension: '.wav',
+      outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+      audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
+      sampleRate: 44100,
+      numberOfChannels: 2,
+      bitRate: 128000,
+  },
+  ios: {
+      extension: '.wav',
+      audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_HIGH,
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      bitRate: 128000,
+      linearPCMBitDepth: 16,
+      linearPCMIsBigEndian: false,
+      linearPCMIsFloat: false,
+  },
+};
+
+const botMessages: { [key: string]: string } = {
+  all: 'Maybe these links can help you :D',
+  blog: 'I found these nice blogs :0',
+  tutorial: 'These tutorials are really good B)',
+  paper: 'I found these interesting papers!',
+  book: 'You could read one of these books :D',
+  video: 'These videos are well explained',
+  nores: "I couldn't find any link related :("
+}
+
+const Chat: React.FC<ChatProps> = props => {
+  const { navigation, route } = props
+  const dispatch = useAppDispatch()
   const [keyboardHeight, setKeyboardHeight] = React.useState(0)
   const [isKeyBoardOpen, setIsKeyboardOpen] = React.useState(false)
-  const [criteria, setCriteria] = React.useState(searchCriteria)
+  const [selectedCriteria, setSelectedCriteria] = React.useState<string>('')
+  const [message, setMessage] = React.useState<string>('')
+  const [recording, setRecording] = React.useState<Audio.Recording>()
+  const userData = useAppSelector(state => state.userReducer.signIn.data)
   const [messages, setMessages] = React.useState<ChatMessage[]>([{
     id     : uuid(),
     content: {
-      text     : 'How can I help you?',
-      resources: []
+      message: 'How can I help you?'
     },
     date   : new Date(),
     fromBot: true
   }])
+
   const onKeyboardDidShow = (e: KeyboardEvent): void => {
     setKeyboardHeight(e.endCoordinates.height)
     setIsKeyboardOpen(true)
@@ -97,6 +135,172 @@ const Chat: React.FC<GeneralScreenProps> = props => {
     setKeyboardHeight(0)
     setIsKeyboardOpen(false)
   }
+
+  const sendMessage = (message: string) => {
+    const keyWord = selectedCriteria.length === 0 ? 'all' : selectedCriteria
+    const query = message
+
+    let newMessages = [
+      ...messages,
+      {
+        id: uuid(),
+        fromBot: false,
+        content: {
+          message
+        },
+        date   : new Date()
+      }
+    ]
+
+    setMessages(newMessages)
+    setMessage('')
+    sendMessageAsync(keyWord, query, newMessages)
+  }
+
+  const sendMessageAsync = async (keyWord: string, query: string, currentMessages: ChatMessage[]) => {
+    try {
+      dispatch(slices.getChatResource())
+      const response: ApiResponse<BotResource[]> = await Post('/search', {
+        args: {
+          keyWord,
+          query
+        }
+      })
+
+      dispatch(slices.getChatResourceSuccess())
+      if (response.message.length !== 0)
+        currentMessages = [
+          ...currentMessages,
+          {
+            id: uuid(),
+            fromBot: true,
+            content: {
+              message: botMessages[keyWord]
+            },
+            date   : new Date()
+          },
+          ...response.message.map(resource => ({
+            id: uuid(),
+            fromBot: true,
+            content: {
+              resource
+            },
+            date   : new Date()
+          }))
+        ]
+      else
+        currentMessages = [
+          ...currentMessages,
+          {
+            id: uuid(),
+            fromBot: true,
+            content: {
+              message: botMessages['nores']
+            },
+            date   : new Date()
+          }
+        ]
+      
+      setMessages(currentMessages)
+    } catch (error) {
+      dispatch(slices.getChatResourceError())
+      const message = error?.response?.data?.message || error?.message
+      console.log(message)
+      alert(message)
+      currentMessages = [
+        ...currentMessages,
+        {
+          id: uuid(),
+          fromBot: true,
+          content: {
+            message: botMessages['nores']
+          },
+          date   : new Date()
+        }
+      ]
+      setMessages(currentMessages)
+    }
+  }
+
+  const startRecording = async () => {
+    try {
+      console.log('requesting permissions...')
+
+      await Audio.requestPermissionsAsync()
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true
+      })
+
+      console.log('starting recording...')
+      const recording = new Audio.Recording()
+
+      await recording.prepareToRecordAsync(recordingOptions)
+      await recording.startAsync()
+
+      setRecording(recording)
+      console.log('recording started')
+    } catch (error) {
+      console.error(error);
+      alert('Failed to start recording');
+    }
+  }
+
+  const stopRecording = async () => {
+    console.log('stopping recording..')
+
+    setRecording(undefined)
+
+    await recording?.stopAndUnloadAsync()
+    const uri = recording?.getURI()
+
+    console.log('recording stopped and stored at', uri);
+
+    if (uri) {
+      try {
+        const audio = await readAsStringAsync(uri, {
+          encoding: EncodingType.Base64
+        })
+
+        dispatch(slices.getChatResource())
+        const response: ApiResponse<string> = await Post('/speech', {
+          args: {
+            base64: audio
+          }
+        })
+
+        dispatch(slices.getChatResource())
+        console.log(response);
+        sendMessage(response.message)
+      } catch (error) {
+        dispatch(slices.getChatResourceError())
+        console.log(error);
+        console.log(error.message);
+        const newMessages = [
+          ...messages,
+          {
+            id: uuid(),
+            fromBot: true,
+            content: {
+              message: "I couldn't hear you well, please try again"
+            },
+            date   : new Date()
+          }
+        ]
+
+        setMessages(newMessages)
+      }
+    }
+  }
+
+  const handleOnChangeMessage = (text: string) => setMessage(text)
+
+  React.useEffect(() => {
+    if (route && route.params)
+      sendMessage(route.params.topic)
+
+    return () => setRecording(undefined)
+  }, [])
 
   React.useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onKeyboardDidShow)
@@ -108,29 +312,8 @@ const Chat: React.FC<GeneralScreenProps> = props => {
     }
   }, [])
 
-  const onSearchCriteriaPress = (id: string) => {
-    if (id === '1')
-      setCriteria(
-        criteria.map(c => {
-          if (c.id === '1') c.selected = !c.selected
-
-          if (criteria[0].selected && c.id !== '1') {
-            c.selected = false
-            c.disabled = true
-          } else if (!criteria[0].selected) c.disabled = false
-
-          return c
-        })
-      )
-    else
-      setCriteria(
-        criteria.map(c => {
-          if (c.id === id) c.selected = !c.selected
-
-          return c
-        })
-      )
-  }
+  const onSearchCriteriaPress = (criteria: string) =>
+    criteria === selectedCriteria ? setSelectedCriteria('') : setSelectedCriteria(criteria)
 
   return (
     <View style={classes.container}>
@@ -147,10 +330,11 @@ const Chat: React.FC<GeneralScreenProps> = props => {
               marginRight : 16
             }}
           />
-          <Text style={classes.title}>Hello Bryan</Text>
+          <Text style={classes.title}>Hello {userData ? userData.name : ''}</Text>
         </View>
-        <SafeAreaView>
+        <SafeAreaView style={{ paddingBottom: isKeyBoardOpen ? keyboardHeight + 195 : 185 }}>
           <FlatList
+            keyExtractor={(item, index) => `${item.id}-${index}`}
             data={messages}
             renderItem={({ item: { id, content, date, fromBot } }) => (
               <Message
@@ -171,30 +355,30 @@ const Chat: React.FC<GeneralScreenProps> = props => {
       >
         <SafeAreaView style={classes.searchCriteriaContainer}>
           <FlatList
+            keyExtractor={(item, index) => `${item}-${index}`}
             data={searchCriteria}
             horizontal
-            renderItem={({ item: { id, name, selected, disabled }}) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
-                key={id}
-                onPress={() => onSearchCriteriaPress(id)}
+                key={`${item}-${index}`}
+                onPress={() => onSearchCriteriaPress(item)}
                 style={[
                   classes.searchCriteria,
                   {
-                    backgroundColor: selected ? COLORS.RED : COLORS.MAIN_BLACK
+                    backgroundColor: selectedCriteria === item ? COLORS.RED : COLORS.MAIN_BLACK
                   }
                 ]}
-                disabled={disabled}
               >
                 <Text
                   style={[
                     classes.textSearchCriteria,
                     {
-                      fontWeight: selected ? '700' : '400',
-                      color     : selected ? COLORS.WHITE : COLORS.LEAD
+                      fontWeight: selectedCriteria === item ? '700' : '400',
+                      color     : selectedCriteria === item ? COLORS.WHITE : COLORS.LEAD
                     }
                   ]}
                 >
-                  {name}
+                  #{item}
                 </Text>
               </TouchableOpacity>
             )}
@@ -205,15 +389,21 @@ const Chat: React.FC<GeneralScreenProps> = props => {
           />
         </SafeAreaView>
         <CustomInput
-          icon='mic'
+          icon={message.length === 0 ? 'mic' : 'send'}
           iconLeft={false}
           style={{
             color               : COLORS.WHITE,
             marginBottom        : 0,
             placeHolder         : 'What topic are you looking for?',
             placeHolderTextColor: COLORS.LEAD,
-            size                : 14
+            size                : 16
           }}
+          value={message}
+          onChangeText={handleOnChangeMessage}
+          hasTouchableOpacity
+          onPressIcon={message.length !== 0 && !recording ? () => sendMessage(message) : undefined}
+          onPressInIcon={message.length === 0 && !recording ? () => startRecording() : undefined}
+          onPressOutIcon={message.length === 0 && recording ? () => stopRecording() : undefined}
         />
       </View>
     </View>
