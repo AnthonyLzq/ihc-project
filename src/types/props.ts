@@ -168,9 +168,10 @@ type CourseCardProps = {
 }
 
 interface User {
-  names: string
-  lastnames: string
-  email: string
+  id              : string
+  name            : string
+  lastName        : string
+  selectedCourses : string[]
 }
 
 type MessageProps = {
