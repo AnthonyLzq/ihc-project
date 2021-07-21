@@ -9,14 +9,13 @@ import {
 
 // PROD
 const FB_CONFIG = {
-  apiKey            : FB_APIKEY,
-  authDomain        : FB_AUTH_DOMAIN,
-  projectId         : FB_PROJECT_ID,
-  storageBucket     : FB_STORAGE_BUCKET,
-  messagingSenderId : FB_MSG_SENDER_ID,
-  appId             : FB_APP_ID,
+  apiKey            : FB_APIKEY.replace('\"', ''),
+  authDomain        : FB_AUTH_DOMAIN.replace('\"', ''),
+  projectId         : FB_PROJECT_ID.replace('\"', ''),
+  storageBucket     : FB_STORAGE_BUCKET.replace('\"', ''),
+  messagingSenderId : FB_MSG_SENDER_ID.replace('\"', ''),
+  appId             : FB_APP_ID.replace('\"', '')
 };
 
-console.log(FB_CONFIG.apiKey)
 
 export default FB_CONFIG;

@@ -1,5 +1,11 @@
 # Frontend App
 
+## Version 0.16.0
+
+- Implemented:
+  - Register user on firebase authentication.
+  - And also takes the user and saves it on firestore database.
+
 ## Version 0.15.3
 
 - Fixed:

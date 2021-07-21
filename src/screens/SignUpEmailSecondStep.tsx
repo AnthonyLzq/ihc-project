@@ -8,8 +8,10 @@ import {
   GoBack
 } from '../components'
 import { SignInBottomText } from './components'
-import { COLORS, FONTS, EMAIL_REGEX } from '../utils'
+import { COLORS, FONTS, EMAIL_REGEX, Post } from '../utils'
 import { useFirebase } from 'react-redux-firebase'
+import { useAppDispatch } from '../hooks'
+import * as slices from '../slices'
 
 const classes = StyleSheet.create({
   container: {
@@ -46,6 +48,7 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
   const [password, setPassword] = React.useState<string>('')
   const [confirmPassword, setConfirmPassword] = React.useState<string>('')
   const firebase = useFirebase()
+  const dispatch = useAppDispatch()
 
   const handleOnChangeEmail = (text: string) => setEmail(text)
   const handleOnChangePassword = (text: string) => setPassword(text)
@@ -64,19 +67,38 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
       return
     }
 
+    signUpWithFirebase()
+  }
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(userCreds => {
-      console.log(userCreds.user?.uid);
-    }).catch(error => console.log(error.message))
+  const signUpWithFirebase = async () => {
+    try {
+      dispatch(slices.signUp())
+      const userCreds = await firebase.auth().createUserWithEmailAndPassword(email, password)
+      const names = route?.params.names || ''
+      const lastnames = route?.params.lastnames || ''
 
+      await Post('/users', {
+        args: {
+          name: names,
+          lastName: lastnames,
+          id: userCreds.user?.uid
+        }
+      })
 
-    // dispatch(slices.signUp({
-    //   names: route?.params?.names || '',
-    //   lastnames: route?.params?.lastnames || '',
-    //   email,
-    //   password,
-    //   navigation
-    // }))
+      dispatch(slices.signUpSuccess())
+      navigation.navigate('SignUpEmailWelcome', {
+        email,
+        names
+      })
+
+      await firebase.auth().signOut()
+    } catch (error) {
+      console.log(error);
+      const message = error?.response?.data || error.message
+      console.log('error message:', message);
+      dispatch(slices.signUpError(message))
+      alert(message)
+    }
   }
 
   return (
