@@ -135,7 +135,7 @@ const Chat: React.FC<GeneralScreenProps> = props => {
   return (
     <View style={classes.container}>
       <StatusBar barStyle='default' />
-      <Header logout={() => logout(navigation)} />
+      <Header navigation={navigation} />
       <View style={classes.chatContainer}>
         <View style={classes.titleContainer}>
           <RobotHappy

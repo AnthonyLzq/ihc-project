@@ -6,17 +6,13 @@ import { Provider } from 'react-redux'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/auth';
 
 import { FB_CONFIG } from './keys'
 import store from './store'
 import App from './App'
 
-const rrfConfig = {
-  userProfile: 'users',
-  useFirestoreForProfile: true
-}
+const rrfConfig = {}
 
 const rrfProps = {
   firebase,

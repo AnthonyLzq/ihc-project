@@ -23,13 +23,30 @@ export const signUpWithFirebase = async (firebase: ExtendedFirebaseInstance, dat
   }
 }  
 
-export const logoutAlert = (navigation: Navigation) => {
+export const logoutAlert = (navigation: Navigation, firebase: ExtendedFirebaseInstance) => {
   Alert.alert(
     'Logout',
     'Are you sure you want to logout?',
     [
       {
-        onPress: () => navigation.navigate('SignInEmail'),
+        onPress: () => {
+          (async () => {
+            try {
+              await firebase.auth().signOut()
+              navigation.reset({
+                index: 1,
+                routes: [
+                  { name: 'SignIn' },
+                  { name: 'SignInEmail' }
+                ]
+              })
+            } catch (error) {
+              console.log(error)
+              console.log(error.message)
+              alert('There was an error trying to sign out')
+            }
+          })()
+        },
         text   : 'Yes',
         style  : 'default'
       },

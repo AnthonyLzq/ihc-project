@@ -4,7 +4,8 @@ import { Icon } from 'react-native-elements'
 
 import SvgBrain from './SvgBrain'
 import { HeaderProps } from '../types/props'
-import { COLORS } from '../utils'
+import { COLORS, logoutAlert } from '../utils'
+import { useFirebase } from 'react-redux-firebase'
 
 const classes = StyleSheet.create({
   container: {
@@ -20,15 +21,16 @@ const classes = StyleSheet.create({
 const Header: React.FC<HeaderProps> = props => {
   const {
     goBack = false,
-    logout,
-    style: { height } = { height: '12%' }
+    style: { height } = { height: '12%' },
+    navigation
   } = props
+  const firebase = useFirebase()
 
   return (
     <View style={[{ height }, classes.container]}>
       {/* {goBack && <Text>Hi</Text>} */}
       <SvgBrain height='32' width='30.25' />
-      <TouchableOpacity onPress={logout}>
+      <TouchableOpacity onPress={() => logoutAlert(navigation, firebase)}>
         <Icon
           color={COLORS.WHITE}
           iconStyle={{

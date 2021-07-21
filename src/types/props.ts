@@ -122,12 +122,12 @@ type CustomBottomTextProps = {
 }
 
 type HeaderProps = {
-  style?: {
-    height?: number | string
+  style?      : {
+    height?   : number | string
   }
-  goBack?  : boolean
-  goBackCB?: () => void
-  logout   : () => void
+  goBack?     : boolean
+  goBackCB?   : () => void
+  navigation  : Navigation
 }
 
 type SvgBrainProps = {

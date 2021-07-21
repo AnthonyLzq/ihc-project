@@ -86,9 +86,12 @@ const SignUpEmailSecondStep: React.FC<SignUpEmailSecondStepProps> = props => {
       })
 
       dispatch(slices.signUpSuccess())
-      navigation.navigate('SignUpEmailWelcome', {
-        email,
-        names
+      navigation.reset({
+        index: 1,
+        routes: [
+          { name: 'SignUp' },
+          { name: 'SignUpEmailWelcome', params: { email, names } }
+        ]
       })
 
       await firebase.auth().signOut()
