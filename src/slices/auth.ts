@@ -45,6 +45,25 @@ export const authSlice = createSlice({
         isLoading: false,
         error: action.payload
       }
+    },
+    signIn: (state) => {
+      Keyboard.dismiss()
+      
+      state.signIn = {
+        isLoading: true
+      }
+    },
+    signInSuccess: (state, action: PayloadAction<User>) => {
+      state.signIn = {
+        isLoading: false,
+        data: action.payload
+      }
+    },
+    signInError: (state, action: PayloadAction<string>) => {
+      state.signIn = {
+        isLoading: false,
+        error: action.payload
+      }
     }
   }
 })
@@ -52,6 +71,9 @@ export const authSlice = createSlice({
 export const {
   signUp,
   signUpSuccess,
-  signUpError
+  signUpError,
+  signIn,
+  signInSuccess,
+  signInError
 } = authSlice.actions
 export default authSlice.reducer

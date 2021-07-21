@@ -28,7 +28,9 @@ const classes = StyleSheet.create({
 })
 
 const LoadingOverlay = () => {
-  const isLoading = useSelector<RootState>(state => state.authReducer.signUp.isLoading) as boolean
+  const isSignUpLoading = useSelector<RootState>(state => state.authReducer.signUp.isLoading) as boolean
+  const isSignInLoading = useSelector<RootState>(state => state.authReducer.signIn.isLoading) as boolean
+  const isLoading = isSignUpLoading || isSignInLoading
   const spinValue = new Animated.Value(0)
   const spin = spinValue.interpolate({
     inputRange: [0, 1],

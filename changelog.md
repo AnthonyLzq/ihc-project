@@ -1,5 +1,11 @@
 # Frontend App
 
+## Version 0.17.0
+
+- Implemented:
+  - Login user with firebase authentication.
+  - And also takes the user and saves it on redux local store.
+
 ## Version 0.16.0
 
 - Implemented:

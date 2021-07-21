@@ -9,7 +9,10 @@ import {
   GoBack
 } from '../components'
 import { SignUpBottomText } from './components'
-import { COLORS, FONTS, EMAIL_REGEX } from '../utils'
+import { COLORS, FONTS, EMAIL_REGEX, Get } from '../utils'
+import { useFirebase } from 'react-redux-firebase'
+import { useAppDispatch } from '../hooks'
+import * as slices from '../slices'
 
 const classes = StyleSheet.create({
   container: {
@@ -50,6 +53,8 @@ const Login: React.FC<SignInEmailProps> = props => {
   } = props
   const [email, setEmail] = React.useState<string>(route?.params?.email || '')
   const [password, setPassword] = React.useState<string>('')
+  const firebase = useFirebase()
+  const dispatch = useAppDispatch()
 
   const handleOnChangeEmail = (text: string) => setEmail(text)
   const handleOnChangePassword = (text: string) => setPassword(text)
@@ -61,7 +66,24 @@ const Login: React.FC<SignInEmailProps> = props => {
       return
     }
 
-    navigation.navigate('SelectCourses')
+    signInWithFirebase()
+  }
+
+  const signInWithFirebase = async () => {
+    try {
+      dispatch(slices.signIn())
+      const userCreds = await firebase.auth().signInWithEmailAndPassword(email, password)
+      const { message } = await Get(`/user/${userCreds.user?.uid}`)
+
+      dispatch(slices.signInSuccess(message))
+      navigation.navigate('SelectCourses')
+    } catch (error) {
+      console.log(error);
+      const message = error?.response?.data || error.message
+      console.log('error message:', message);
+      dispatch(slices.signInError(message))
+      alert(message)
+    }    
   }
 
   return (
