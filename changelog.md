@@ -1,5 +1,17 @@
 # Frontend App
 
+## Version 0.18.0
+
+- Removed:
+  - `redux-firestore` library and firestore configuration.
+  - `redux-logger` library.
+- Fixed:
+  - Sign out function doesn't go back to private screens.
+  - Sign up welcome screen doesn't go back to sign up steps.
+  - Sign in screen after sign up welcome screen doesn't go back to there.
+- Implemented:
+  - Logout using firebase authentication.
+
 ## Version 0.17.0
 
 - Implemented:

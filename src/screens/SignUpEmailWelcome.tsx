@@ -66,8 +66,12 @@ const SignUpEmailWelcome: React.FC<SignUpEmailWelcomeProps> = props => {
   } = props
 
   const signInWithEmail = () => 
-    navigation.navigate('SignInEmail', {
-      email: route?.params?.email || ''
+    navigation.reset({
+      index: 1,
+      routes: [
+        { name: 'SignIn' },
+        { name: 'SignInEmail', params: { email: route?.params.email || '' } }
+      ]
     })
 
   return (

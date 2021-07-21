@@ -63,7 +63,7 @@ const AllCourses: React.FC<AllCoursesProps> = props => {
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
-      <Header logout={(() => logout(navigation))}/>
+      <Header navigation={navigation}/>
       <View style={classes.allCourses}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>All my </Text>

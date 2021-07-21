@@ -97,7 +97,7 @@ const CourseDetail: React.FC<CourseDetailProps> = props => {
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
-      <Header logout={() => logout(navigation)}/>
+      <Header navigation={navigation}/>
       <View style={classes.topicsContainer}>
         <Text style={classes.title}>{course}</Text>
         <Text style={classes.subtitle}>Topics</Text>

@@ -13,6 +13,7 @@ import { COLORS, FONTS, EMAIL_REGEX, Get } from '../utils'
 import { useFirebase } from 'react-redux-firebase'
 import { useAppDispatch } from '../hooks'
 import * as slices from '../slices'
+import { CommonActions } from '@react-navigation/routers'
 
 const classes = StyleSheet.create({
   container: {
@@ -76,7 +77,12 @@ const Login: React.FC<SignInEmailProps> = props => {
       const { message } = await Get(`/user/${userCreds.user?.uid}`)
 
       dispatch(slices.signInSuccess(message))
-      navigation.navigate('SelectCourses')
+      navigation.reset({
+        index: 0,
+        routes: [
+          { name: 'SelectCourses' }
+        ]
+      })
     } catch (error) {
       console.log(error);
       const message = error?.response?.data || error.message

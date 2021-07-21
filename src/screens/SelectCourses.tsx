@@ -109,7 +109,7 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
-      <Header logout={logoutAlert} />
+      <Header navigation={navigation} />
       <View style={classes.coursesContainer}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>Select the </Text>

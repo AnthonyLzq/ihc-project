@@ -85,7 +85,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
-      <Header logout={(() => logout(navigation))}/>
+      <Header navigation={navigation}/>
       <View style={classes.lastViewedCoursesContainer}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>
