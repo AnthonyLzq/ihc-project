@@ -2,9 +2,9 @@ import { takeLatest } from 'redux-saga/effects'
 import * as slices from '../slices'
 import * as api from '../api'
 
-export function* getInitialSyllabus() {
+export function* getAllSyllabus() {
   yield takeLatest(
-    slices.getInitialSyllabus,
-    api.getInitialSyllabus
+    slices.getAllSyllabus,
+    api.getAllSyllabus
   )
 }

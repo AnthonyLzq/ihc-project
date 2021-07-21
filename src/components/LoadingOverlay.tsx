@@ -31,9 +31,9 @@ const classes = StyleSheet.create({
 const LoadingOverlay = () => {
   const isSignUpLoading = useAppSelector(state => state.userReducer.signUp.isLoading)
   const isSignInLoading = useAppSelector(state => state.userReducer.signIn.isLoading)
-  const isInitialSyllabusLoading = useAppSelector(state => state.syllabusReducer.initialSyllabus.isLoading)
+  const isAllSyllabusLoading = useAppSelector(state => state.syllabusReducer.allSyllabus.isLoading)
   const isSelectingSyllabus = useAppSelector(state => state.userReducer.selectedSyllabus.isLoading)
-  const isLoading = isSignUpLoading || isSignInLoading || isInitialSyllabusLoading || isSelectingSyllabus
+  const isLoading = isSignUpLoading || isSignInLoading || isAllSyllabusLoading || isSelectingSyllabus
   const spinValue = new Animated.Value(0)
   const spin = spinValue.interpolate({
     inputRange: [0, 1],

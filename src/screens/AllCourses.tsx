@@ -16,7 +16,6 @@ import {
   COURSES,
   COLORS,
   FONTS,
-  logout,
   ICourseData,
   getRandomColor
 } from '../utils'

@@ -12,8 +12,8 @@ const classes = StyleSheet.create({
     flexDirection : 'row',
     height        : 72,
     justifyContent: 'space-between',
-    paddingEnd    : 32,
-    paddingStart  : 32
+    paddingEnd    : 24,
+    paddingStart  : 24
   },
   course: {
     alignItems   : 'center',
@@ -23,7 +23,8 @@ const classes = StyleSheet.create({
     color     : COLORS.WHITE,
     fontFamily: FONTS.SECONDARY.BOLD,
     fontSize  : 16,
-    marginLeft: 16
+    marginLeft: 16,
+    textTransform: 'capitalize'
   }
 })
 

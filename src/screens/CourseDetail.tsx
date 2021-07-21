@@ -18,8 +18,7 @@ import {
   COURSES,
   FONTS,
   RELATED_COURSES,
-  ICourseData,
-  logout
+  ICourseData
 } from '../utils'
 
 const classes = StyleSheet.create({
