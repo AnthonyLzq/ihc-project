@@ -13,7 +13,6 @@ import { COLORS, FONTS, EMAIL_REGEX, Get } from '../utils'
 import { useFirebase } from 'react-redux-firebase'
 import { useAppDispatch } from '../hooks'
 import * as slices from '../slices'
-import { CommonActions } from '@react-navigation/routers'
 
 const classes = StyleSheet.create({
   container: {

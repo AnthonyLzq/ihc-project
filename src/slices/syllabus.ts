@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Syllabus } from '../types/props'
+import { SelectCoursesBody, Syllabus } from '../types/props'
 
 interface GeneralAction<T> {
   isLoading : boolean
@@ -8,8 +8,9 @@ interface GeneralAction<T> {
 }
 
 export interface SyllabusState {
-  initialSyllabus : Syllabus[],
-  allSyllabus     : GeneralAction<Syllabus[]>
+  initialSyllabus         : Syllabus[],
+  allSyllabus             : GeneralAction<Syllabus[]>
+  recommendedSyllabus     : GeneralAction<Syllabus[]>
 }
 
 const initialState: SyllabusState = {
@@ -17,6 +18,9 @@ const initialState: SyllabusState = {
   allSyllabus: {
     isLoading: false
   },
+  recommendedSyllabus: {
+    isLoading: false
+  }
 }
 
 const selectNCoursesRandomly = (courses: Syllabus[], size: number = 6): Syllabus[] => {
@@ -56,6 +60,21 @@ export const syllabusSlice = createSlice({
         isLoading: false,
         error: action.payload
       }
+    },
+    getRecommendedSyllabus: (state, action: PayloadAction<SelectCoursesBody>) => {
+      state.recommendedSyllabus.isLoading = true
+    },
+    getRecommendedSyllabusSuccess: (state, action: PayloadAction<Syllabus[]>) => {
+      state.recommendedSyllabus = {
+        isLoading: false,
+        data: selectNCoursesRandomly(action.payload, 2)
+      }
+    },
+    getRecommendedSyllabusError: (state, action: PayloadAction<string>) => {
+      state.recommendedSyllabus = {
+        isLoading: false,
+        error: action.payload
+      }
     }
   }
 })
@@ -63,6 +82,9 @@ export const syllabusSlice = createSlice({
 export const {
   getAllSyllabus,
   getAllSyllabusSuccess,
-  getAllSyllabusError
+  getAllSyllabusError,
+  getRecommendedSyllabus,
+  getRecommendedSyllabusSuccess,
+  getRecommendedSyllabusError
 } = syllabusSlice.actions
 export default syllabusSlice.reducer

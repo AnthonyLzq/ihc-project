@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.25.0
+
+- Implemented:
+  - SR for courses and topics was implemented.
+
 ## Version 0.24.0
 
 - Implemented:
