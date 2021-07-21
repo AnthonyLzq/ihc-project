@@ -272,5 +272,6 @@ export {
   UserSignUpCredentials,
   Syllabus,
   ApiResponse,
-  SelectCoursesBody
+  SelectCoursesBody,
+  AnalyticProgramItem
 }

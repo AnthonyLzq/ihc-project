@@ -10,16 +10,14 @@ import {
 } from 'react-native'
 import { Icon, FAB } from 'react-native-elements'
 
-import { CourseDetailProps } from '../types/props'
+import { CourseDetailProps, Syllabus } from '../types/props'
 import { Header } from '../components'
 import { RobotHappy } from '../icons'
 import {
   COLORS,
-  COURSES,
   FONTS,
-  RELATED_COURSES,
-  ICourseData
 } from '../utils'
+import { useAppSelector } from '../hooks'
 
 const classes = StyleSheet.create({
   container: {
@@ -30,7 +28,7 @@ const classes = StyleSheet.create({
     borderTopEndRadius  : 26,
     borderTopStartRadius: 26,
     height              : '88%',
-    // paddingEnd          : 32,
+    paddingEnd          : 32,
     paddingStart        : 32,
     paddingTop          : 32
   },
@@ -38,7 +36,8 @@ const classes = StyleSheet.create({
     color       : COLORS.PURPLE,
     fontFamily  : FONTS.SECONDARY.BOLD,
     fontSize    : 30,
-    marginBottom: 10
+    marginBottom: 10,
+    textTransform: 'capitalize'
   },
   subtitle: {
     color       : COLORS.WHITE,
@@ -53,108 +52,95 @@ const classes = StyleSheet.create({
     alignItems   : 'center',
     flexDirection: 'row',
     marginBottom : 8,
-    marginLeft   : 18
+    marginLeft   : 18,
+    maxWidth     : '80%'
   },
   topicName: {
     color       : COLORS.WHITE,
     fontFamily  : FONTS.SECONDARY.REGULAR,
-    fontSize    : 18,
+    fontSize    : 18
   }
 })
-
-interface Topic {
-  name: string
-  id  : string
-}
 
 const CourseDetail: React.FC<CourseDetailProps> = props => {
   const {
     navigation,
     route
   } = props
-  const [course, setCourse] = React.useState('')
-  const [mainTopics, setMainTopics] = React.useState<Topic[]>([])
-  const [suggestTopics, setSuggestTopics] = React.useState<Topic[]>([])
-
-  React.useEffect(() => {
-    const courseData = [...COURSES, ...RELATED_COURSES]
-      .find(c => c.id === (route?.params?.id)) as ICourseData
-
-    setCourse(courseData.course)
-    setMainTopics(
-      courseData.topics
-        .slice(0, 6)
-        .map((e, index) => ({ name: e, id: `${index}` }))
-    )
-    setSuggestTopics(
-      courseData.topics
-        .slice(6)
-        .map((e, index) => ({ name: e, id: `${index}` }))
-    )
-  }, [])
+  const allCourses = useAppSelector(state => state.syllabusReducer.allSyllabus.data) as Syllabus[]
+  const courseData = allCourses.find(course => course.generalInfo.course.code === (route?.params?.id))
+  const mainTopics = courseData ? courseData.analyticProgram.map(topic => topic) : []
+  const suggestTopics = courseData ? courseData.analyticProgram.map(topic => topic) : []
 
   return (
     <SafeAreaView style={classes.container}>
       <StatusBar barStyle='default' />
       <Header navigation={navigation}/>
       <View style={classes.topicsContainer}>
-        <Text style={classes.title}>{course}</Text>
-        <Text style={classes.subtitle}>Topics</Text>
-        <FlatList
-          data={mainTopics}
-          renderItem={({ item: { name, id }}) => (
-            <TouchableOpacity
-              key={id}
-              onPress={() => navigation.navigate('Chat')}
-              style={classes.topicView}
-            >
-              <Icon
-                color={COLORS.WHITE}
-                name='file-search-outline'
-                type='material-community'
-                size={16}
-                style={{
-                  marginRight: 16
-                }}
-              />
-              <Text style={classes.topicName}>{name}</Text>
-            </TouchableOpacity>
-          )}
-          showsVerticalScrollIndicator={false}
-          style={{
-            flexGrow : 0,
-            maxHeight: 220
-          }}
-        />
-        <Text style={[classes.subtitle, { marginTop: 17 }]}>
-          It might interest you
-        </Text>
-        <FlatList
-          data={suggestTopics}
-          renderItem={({ item: { name, id } }) => (
-            <TouchableOpacity
-              key={id}
-              onPress={() => navigation.navigate('Chat')}
-              style={classes.topicView}
-            >
-              <Icon
-                color={COLORS.WHITE}
-                name='file-search-outline'
-                type='material-community'
-                size={16}
-                style={{
-                  marginRight: 16
-                }}
-              />
-              <Text style={classes.topicName}>{name}</Text>
-            </TouchableOpacity>
-          )}
-          showsVerticalScrollIndicator={false}
-          style={{
-            flexGrow : 0,
-            maxHeight: 180
-          }}
-        />
+        {
+          courseData &&
+          <>
+            <Text style={classes.title}>{courseData.generalInfo.course.name}</Text>
+            <Text style={classes.subtitle}>Topics</Text>
+            <FlatList
+              keyExtractor={(item, index) => `${item.topic}-${index}`}
+              data={mainTopics}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  key={item.topic}
+                  onPress={() => navigation.navigate('Chat')}
+                  style={classes.topicView}
+                >
+                  <Icon
+                    color={COLORS.WHITE}
+                    name='file-search-outline'
+                    type='material-community'
+                    size={16}
+                    style={{
+                      marginRight: 16
+                    }}
+                  />
+                  <Text style={classes.topicName}>{item.topic}</Text>
+                </TouchableOpacity>
+              )}
+              showsVerticalScrollIndicator={false}
+              style={{
+                flexGrow : 0,
+                maxHeight: 220
+              }}
+            />
+            <Text style={[classes.subtitle, { marginTop: 17 }]}>
+              It might interest you
+            </Text>
+            <FlatList
+              keyExtractor={(item, index) => `${item.topic}-${index}`}
+              data={suggestTopics}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  key={item.topic}
+                  onPress={() => navigation.navigate('Chat')}
+                  style={classes.topicView}
+                >
+                  <Icon
+                    color={COLORS.WHITE}
+                    name='file-search-outline'
+                    type='material-community'
+                    size={16}
+                    style={{
+                      marginRight: 16
+                    }}
+                  />
+                  <Text style={classes.topicName}>{item.topic}</Text>
+                </TouchableOpacity>
+              )}
+              showsVerticalScrollIndicator={false}
+              style={{
+                flexGrow : 0,
+                maxHeight: 180
+              }}
+            />
+          </>
+        }
       </View>
       <FAB
         color={COLORS.RED}

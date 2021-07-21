@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.23.0
+
+- Implemented:
+  - Now course details screen loads the data from database.
+
 ## Version 0.22.0
 
 - Implemented:
