@@ -1,5 +1,10 @@
 # Frontend App
 
+## Version 0.19.0
+
+- Implemented:
+  - Now the first view of selecting courses fetchs data from backend.
+
 ## Version 0.18.0
 
 - Removed:

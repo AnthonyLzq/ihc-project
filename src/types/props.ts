@@ -192,6 +192,49 @@ interface UserSignUpCredentials extends UserSignInCredentials {
   lastnames: string
 }
 
+interface AnalyticProgramItem {
+  themes? : string[]
+  topic   : string
+}
+
+interface BibliographyItem {
+  category? : string
+  rates     : number
+  name      : string
+  rating    : number
+}
+
+interface Course {
+  name  : string
+  code  : string
+}
+
+interface Syllabus {
+  analyticProgram   : AnalyticProgramItem[]
+  bibliography      : BibliographyItem[]
+  competencies      : string[]
+  generalInfo       : {
+    condition: string
+    course: Course
+    credits: number
+    evaluationSystem: string
+    hoursPerWeek    : {
+      laboratory?     : number
+      practice?       : number
+      theory          : number
+      total           : number
+    }
+    preRequirements?  : Course[]
+  }
+  icon?             : string
+  sommelier         : string
+}
+
+interface ApiResponse<T> {
+  error   : boolean
+  message : T
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -220,5 +263,7 @@ export {
   SignUpEmailWelcomeProps,
   MessageProps,
   UserSignInCredentials,
-  UserSignUpCredentials
+  UserSignUpCredentials,
+  Syllabus,
+  ApiResponse
 }

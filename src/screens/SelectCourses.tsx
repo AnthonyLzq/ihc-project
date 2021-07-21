@@ -15,7 +15,9 @@ import {
   SelectCourseCard,
   CustomButton
 } from '../components'
-import { COLORS, COURSES, FONTS } from '../utils'
+import { COLORS, FONTS } from '../utils'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import * as slices from '../slices'
 
 const classes = StyleSheet.create({
   container: {
@@ -47,6 +49,8 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
   const { navigation } = props
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])
+  const dispatch = useAppDispatch()
+  const { isLoading, data } = useAppSelector(state => state.syllabusReducer.initialSyllabus)
 
   const changeNCourses = (increaseOrDecrease: boolean, id: string): void => {
     if (increaseOrDecrease) {
@@ -85,25 +89,8 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
     )
   }
 
-  // TODO: implemented a way to logout globally
-  const logoutAlert = React.useCallback(() => {
-    Alert.alert(
-      'Logout',
-      'Are you sure you want to logout?',
-      [
-        {
-          onPress: () => navigation.navigate('SignInEmail'),
-          text   : 'Yes',
-          style  : 'default'
-        },
-        {
-          onPress: () => {},
-          text   : 'No',
-          style  : 'cancel'
-        }
-      ],
-      { cancelable: true }
-    )
+  React.useEffect(() => {
+    dispatch(slices.getInitialSyllabus())
   }, [])
 
   return (
@@ -121,17 +108,18 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
           <Text style={classes.textWhite}>{nCourses} / 5</Text>
         </View>
         <FlatList
+          keyExtractor={(item, index) => `${item.generalInfo.course.code}-${index}`}
           columnWrapperStyle={{ justifyContent: 'space-between' }}
-          data={COURSES}
+          data={data ? data : []}
           numColumns={2}
-          renderItem={({ item: { id, course, icon, iconType }, index }) => (
+          renderItem={({ item, index }) => (
             <SelectCourseCard
               available={nCourses < 5}
-              key={id}
-              course={course}
-              icon={icon}
-              id={id}
-              iconType={iconType}
+              id={item.generalInfo.course.code}
+              key={`${item.generalInfo.course.code}-${index}`}
+              course={item.generalInfo.course.name}
+              icon={item.icon ? item.icon.split('/')[1] : 'language-java'}
+              iconType={item.icon ? item.icon.split('/')[0] : 'material-community'}
               onPress={changeNCourses}
               style={{
                 marginRight: index % 2 == 0 ? 32 : undefined

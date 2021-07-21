@@ -20,7 +20,8 @@ const classes = StyleSheet.create({
       height: 1
     },
     shadowRadius: 4,
-    width       : 0.36 * wWidth
+    width       : 0.36 * wWidth,
+    padding     : 10
   },
   textWhite: {
     color     : COLORS.WHITE,
