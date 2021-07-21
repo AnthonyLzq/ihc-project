@@ -1,16 +1,16 @@
 // export all reducers
 import { firebaseReducer } from 'react-redux-firebase';
-import authReducer from './auth'
+import userReducer from './user'
 import syllabusReducer from './syllabus'
 
 const rootReducer = {
   firebaseReducer,
-  authReducer,
+  userReducer,
   syllabusReducer
 }
 
 export default rootReducer
 
 // export all actions
-export * from './auth'
+export * from './user'
 export * from './syllabus'

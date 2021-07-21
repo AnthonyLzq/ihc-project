@@ -235,6 +235,12 @@ interface ApiResponse<T> {
   message : T
 }
 
+interface SelectCoursesBody {
+  id              : string
+  selectedCourses : string[]
+  navigation      : Navigation
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -265,5 +271,6 @@ export {
   UserSignInCredentials,
   UserSignUpCredentials,
   Syllabus,
-  ApiResponse
+  ApiResponse,
+  SelectCoursesBody
 }

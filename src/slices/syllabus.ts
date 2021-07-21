@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Keyboard } from 'react-native'
 import { Syllabus } from '../types/props'
 
 interface GeneralAction<T> {
@@ -23,11 +22,7 @@ export const syllabusSlice = createSlice({
   initialState,
   reducers: {
     getInitialSyllabus: (state) => {
-      Keyboard.dismiss()
-      
-      state.initialSyllabus = {
-        isLoading: true
-      }
+      state.initialSyllabus.isLoading = true
     },
     getInitialSyllabusSuccess: (state, action: PayloadAction<Syllabus[]>) => {
       state.initialSyllabus = {
@@ -47,6 +42,6 @@ export const syllabusSlice = createSlice({
 export const {
   getInitialSyllabus,
   getInitialSyllabusSuccess,
-  getInitialSyllabusError,
+  getInitialSyllabusError
 } = syllabusSlice.actions
 export default syllabusSlice.reducer

@@ -5,6 +5,7 @@ import SvgBrain from './SvgBrain'
 import { FONTS, COLORS } from '../utils'
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
+import { useAppSelector } from '../hooks'
 
 const svgSize = '100'
 
@@ -28,10 +29,11 @@ const classes = StyleSheet.create({
 })
 
 const LoadingOverlay = () => {
-  const isSignUpLoading = useSelector<RootState>(state => state.authReducer.signUp.isLoading) as boolean
-  const isSignInLoading = useSelector<RootState>(state => state.authReducer.signIn.isLoading) as boolean
-  const isInitialSyllabusLoading = useSelector<RootState>(state => state.syllabusReducer.initialSyllabus.isLoading) as boolean
-  const isLoading = isSignUpLoading || isSignInLoading || isInitialSyllabusLoading
+  const isSignUpLoading = useAppSelector(state => state.userReducer.signUp.isLoading)
+  const isSignInLoading = useAppSelector(state => state.userReducer.signIn.isLoading)
+  const isInitialSyllabusLoading = useAppSelector(state => state.syllabusReducer.initialSyllabus.isLoading)
+  const isSelectingSyllabus = useAppSelector(state => state.userReducer.selectedSyllabus.isLoading)
+  const isLoading = isSignUpLoading || isSignInLoading || isInitialSyllabusLoading || isSelectingSyllabus
   const spinValue = new Animated.Value(0)
   const spin = spinValue.interpolate({
     inputRange: [0, 1],
