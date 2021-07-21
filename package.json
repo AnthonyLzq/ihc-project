@@ -1,6 +1,6 @@
 {
   "main": "./src/index.tsx",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
