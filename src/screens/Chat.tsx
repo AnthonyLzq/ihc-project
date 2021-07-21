@@ -19,7 +19,7 @@ import { v4 as uuid } from 'uuid'
 import { CustomInput, Header } from '../components'
 import { Message } from './components'
 import { RobotHappy } from '../icons'
-import { COLORS, FONTS, ChatMessage, logout, searchCriteria } from '../utils'
+import { COLORS, FONTS, ChatMessage, searchCriteria } from '../utils'
 import { GeneralScreenProps } from '../types/props'
 
 const wHeight = Dimensions.get('window').height

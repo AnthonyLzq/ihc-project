@@ -15,13 +15,12 @@ import { Header, CourseCard } from '../components'
 import RobotHappy from '../icons/RobotHappy'
 import {
   COLORS,
-  COURSES,
   RELATED_COURSES,
   FONTS,
-  ICourseData,
   getRandomColor,
-  logout
+  reduceTextToSize
 } from '../utils'
+import { useAppSelector } from '../hooks'
 
 const classes = StyleSheet.create({
   container: {
@@ -78,9 +77,9 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
     navigation,
     route
   } = props
-  const [selectedCourses] = React.useState<ICourseData[]>(
-    COURSES.filter(c => route?.params?.ids.includes(c.id))
-  )
+  const allCourses = useAppSelector(state => state.syllabusReducer.allSyllabus.data)
+  const userData = useAppSelector(state => state.userReducer.signIn.data)
+  const selectedCourses = allCourses ? allCourses.filter(course => userData?.selectedCourses.includes(course.generalInfo.course.code)) : []
 
   return (
     <SafeAreaView style={classes.container}>
@@ -89,23 +88,24 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
       <View style={classes.lastViewedCoursesContainer}>
         <View style={classes.title}>
           <Text style={classes.textWhite}>
-            {route?.params?.firstTime ? 'Last viewed ' : 'Selected '}
+            Last viewed{' '}
           </Text>
           <Text style={classes.textPurple}>courses</Text>
         </View>
         <FlatList
+          keyExtractor={(item, index) => `${item.generalInfo.course.code}-${index}`}
           data={selectedCourses}
-          renderItem={({ item: { course, icon, iconType, id }, index }) => (
+          renderItem={({ item, index }) => (
             <CourseCard
-              key={id}
+              key={item.generalInfo.course.code}
               style={{
                 color       : getRandomColor(),
                 marginBottom: index !== selectedCourses.length - 1 ? 16 : 0
               }}
-              course={course}
-              icon={icon}
-              iconType={iconType}
-              onPress={() => navigation.navigate('CourseDetail', { id })}
+              course={reduceTextToSize(item.generalInfo.course.name)}
+              icon={item.icon ? item.icon.split('/')[1] : 'language-java'}
+              iconType={item.icon ? item.icon.split('/')[0] : 'material-community'}
+              onPress={() => navigation.navigate('CourseDetail', { id: item.generalInfo.course.code })}
             />
           )}
           showsVerticalScrollIndicator={false}

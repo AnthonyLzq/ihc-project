@@ -44,14 +44,13 @@ const classes = StyleSheet.create({
   }
 })
 
-// Mockup version
 const SelectCourses: React.FC<SelectCoursesProps> = props => {
   const { navigation } = props
   const [nCourses, setNCourses] = React.useState(0)
   const [selectedCourses, setSelectedCourses] = React.useState<string[]>([])
   const dispatch = useAppDispatch()
   const userData = useAppSelector(state => state.userReducer.signIn.data)
-  const courses = useAppSelector(state => state.syllabusReducer.initialSyllabus.data)
+  const randomCourses = useAppSelector(state => state.syllabusReducer.initialSyllabus)
 
   const changeNCourses = (increaseOrDecrease: boolean, id: string): void => {
     if (increaseOrDecrease) {
@@ -90,7 +89,7 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
   }
 
   React.useEffect(() => {
-    dispatch(slices.getInitialSyllabus())
+    dispatch(slices.getAllSyllabus())
   }, [])
 
   return (
@@ -110,7 +109,7 @@ const SelectCourses: React.FC<SelectCoursesProps> = props => {
         <FlatList
           keyExtractor={(item, index) => `${item.generalInfo.course.code}-${index}`}
           columnWrapperStyle={{ justifyContent: 'space-between' }}
-          data={courses ? courses : []}
+          data={randomCourses}
           numColumns={2}
           renderItem={({ item, index }) => (
             <SelectCourseCard
