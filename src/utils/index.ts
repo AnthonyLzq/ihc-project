@@ -1,3 +1,4 @@
+import { BotResource } from '../types/props'
 import COLORS from './colors'
 import { fontResources, FONTS  } from './fonts'
 interface ICourseData {
@@ -179,50 +180,19 @@ interface SearchCriteria {
   disabled: boolean
 }
 
-const searchCriteria: SearchCriteria[] = [
-  {
-    id      : '1',
-    name    : '#all',
-    selected: false,
-    disabled: false
-  },
-  {
-    id      : '2',
-    name    : '#blog',
-    selected: false,
-    disabled: false
-  },
-  {
-    id      : '3',
-    name    : '#tutorial',
-    selected: false,
-    disabled: false
-  },
-  {
-    id      : '4',
-    name    : '#paper',
-    selected: false,
-    disabled: false
-  },
-  {
-    id      : '5',
-    name    : '#book',
-    selected: false,
-    disabled: false
-  },
-  {
-    id      : '6',
-    name    : '#video',
-    selected: false,
-    disabled: false
-  }
+const searchCriteria: string[] = [
+  'blog',
+  'tutorial',
+  'paper',
+  'book',
+  'video'
 ]
 
 interface ChatMessage {
   id     : string
   content: {
-    text     : string
-    resources: string[]
+    message?    : string
+    resource?  : BotResource
   }
   date   : Date
   fromBot: boolean // true: bot, false: user

@@ -124,6 +124,7 @@ const LastViewedCourses: React.FC<LastViewedCoursesProps> = props => {
         </TouchableOpacity>
         <Text style={classes.mightInterest}>It might interest you</Text>
         <FlatList
+          keyExtractor={(item, index) => `${item.id}-${index}`}
           data={RELATED_COURSES}
           renderItem={({ item: { course, icon, iconType, id }, index }) => (
             <CourseCard

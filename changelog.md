@@ -1,5 +1,11 @@
 # Frontend App
 
+## Version 0.24.0
+
+- Implemented:
+  - Voice recognition on chat screen.
+  - Search system for topics with some keyword associated.
+
 ## Version 0.23.0
 
 - Implemented:

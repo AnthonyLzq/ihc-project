@@ -6,7 +6,8 @@ const COLORS = {
   RED         : '#FF6264',
   GREEN       : '#7ACF65',
   WHITE       : '#FFF',
-  BOT_MESSAGE : '#303030'
+  BOT_MESSAGE : '#303030',
+  LINK        : '#3D93C4'
 }
 
 export default COLORS

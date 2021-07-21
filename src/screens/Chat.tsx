@@ -3,9 +3,7 @@ import {
   Dimensions,
   FlatList,
   Keyboard,
-  KeyboardAvoidingView,
   KeyboardEvent,
-  Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -14,7 +12,7 @@ import {
   View,
 } from 'react-native'
 import { Audio } from 'expo-av';
-import { getInfoAsync, readAsStringAsync, EncodingType } from 'expo-file-system'
+import { readAsStringAsync, EncodingType } from 'expo-file-system'
 import 'react-native-get-random-values'
 import { v4 as uuid } from 'uuid'
 
@@ -22,13 +20,13 @@ import { CustomInput, Header } from '../components'
 import { Message } from './components'
 import { RobotHappy } from '../icons'
 
-import { COLORS, FONTS, ChatMessage, searchCriteria } from '../utils'
-import { ChatProps } from '../types/props'
-import axios from 'axios';
-import { CLOUD_URL } from '../keys';
+import { COLORS, FONTS, ChatMessage, searchCriteria, Post } from '../utils'
+import { ApiResponse, ChatProps, BotResource } from '../types/props'
+import { useAppDispatch, useAppSelector } from '../hooks';
+import * as slices from '../slices';
 
 const wHeight = Dimensions.get('window').height
-const wWidth = Dimensions.get('window').width
+// const wWidth = Dimensions.get('window').width
 
 const classes = StyleSheet.create({
   container: {
@@ -64,8 +62,8 @@ const classes = StyleSheet.create({
     borderRadius : 4,
     paddingTop: 3,
     paddingBottom: 3,
-    paddingStart: 10,
-    paddingEnd: 10,
+    paddingStart: 12,
+    paddingEnd: 12,
   },
   textSearchCriteria: {
     fontFamily: FONTS.INPUT.REGULAR,
@@ -82,7 +80,7 @@ const classes = StyleSheet.create({
 
 const recordingOptions = {
   android: {
-      extension: '.m4a',
+      extension: '.wav',
       outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
       audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AAC,
       sampleRate: 44100,
@@ -101,23 +99,34 @@ const recordingOptions = {
   },
 };
 
+const botMessages: { [key: string]: string } = {
+  all: 'Maybe these links can help you :D',
+  blog: 'I found these nice blogs :0',
+  tutorial: 'These tutorials are really good B)',
+  paper: 'I found these interesting papers!',
+  book: 'You could read one of these books :D',
+  video: 'These videos are well explained',
+  nores: "I couldn't find any link related :("
+}
+
 const Chat: React.FC<ChatProps> = props => {
-  const { navigation } = props
+  const { navigation, route } = props
+  const dispatch = useAppDispatch()
   const [keyboardHeight, setKeyboardHeight] = React.useState(0)
   const [isKeyBoardOpen, setIsKeyboardOpen] = React.useState(false)
-  const [criteria, setCriteria] = React.useState(searchCriteria)
+  const [selectedCriteria, setSelectedCriteria] = React.useState<string>('')
   const [message, setMessage] = React.useState<string>('')
   const [recording, setRecording] = React.useState<Audio.Recording>()
-  const [sound, setSound] = React.useState<Audio.Sound>()
+  const userData = useAppSelector(state => state.userReducer.signIn.data)
   const [messages, setMessages] = React.useState<ChatMessage[]>([{
     id     : uuid(),
     content: {
-      text     : 'How can I help you?',
-      resources: []
+      message: 'How can I help you?'
     },
     date   : new Date(),
     fromBot: true
   }])
+
   const onKeyboardDidShow = (e: KeyboardEvent): void => {
     setKeyboardHeight(e.endCoordinates.height)
     setIsKeyboardOpen(true)
@@ -127,8 +136,90 @@ const Chat: React.FC<ChatProps> = props => {
     setIsKeyboardOpen(false)
   }
 
-  const sendMessage = () => {
-    alert('send message')
+  const sendMessage = (message: string) => {
+    const keyWord = selectedCriteria.length === 0 ? 'all' : selectedCriteria
+    const query = message
+
+    let newMessages = [
+      ...messages,
+      {
+        id: uuid(),
+        fromBot: false,
+        content: {
+          message
+        },
+        date   : new Date()
+      }
+    ]
+
+    setMessages(newMessages)
+    setMessage('')
+    sendMessageAsync(keyWord, query, newMessages)
+  }
+
+  const sendMessageAsync = async (keyWord: string, query: string, currentMessages: ChatMessage[]) => {
+    try {
+      dispatch(slices.getChatResource())
+      const response: ApiResponse<BotResource[]> = await Post('/search', {
+        args: {
+          keyWord,
+          query
+        }
+      })
+
+      dispatch(slices.getChatResourceSuccess())
+      if (response.message.length !== 0)
+        currentMessages = [
+          ...currentMessages,
+          {
+            id: uuid(),
+            fromBot: true,
+            content: {
+              message: botMessages[keyWord]
+            },
+            date   : new Date()
+          },
+          ...response.message.map(resource => ({
+            id: uuid(),
+            fromBot: true,
+            content: {
+              resource
+            },
+            date   : new Date()
+          }))
+        ]
+      else
+        currentMessages = [
+          ...currentMessages,
+          {
+            id: uuid(),
+            fromBot: true,
+            content: {
+              message: botMessages['nores']
+            },
+            date   : new Date()
+          }
+        ]
+      
+      setMessages(currentMessages)
+    } catch (error) {
+      dispatch(slices.getChatResourceError())
+      const message = error?.response?.data?.message || error?.message
+      console.log(message)
+      alert(message)
+      currentMessages = [
+        ...currentMessages,
+        {
+          id: uuid(),
+          fromBot: true,
+          content: {
+            message: botMessages['nores']
+          },
+          date   : new Date()
+        }
+      ]
+      setMessages(currentMessages)
+    }
   }
 
   const startRecording = async () => {
@@ -150,7 +241,8 @@ const Chat: React.FC<ChatProps> = props => {
       setRecording(recording)
       console.log('recording started')
     } catch (error) {
-      console.error('failed to start recording...', error);
+      console.error(error);
+      alert('Failed to start recording');
     }
   }
 
@@ -166,38 +258,49 @@ const Chat: React.FC<ChatProps> = props => {
 
     if (uri) {
       try {
-        const info = await getInfoAsync(uri)
         const audio = await readAsStringAsync(uri, {
           encoding: EncodingType.Base64
         })
 
-        console.log('audio64', audio);
-
-        const response = await axios({
-          url: CLOUD_URL,
-          method: 'post',
-          data: {
-            config: {
-              encoding: 'LINEAR16',
-              languageCode: 'en-US',
-              sampleRateHertz: 16000
-            },
-            audio: {
-              content: audio
-            }
+        dispatch(slices.getChatResource())
+        const response: ApiResponse<string> = await Post('/speech', {
+          args: {
+            base64: audio
           }
         })
 
-        console.log(response.data);
+        dispatch(slices.getChatResource())
+        console.log(response);
+        sendMessage(response.message)
       } catch (error) {
+        dispatch(slices.getChatResourceError())
         console.log(error);
         console.log(error.message);
-        console.log(error.response.data);
+        const newMessages = [
+          ...messages,
+          {
+            id: uuid(),
+            fromBot: true,
+            content: {
+              message: "I couldn't hear you well, please try again"
+            },
+            date   : new Date()
+          }
+        ]
+
+        setMessages(newMessages)
       }
     }
   }
 
   const handleOnChangeMessage = (text: string) => setMessage(text)
+
+  React.useEffect(() => {
+    if (route && route.params)
+      sendMessage(route.params.topic)
+
+    return () => setRecording(undefined)
+  }, [])
 
   React.useEffect(() => {
     Keyboard.addListener('keyboardDidShow', onKeyboardDidShow)
@@ -209,29 +312,8 @@ const Chat: React.FC<ChatProps> = props => {
     }
   }, [])
 
-  const onSearchCriteriaPress = (id: string) => {
-    if (id === '1')
-      setCriteria(
-        criteria.map(c => {
-          if (c.id === '1') c.selected = !c.selected
-
-          if (criteria[0].selected && c.id !== '1') {
-            c.selected = false
-            c.disabled = true
-          } else if (!criteria[0].selected) c.disabled = false
-
-          return c
-        })
-      )
-    else
-      setCriteria(
-        criteria.map(c => {
-          if (c.id === id) c.selected = !c.selected
-
-          return c
-        })
-      )
-  }
+  const onSearchCriteriaPress = (criteria: string) =>
+    criteria === selectedCriteria ? setSelectedCriteria('') : setSelectedCriteria(criteria)
 
   return (
     <View style={classes.container}>
@@ -248,10 +330,11 @@ const Chat: React.FC<ChatProps> = props => {
               marginRight : 16
             }}
           />
-          <Text style={classes.title}>Hello Bryan</Text>
+          <Text style={classes.title}>Hello {userData ? userData.name : ''}</Text>
         </View>
-        <SafeAreaView>
+        <SafeAreaView style={{ paddingBottom: isKeyBoardOpen ? keyboardHeight + 195 : 185 }}>
           <FlatList
+            keyExtractor={(item, index) => `${item.id}-${index}`}
             data={messages}
             renderItem={({ item: { id, content, date, fromBot } }) => (
               <Message
@@ -272,30 +355,30 @@ const Chat: React.FC<ChatProps> = props => {
       >
         <SafeAreaView style={classes.searchCriteriaContainer}>
           <FlatList
+            keyExtractor={(item, index) => `${item}-${index}`}
             data={searchCriteria}
             horizontal
-            renderItem={({ item: { id, name, selected, disabled }}) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
-                key={id}
-                onPress={() => onSearchCriteriaPress(id)}
+                key={`${item}-${index}`}
+                onPress={() => onSearchCriteriaPress(item)}
                 style={[
                   classes.searchCriteria,
                   {
-                    backgroundColor: selected ? COLORS.RED : COLORS.MAIN_BLACK
+                    backgroundColor: selectedCriteria === item ? COLORS.RED : COLORS.MAIN_BLACK
                   }
                 ]}
-                disabled={disabled}
               >
                 <Text
                   style={[
                     classes.textSearchCriteria,
                     {
-                      fontWeight: selected ? '700' : '400',
-                      color     : selected ? COLORS.WHITE : COLORS.LEAD
+                      fontWeight: selectedCriteria === item ? '700' : '400',
+                      color     : selectedCriteria === item ? COLORS.WHITE : COLORS.LEAD
                     }
                   ]}
                 >
-                  {name}
+                  #{item}
                 </Text>
               </TouchableOpacity>
             )}
@@ -306,8 +389,7 @@ const Chat: React.FC<ChatProps> = props => {
           />
         </SafeAreaView>
         <CustomInput
-          // icon={message.length === 0 ? 'mic' : 'send'}
-          icon='send'
+          icon={message.length === 0 ? 'mic' : 'send'}
           iconLeft={false}
           style={{
             color               : COLORS.WHITE,
@@ -319,10 +401,9 @@ const Chat: React.FC<ChatProps> = props => {
           value={message}
           onChangeText={handleOnChangeMessage}
           hasTouchableOpacity
-          onPressIcon={sendMessage}
-          // onPressIcon={message.length !== 0 && !recording ? sendMessage : undefined}
-          // onPressInIcon={message.length === 0 && !recording ? () => startRecording() : undefined}
-          // onPressOutIcon={message.length === 0 && recording ? () => stopRecording() : undefined}
+          onPressIcon={message.length !== 0 && !recording ? () => sendMessage(message) : undefined}
+          onPressInIcon={message.length === 0 && !recording ? () => startRecording() : undefined}
+          onPressOutIcon={message.length === 0 && recording ? () => stopRecording() : undefined}
         />
       </View>
     </View>

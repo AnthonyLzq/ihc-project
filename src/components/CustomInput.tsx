@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, TouchableOpacityBase } from 'react-native'
+import { StyleSheet, View, TouchableHighlight } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Input } from 'react-native-elements'
 
@@ -40,28 +40,33 @@ const CustomInput: React.FC<CustomInputProps> = props => {
     onPressInIcon = undefined,
     onPressOutIcon = undefined
   } = props
+  const [isPress, setIsPress] = React.useState(false)
 
   const touchableOpacityProps = {
+    activeOpacity: 1,
+    underlayColor: COLORS.RED,                               // <-- "backgroundColor" will be always overwritten by "underlayColor"
     style: { backgroundColor: COLORS.SECOND_BLACK, borderRadius: 50, padding: 8 },
     onPressIn: onPressInIcon,
     onPressOut: onPressOutIcon,
     onPress: onPressIcon,
+    onHideUnderlay: () => setIsPress(false),
+    onShowUnderlay: () => setIsPress(true)
   }
 
   const iconProps = icon ? {
     leftIcon: iconLeft ? 
               (hasTouchableOpacity ? 
-                <TouchableOpacity {...touchableOpacityProps}>
-                  <Icon color={placeHolderTextColor} name={icon} size={size} />
-                </TouchableOpacity> :
-                <Icon color={placeHolderTextColor} name={icon} size={size} />) :
+                <TouchableHighlight {...touchableOpacityProps}>
+                  <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />
+                </TouchableHighlight> :
+                <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />) :
                 undefined,
     rightIcon: !iconLeft ?
               (hasTouchableOpacity ?
-                <TouchableOpacity {...touchableOpacityProps}>
-                  <Icon color={placeHolderTextColor} name={icon} size={size} />
-                </TouchableOpacity> :
-                <Icon color={placeHolderTextColor} name={icon} size={size} />) :
+                <TouchableHighlight {...touchableOpacityProps}>
+                  <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />
+                </TouchableHighlight> :
+                <Icon color={!isPress ? placeHolderTextColor : COLORS.WHITE} name={icon} size={size} />) :
                 undefined
   } : {}
 

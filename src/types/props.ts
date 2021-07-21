@@ -20,7 +20,9 @@ type RootStackParamList = {
   AllCourses:  {
     ids: string[]
   }
-  Chat                 : undefined
+  Chat?   : {
+    topic : string
+  }
   SignUp               : undefined
   SignUpEmailFirstStep : undefined
   SignUpEmailSecondStep: {
@@ -183,9 +185,9 @@ interface User {
 
 type MessageProps = {
   content: {
-    text     : string
-    resources: string[]
-  },
+    message?    : string
+    resource?  : BotResource
+  }
   date   : Date
   fromBot: boolean
 }
@@ -248,6 +250,12 @@ interface SelectCoursesBody {
   navigation      : Navigation
 }
 
+interface BotResource {
+  description : string
+  link        : string
+  title       : string
+}
+
 export {
   SelectCourseCardProps,
   CustomBelowButtonTextProps,
@@ -281,5 +289,6 @@ export {
   Syllabus,
   ApiResponse,
   SelectCoursesBody,
-  AnalyticProgramItem
+  AnalyticProgramItem,
+  BotResource
 }
